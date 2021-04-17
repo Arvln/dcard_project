@@ -1,0 +1,57 @@
+:root {
+  --color-light-blue: rgb(0, 106, 166);
+  --color-search-bar-blue: rgb(0, 88, 138);
+  --color-border-blue: rgb(0, 88, 138);
+}
+
+body,
+div,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+dl,
+li,
+dt,
+dd,
+img,
+input,
+button {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+input {
+  caret-color: rgb(255, 255, 255);
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+button {
+  border: 0;
+  outline: none;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: Roboto,Helvetica Neue,Helvetica,Arial,PingFang TC,黑體-繁,Heiti TC,蘋果儷中黑,Apple LiGothic Medium,微軟正黑體,Microsoft JhengHei,sans-serif;
+  overflow-y: scroll;
+  overflow-x: auto;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

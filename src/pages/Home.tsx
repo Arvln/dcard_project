@@ -1,13 +1,19 @@
 import { Link, useRouteMatch } from 'react-router-dom';
+// style
+import { Wrapper } from "../components/style/HomeWrapper";
+// components
+import TopNavBar from "../components/common/TopNavBar";
 
 
 function Home() {
   const { url } = useRouteMatch();
 
   return (
-    <div>
-      
-    </div>
+    <>
+      <TopNavBar />
+      <Wrapper>
+      </Wrapper>
+    </>
   )
 }
 
