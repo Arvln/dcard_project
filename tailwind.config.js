@@ -7,6 +7,8 @@ module.exports = {
         lightBlue: 'var(--color-light-blue)',
         borderBlue: 'var(--color-border-blue)',
         searchBarBlue: 'var(--color-search-bar-blue)',
+        deepBlue: 'var(--color-deep-blue)',
+        darkBlue: 'var(--color-dark-blue)',
       },
     },
   },

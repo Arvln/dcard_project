@@ -2,11 +2,14 @@
   --color-light-blue: rgb(0, 106, 166);
   --color-search-bar-blue: rgb(0, 88, 138);
   --color-border-blue: rgb(0, 88, 138);
+  --color-deep-blue: rgb(0, 50, 78);
+  --color-dark-blue: rgb(0, 40, 63);
 }
 
 body,
 div,
 p,
+a,
 h1,
 h2,
 h3,
@@ -32,6 +35,10 @@ a {
   color: rgb(255, 255, 255);
 }
 
+li {
+  list-style: none;
+}
+
 input {
   caret-color: rgb(255, 255, 255);
 }
@@ -52,6 +59,7 @@ body {
   overflow-y: scroll;
   overflow-x: auto;
   width: 100%;
+  background-color: var(--color-deep-blue);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

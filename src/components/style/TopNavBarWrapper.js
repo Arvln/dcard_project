@@ -4,6 +4,7 @@ export const Wrapper = styled.div(() => [
   tw`
     fixed
     top-0
+    left-0
     w-full
     h-12
   `,
@@ -59,6 +60,7 @@ export const Wrapper = styled.div(() => [
   }
 
   & .container-left {
+    width: 47rem;
     height: 100%;
     display: flex;
     padding: 0 16px;
@@ -67,7 +69,7 @@ export const Wrapper = styled.div(() => [
 
   & .search-bar {
     display: flex;
-    width: 41.625rem;
+    width: 100%;
     height: 30px;
     min-width: 200px;
     max-width: 666px;
