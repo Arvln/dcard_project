@@ -1,4 +1,4 @@
-import { Wrapper } from "../../style/SubNavItemsWrapper";
+import { Wrapper } from "../style/SubNavItemsWrapper";
 
 function RecommandSubNav() {
   return (

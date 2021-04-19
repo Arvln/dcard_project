@@ -9,8 +9,6 @@ import SignUp from "./SignUp";
 import Trems from "./more/Terms";
 import Faq from "./more/Faq";
 import Brand from "./more/Brand";
-import Business from "./more/Business";
-import Today from "./more/Today";
 import Download from "./more/Download";
 import User from "./User";
 import SearchOptions from "./SearchOption";
@@ -27,8 +25,6 @@ export {
   Trems,
   Faq,
   Brand,
-  Business,
-  Today,
   Download,
   User,
   SearchOptions,

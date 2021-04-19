@@ -85,5 +85,49 @@ export const Wrapper = styled.div(() => [
     padding: 0 2px;
     cursor: pointer;
   }
+
+  & .about-container {
+    /* todo: when user click, about section need to show up! */
+    display: none;
+    position: fixed;
+    top: 48px;
+    right: 206px;
+    width: 160px;
+    height: 332px;
+    border-radius: 12px;
+    background-color: #fff;
+  }
+
+  & .about-container::before {
+    content: "";
+    position: fixed;
+    top: 41.45px;
+    right: 227px;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    border: 7px solid #fff;
+    border-top-left-radius: 4px;
+    transform: rotate(45deg);
+  }
+
+  & .about {
+    width: 100%;
+    height: 100%;
+    padding: 6px 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  & .about li a {
+    width: 160px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 12px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: rgb(64, 64, 64);
+  }
   `
 ])

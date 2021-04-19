@@ -1,25 +1,36 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "/_next/static/images/manifest/icon_192x192.10b0af57682bae5a97c427ff75a00b59.png",
+      "sizes": "192x192",
+      "type": "image/png"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "src": "/_next/static/images/manifest/icon_96x96.8a02bd1a87bc19efee79fa9b5148f494.png",
+      "sizes": "96x96",
+      "type": "image/png"
     }
   ],
-  "start_url": ".",
+  "name": "Dcard",
+  "short_name": "Dcard",
+  "orientation": "portrait-primary",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "start_url": "/f",
+  "description": "廣受年輕人喜愛的 Dcard 是台灣最大的匿名交流平台，舉凡時事話題、感情心情、吃喝玩樂、學習工作等，都有卡友陪你聊！",
+  "lang": "zh-TW",
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.sparkslab.dcardreader",
+      "id": "com.sparkslab.dcardreader"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/tw/app/dcard/id951353454"
+    }
+  ],
+  "background_color": "#006aa6",
+  "theme_color": "#006aa6",
+  "scope": "/",
+  "prefer_related_applications": true
 }

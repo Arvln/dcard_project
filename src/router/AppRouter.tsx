@@ -1,6 +1,7 @@
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import * as Pages from "../pages";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
+import { SharingComponent } from "../components/common";
+import * as Pages from "../pages";
 
 function AppRouter() {
   return (
@@ -9,7 +10,11 @@ function AppRouter() {
       <Route exact path="/">
         <Redirect to="/f" />
       </Route>
-      <Route exact path="/f" children={<Pages.Home />} />
+      <Route
+        exact
+        path="/f"
+        children={<SharingComponent MainCreator={Pages.Home} />}
+      />
 
       {/* nav */}
       <Route path="/search" children={<Pages.Search />} />
@@ -17,8 +22,6 @@ function AppRouter() {
       <Route path="/terms" children={<Pages.Trems />} />
       <Route path="/faq" children={<Pages.Faq />} />
       <Route path="/brand" children={<Pages.Brand />} />
-      <Route path="/business" children={<Pages.Business />} />
-      <Route path="/today" children={<Pages.Today />} />
       <Route path="/download" children={<Pages.Download />} />
       <Route path="/my" children={<Pages.User />} />
 
@@ -29,7 +32,7 @@ function AppRouter() {
       <Route path="/def/gamezone" children={<Pages.Gamezone />} />
       <Route path="/f/sections" children={<Pages.Sections />} />
     </Router>
-  )
+  );
 }
 
-export default AppRouter
+export default AppRouter;
