@@ -4,6 +4,7 @@ import SearchRouter from "../router/SearchRouter";
 
 function Search() {
   const { url } = useRouteMatch();
+  
   return (
     <div>
       <SearchRouter />

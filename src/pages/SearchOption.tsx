@@ -1,10 +1,15 @@
+import { useRouteMatch } from "react-router-dom"
+
+import { Wrapper } from "./style/SearchOptionWrapper";
 
 
 function SearchOption() {
+  const { url } = useRouteMatch();
+  
   return (
-    <div>
-      Search options
-    </div>
+    <Wrapper>
+      
+    </Wrapper>
   )
 }
 

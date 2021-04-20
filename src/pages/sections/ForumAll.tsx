@@ -1,10 +1,10 @@
-
+import { Wrapper } from "../style/ForumAllWrapper";
 
 function ForumAll() {
   return (
-    <div>
-      Forum All Page
-    </div>
+    <Wrapper>
+      
+    </Wrapper>
   )
 }
 

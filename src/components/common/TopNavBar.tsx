@@ -6,10 +6,13 @@ function TopNavBar() {
     <Wrapper>
       <div className="top-container">
         <div className="container-left">
-          <img
-            src="https://www.dcard.tw/_next/static/media/logo-2ef7b50901acaa284f36a0484329ec05.svg"
-            alt="Dcard"
-          />
+          <a href="/f">
+            <h1 style={{fontSize: 0}}>Dcard</h1>
+            <img
+              src="https://www.dcard.tw/_next/static/media/logo-2ef7b50901acaa284f36a0484329ec05.svg"
+              alt="Dcard"
+            />
+          </a>
           <div className="search-bar">
             <input type="text" placeholder="搜尋" />
             <button>
@@ -52,10 +55,10 @@ function TopNavBar() {
               <a href="/terms">服務條款</a>
             </li>
             <li>
-              <a href="/faq" target="_blank">常見問題</a>
+              <a href="https://about.dcard.tw/faq" target="_blank">常見問題</a>
             </li>
             <li>
-              <a href="javascript:;">回報問題</a>
+              <a href="#">回報問題</a>
             </li>
             <li>
               <a href="/brand" target="_blank">品牌識別</a>

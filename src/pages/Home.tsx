@@ -1,4 +1,4 @@
-import { Wrapper } from "../components/style/HomeWrapper";
+import { Wrapper } from "./style/HomeWrapper";
 
 
 function Home() {

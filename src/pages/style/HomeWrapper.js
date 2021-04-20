@@ -4,7 +4,7 @@ export const Wrapper = styled.main(() => [
   tw``,
   css`
     & {
-      height: 900px;
+      height: 3000px;
       background-color: pink;
     }
   `

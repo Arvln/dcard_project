@@ -7,7 +7,6 @@ import Search from "./Search";
 import Sections from "./sections/Sections";
 import SignUp from "./SignUp";
 import Trems from "./more/Terms";
-import Faq from "./more/Faq";
 import Brand from "./more/Brand";
 import Download from "./more/Download";
 import User from "./User";
@@ -23,7 +22,6 @@ export {
   Sections,
   SignUp,
   Trems,
-  Faq,
   Brand,
   Download,
   User,

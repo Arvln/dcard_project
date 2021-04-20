@@ -1,10 +1,10 @@
-
+import { Wrapper } from "../style/SectionsWrapper";
 
 function Sections() {
   return (
-    <div>
-      Sections Page
-    </div>
+    <Wrapper>
+      
+    </Wrapper>
   )
 }
 
