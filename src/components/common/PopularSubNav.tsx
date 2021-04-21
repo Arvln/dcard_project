@@ -1,12 +1,13 @@
 import { Wrapper } from "../style/SubNavItemsWrapper";
 
+// TODO: when user in forum page, switch nav bar color
 function PopularSubNav() {
   return (
     <Wrapper>
       <li>
         <h3>即時熱門看板</h3>
       </li>
-      <li>
+      <li style={{backgroundColor: "rgba(255, 255, 255, 0.3)"}}>
         <a href="/f/sections">
           <img src="https://megapx-assets.dcard.tw/images/c99966a1-03f9-4a69-86d4-df979a970496/full.jpeg" width="30" height="30" loading="lazy" alt="Logo" />
           <span>感情</span>

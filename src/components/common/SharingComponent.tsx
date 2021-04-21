@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useRouteMatch } from "react-router-dom";
 // style
 import { Wrapper } from "../style/SharingComponentWrapper";
@@ -7,31 +8,28 @@ import TopSubNav from "./TopSubNav";
 import PopularSubNav from "./PopularSubNav";
 import RecommandSubNav from "./RecommandSubNav";
 import AsideTitle from "./AsideTitle";
-import { useEffect, useState } from "react";
+
 
 type Props = {
   MainCreator: () => JSX.Element;
 };
 
-// TODO: when forum section in top sub bar, don't show up footer section!
 function SharingComponent({ MainCreator }: Props) {
   const { url } = useRouteMatch();
   const [hasAsideTitle, setHasAsideTitle] = useState(true);
   const [hasFooter, setHasFooter] = useState(true);
 
   useEffect(() => {
-    const rules: RegExp = /^\/search/;
-
+    const searchPages: RegExp = /^\/search/;
     if (url === "/f") {
       setHasAsideTitle(false);
     }
-
     if (
       url === "/forum/all" ||
       url === "/forum/popular" ||
       url === "/goods" ||
       url === "/def/gamezone" ||
-      rules.test(url)
+      searchPages.test(url)
     ) {
       setHasAsideTitle(false);
       setHasFooter(false);

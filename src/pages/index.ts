@@ -3,7 +3,6 @@ import ForumPopular from "./sections/ForumPopular";
 import Gamezone from "./sections/Gamezone";
 import Goods from "./sections/Goods";
 import Home from "./Home";
-import Search from "./Search";
 import Sections from "./sections/Sections";
 import SignUp from "./SignUp";
 import Trems from "./more/Terms";
@@ -18,7 +17,6 @@ export {
   Gamezone,
   Goods,
   Home,
-  Search,
   Sections,
   SignUp,
   Trems,

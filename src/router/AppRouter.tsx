@@ -1,7 +1,10 @@
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-
+// sharing part
 import { SharingComponent } from "../components/common";
+// pages
 import * as Pages from "../pages";
+// search router
+import SearchRouter from "../router/SearchRouter";
 
 function AppRouter() {
   return (
@@ -17,7 +20,7 @@ function AppRouter() {
       />
 
       {/* nav */}
-      <Route path="/search" children={<SharingComponent MainCreator={Pages.Search} />} />
+      <Route path="/search" children={<SearchRouter />} />
       <Route path="/signup" children={<Pages.SignUp />} />
       <Route path="/terms" children={<Pages.Trems />} />
       <Route path="/brand" children={<Pages.Brand />} />

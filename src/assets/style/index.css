@@ -24,7 +24,12 @@ dt,
 dd,
 img,
 input,
-button {
+button,
+header,
+nav,
+aside,
+section,
+footer {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
