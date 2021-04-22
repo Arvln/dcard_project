@@ -1,16 +1,17 @@
 import tw, { styled, css, theme } from "twin.macro";
 
-export const Wrapper = styled.div(() => [
+export const Wrapper = styled.div(({ hasClickArrowIcon }) => [
   tw`
     fixed
     top-0
     left-0
     w-full
     h-12
+    bg-lightBlue
   `,
   css`
   & {
-    background-color: ${theme`colors.lightBlue`};
+    z-index: 100;
   }
 
   img {
@@ -87,8 +88,7 @@ export const Wrapper = styled.div(() => [
   }
 
   & .about-container {
-    /* todo: when user click, about section need to show up! */
-    display: none;
+    display: ${hasClickArrowIcon ? "block" : "none"};
     position: fixed;
     top: 48px;
     right: 206px;

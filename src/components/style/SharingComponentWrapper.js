@@ -18,7 +18,7 @@ export const Wrapper = styled.div(({hasFooter}) => [
       grid-column: start / mainLeft;
       width: 208px;
       min-width: 208px;
-      height: calc(100vh - 270px);
+      min-height: 2056px;
       padding: 20px 0;
     }
 
@@ -26,7 +26,7 @@ export const Wrapper = styled.div(({hasFooter}) => [
       overflow-y: scroll;
       overflow-x: hidden;
       width: 100%;
-      height: 100%;
+      height: calc(100vh - 270px);
     }
 
     /* 滾動條樣式 */
@@ -46,13 +46,14 @@ export const Wrapper = styled.div(({hasFooter}) => [
 
     & .forum-content {
       grid-column: mainLeft / mainRight;
-      min-width: 729px;
+      min-width: 728px;
       margin: 0 12px;
       padding-top: 20px;
     }
 
     & .forum-content main {
       width: 100%;
+      min-height: 2056px;
       border-radius: 4px 4px 0 0;
     }
 
@@ -60,12 +61,14 @@ export const Wrapper = styled.div(({hasFooter}) => [
       grid-column: mainRight / end;
       padding: 20px 0;
       min-width: 300px;
+      height: 2056px;
     }
 
     & .forum-footer {
       position: fixed;
       bottom: 0;
       left: 0;
+      z-index: 100;
       width: 100%;
       height: 132px;
       background-color: rgba(36, 40, 45, 0.95);
@@ -148,18 +151,14 @@ export const Wrapper = styled.div(({hasFooter}) => [
 
     & .long-msg {
       min-width: 300px;
-      height: 410px;
+      height: 600px;
       margin-bottom: 10px;
-      position: sticky;
-      top: 48px;
     }
 
     & .botton-navbar {
       display: flex;
       height: 22px;
       margin: -3px -5px;
-      position: sticky;
-      top: 465px;
     }
 
     & .botton-navbar li {

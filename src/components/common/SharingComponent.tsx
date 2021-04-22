@@ -9,21 +9,21 @@ import PopularSubNav from "./PopularSubNav";
 import RecommandSubNav from "./RecommandSubNav";
 import AsideTitle from "./AsideTitle";
 
-
 type Props = {
   MainCreator: () => JSX.Element;
 };
 
 function SharingComponent({ MainCreator }: Props) {
   const { url } = useRouteMatch();
-  const [hasAsideTitle, setHasAsideTitle] = useState(true);
+  const [hasAsideTitle, setHasAsideTitle] = useState(false);
   const [hasFooter, setHasFooter] = useState(true);
 
   useEffect(() => {
-    const searchPages: RegExp = /^\/search/;
-    if (url === "/f") {
-      setHasAsideTitle(false);
+    const forumPages: RegExp = /^\/f\//;
+    if (url !== "/f/latest" && url !== "/f/pessoal" && forumPages.test(url)) {
+      setHasAsideTitle(true);
     }
+    const searchPages: RegExp = /^\/search/;
     if (
       url === "/forum/all" ||
       url === "/forum/popular" ||
@@ -31,7 +31,6 @@ function SharingComponent({ MainCreator }: Props) {
       url === "/def/gamezone" ||
       searchPages.test(url)
     ) {
-      setHasAsideTitle(false);
       setHasFooter(false);
     }
   }, [url]);

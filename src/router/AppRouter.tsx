@@ -4,7 +4,7 @@ import { SharingComponent } from "../components/common";
 // pages
 import * as Pages from "../pages";
 // search router
-import SearchRouter from "../router/SearchRouter";
+import SearchRouter from "./SearchRouter";
 
 function AppRouter() {
   return (
@@ -16,6 +16,14 @@ function AppRouter() {
       <Route
         exact
         path="/f"
+        children={<SharingComponent MainCreator={Pages.Home} />}
+      />
+      <Route
+        path="/f/latest"
+        children={<SharingComponent MainCreator={Pages.Home} />}
+      />
+      <Route
+        path="/f/pessoal"
         children={<SharingComponent MainCreator={Pages.Home} />}
       />
 
@@ -34,6 +42,14 @@ function AppRouter() {
       <Route path="/def/gamezone" children={<Pages.Gamezone />} />
       <Route
         path="/f/sections"
+        children={<SharingComponent MainCreator={Pages.Sections} />}
+      />
+      <Route
+        path="/f/sections/latest"
+        children={<SharingComponent MainCreator={Pages.Sections} />}
+      />
+      <Route
+        path="/f/sections/rule"
         children={<SharingComponent MainCreator={Pages.Sections} />}
       />
     </Router>

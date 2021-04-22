@@ -4,12 +4,9 @@ import { Wrapper } from "../style/AsideTitleWrapper";
 // TODO: when user click arrow icon p svg nav switch style!
 function AsideTitle() {
   const [hasClickArrowIcon, setHasClickArrowIcon] = useState(false);
-  function ClickArrowIconhandler(): void {
-    if (hasClickArrowIcon) {
-      setHasClickArrowIcon(false);
-    } else {
-      setHasClickArrowIcon(true);
-    }
+  function ClickArrowIconHandler(): void {
+    hasClickArrowIcon && setHasClickArrowIcon(false);
+    hasClickArrowIcon || setHasClickArrowIcon(true);
   }
 
   return (
@@ -40,7 +37,7 @@ function AsideTitle() {
             focusable="false"
             role="img"
             aria-hidden="true"
-            onClick={ClickArrowIconhandler}
+            onClick={ClickArrowIconHandler}
           >
             <path d="M11.08 15.62l-4.69-4.69a1.31 1.31 0 01.92-2.24h9.38a1.31 1.31 0 01.92 2.24l-4.69 4.69a1.3 1.3 0 01-1.84 0z"></path>
             <path fill="none" d="M0 0h24v24H0z"></path>

@@ -1,9 +1,16 @@
+import { useState } from "react";
 import tw from "twin.macro";
 import { Wrapper } from "../style/TopNavBarWrapper";
 
 function TopNavBar() {
+  const [hasClickArrowIcon, setHasClickArrowIcon] = useState(false);
+  function ClickArrowIconHandler(): void {
+    hasClickArrowIcon && setHasClickArrowIcon(false);
+    hasClickArrowIcon || setHasClickArrowIcon(true);
+  }
+
   return (
-    <Wrapper>
+    <Wrapper hasClickArrowIcon={hasClickArrowIcon}>
       <div className="top-container">
         <div className="container-left">
           <a href="/f">
@@ -44,6 +51,7 @@ function TopNavBar() {
             fill="#fff"
             role="img"
             aria-hidden="true"
+            onClick={ClickArrowIconHandler}
           >
             <path d="M11.08 15.62l-4.69-4.69a1.31 1.31 0 01.92-2.24h9.38a1.31 1.31 0 01.92 2.24l-4.69 4.69a1.3 1.3 0 01-1.84 0z"></path>
             <path fill="none" d="M0 0h24v24H0z"></path>

@@ -1,6 +1,6 @@
 import tw, { styled, css, theme } from "twin.macro";
 
-export const Wrapper = styled.section(({hasClickArrowIcon}) => [
+export const Wrapper = styled.section(({ hasClickArrowIcon }) => [
   tw`
     rounded-sm
     bg-white
@@ -18,16 +18,17 @@ export const Wrapper = styled.section(({hasClickArrowIcon}) => [
       font-weight: 500;
     }
 
-    & .forum-posts-count, .forum-introduce p {
+    & .forum-posts-count,
+    .forum-introduce p {
       max-width: 244px;
       line-height: 1.43;
-      color: rgba(0, 0, 0, .6);
+      color: rgba(0, 0, 0, 0.6);
       font-size: 14px;
     }
 
     & .forum-posts-count {
       overflow: hidden;
-      text-overflow:ellipsis;
+      text-overflow: ellipsis;
       white-space: nowrap;
     }
 
@@ -44,7 +45,7 @@ export const Wrapper = styled.section(({hasClickArrowIcon}) => [
 
     & .forum-introduce {
       height: ${hasClickArrowIcon ? "600px" : "21px"};
-      transition: height 400ms cubic-bezier(.4,0,.2,1);
+      transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       flex-direction: column;
     }
@@ -64,7 +65,7 @@ export const Wrapper = styled.section(({hasClickArrowIcon}) => [
     & .forum-info-nav {
       /* 淡入淡出速度 */
       opacity: ${hasClickArrowIcon ? 1 : 0};
-      transition: opacity 600ms cubic-bezier(.7,0,.2,5);
+      transition: opacity 300ms cubic-bezier(.7, 0, 0.5, 3);
       display: flex;
       flex-wrap: wrap;
       width: 100%;
@@ -77,8 +78,8 @@ export const Wrapper = styled.section(({hasClickArrowIcon}) => [
       margin-right: 8px;
     }
 
-    & .forum-info-nav li a { 
-      display: block;  
+    & .forum-info-nav li a {
+      display: block;
       width: 100%;
       height: 100%;
       border-radius: 16px;
@@ -113,5 +114,5 @@ export const Wrapper = styled.section(({hasClickArrowIcon}) => [
     & .post-article:hover {
       background-color: #5ab0db;
     }
-  `
-])
+  `,
+]);
