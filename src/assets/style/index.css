@@ -4,6 +4,8 @@
   --color-border-blue: rgb(0, 88, 138);
   --color-deep-blue: rgb(0, 50, 78);
   --color-dark-blue: rgb(0, 40, 63);
+  --button-initial-background: #3397cf;
+  --button-hover-background: #5ab0db;
 }
 
 body,

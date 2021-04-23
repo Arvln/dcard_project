@@ -41,6 +41,7 @@ function AppRouter() {
       <Route path="/goods" children={<Pages.Goods />} />
       <Route path="/def/gamezone" children={<Pages.Gamezone />} />
       <Route
+        exact
         path="/f/sections"
         children={<SharingComponent MainCreator={Pages.Sections} />}
       />

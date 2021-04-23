@@ -121,11 +121,11 @@ export const Wrapper = styled.div(({hasFooter}) => [
     }
 
     & .sign-up a {
-      color: #3397CF;
+      color: ${theme`colors.buttonInitialBackground`};
     }
 
     & .sign-up a:hover {
-      color: #5ab0db;
+      color: ${theme`colors.buttonHoverBackground`};
     }
 
     & .footer-button div a {

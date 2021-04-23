@@ -44,6 +44,7 @@ export const Wrapper = styled.section(({ hasClickArrowIcon }) => [
     }
 
     & .forum-introduce {
+      position: relative;
       height: ${hasClickArrowIcon ? "600px" : "21px"};
       transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
@@ -63,6 +64,9 @@ export const Wrapper = styled.section(({ hasClickArrowIcon }) => [
     }
 
     & .forum-info-nav {
+      position: absolute;
+      left: 0;
+      z-index: 98;
       /* 淡入淡出速度 */
       opacity: ${hasClickArrowIcon ? 1 : 0};
       transition: opacity 300ms cubic-bezier(.7, 0, 0.5, 3);
@@ -98,6 +102,7 @@ export const Wrapper = styled.section(({ hasClickArrowIcon }) => [
     }
 
     & .post-article {
+      position: relative;
       width: 100%;
       height: 44px;
       margin-top: 20px;
@@ -105,14 +110,15 @@ export const Wrapper = styled.section(({ hasClickArrowIcon }) => [
       border-radius: 10px;
       font-weight: 500;
       color: #fff;
-      background-color: #3397cf;
+      background-color: ${theme`colors.buttonInitialBackground`};
       display: flex;
       justify-content: center;
       align-items: center;
+      z-index: 99;
     }
 
     & .post-article:hover {
-      background-color: #5ab0db;
+      background-color: ${theme`colors.buttonHoverBackground`};
     }
   `,
 ]);

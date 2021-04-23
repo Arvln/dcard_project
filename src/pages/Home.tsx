@@ -1,35 +1,35 @@
 import { Wrapper } from "./style/HomeWrapper";
 import { ArticleItem } from "../components/common";
-import { useRouteMatch } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function Home() {
   const { url } = useRouteMatch();
-  const [navBarClassName, setNavBarClassName] = useState("popular");
+  const [navBarClassName, setNavBarClassName] = useState("");
   useEffect(() => {
     url === "/f" && setNavBarClassName("popular");
     url === "/f/latest" && setNavBarClassName("latest");
     url === "/f/pessoal" && setNavBarClassName("pessoal");
-  }, [url]);
+  }, [url])
 
   return (
     <Wrapper navBarClassName={navBarClassName}>
       <div className="top-navbar">
         <ul className="top-navbar-items-wrapper">
           <li className="popular">
-            <a href="/f">
+            <Link to="/f">
               <span>熱門</span>
-            </a>
+            </Link>
           </li>
           <li className="latest">
-            <a href="/f/latest">
+            <Link to="/f/latest">
               <span>最新</span>
-            </a>
+            </Link>
           </li>
           <li className="pessoal">
-            <a href="/f/pessoal">
+            <Link to="/f/pessoal">
               <span>追蹤</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
@@ -38,17 +38,18 @@ function Home() {
           href="https://youtu.be/ETogpwOdkSY"
           target="_blank"
           rel="nofollow noopener noreferrer"
+          className="first-banner"
         >
           <img
             src="https://megapx-assets.dcard.tw/images/120e66b3-da52-4959-b4e0-f4807e5a84a7/full.png"
             alt="(banner)0421_Dcard尋奇EP27.png"
-            width="100%"
-            style={{ opacity: 1 }}
+            width="1800"
+            height="600"
           />
         </a>
       )}
       {navBarClassName === "pessoal" || (
-        <ul className="main-content">
+        <ul>
           <ArticleItem />
           <ArticleItem />
           <ArticleItem />
@@ -178,9 +179,9 @@ function Home() {
             />
             <h2>尚未登入</h2>
             <p>追蹤喜歡的內容建立專屬文章列表</p>
-            <a href="/signup">
+            <Link to="/signup">
               <button type="button">立即登入</button>
-            </a>
+            </Link>
           </div>
         </div>
       )}

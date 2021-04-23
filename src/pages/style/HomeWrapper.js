@@ -1,6 +1,7 @@
 import tw, { styled, css, theme } from "twin.macro";
 
-export const Wrapper = styled.main(({navBarClassName}) => [
+export const Wrapper = styled.main(({ navBarClassName }) => [
+  console.log(navBarClassName),
   tw`
     bg-white
   `,
@@ -20,6 +21,17 @@ export const Wrapper = styled.main(({navBarClassName}) => [
       background-color: #fff;
       z-index: 100;
     }
+
+    & .first-banner {
+      display: block;
+    }
+
+    & .first-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 1;
+    } 
 
     & .top-navbar-items-wrapper {
       display: flex;
@@ -55,11 +67,6 @@ export const Wrapper = styled.main(({navBarClassName}) => [
       content: "";
       border-bottom: 2px solid rgb(51, 151, 207);
       width: 100%;
-    }
-
-    & .main-content {
-      overflow-y: scroll;
-      overflow-x: hidden;
     }
 
     & .pessoal-container {
@@ -102,8 +109,12 @@ export const Wrapper = styled.main(({navBarClassName}) => [
       height: 44px;
       margin-top: 16px;
       border-radius: 10px;
-      background-color: #3397cf;
+      background-color: ${theme`colors.buttonInitialBackground`};
       color: rgba(255, 255, 255, 1);
+    }
+
+    .login-msg a:hover {
+      background-color: ${theme`colors.buttonHoverBackground`};
     }
   `
 ])

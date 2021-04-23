@@ -9,6 +9,8 @@ module.exports = {
         searchBarBlue: 'var(--color-search-bar-blue)',
         deepBlue: 'var(--color-deep-blue)',
         darkBlue: 'var(--color-dark-blue)',
+        buttonInitialBackground: 'var(--button-initial-background)',
+        buttonHoverBackground: 'var(--button-hover-background)',
       },
     },
   },
