@@ -49,6 +49,7 @@ export const Wrapper = styled.section(({ hasClickArrowIcon }) => [
       transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       flex-direction: column;
+      contain: paint;
     }
 
     & .forum-indroduce-header {
@@ -67,9 +68,6 @@ export const Wrapper = styled.section(({ hasClickArrowIcon }) => [
       position: absolute;
       left: 0;
       z-index: 98;
-      /* 淡入淡出速度 */
-      opacity: ${hasClickArrowIcon ? 1 : 0};
-      transition: opacity 300ms cubic-bezier(.7, 0, 0.5, 3);
       display: flex;
       flex-wrap: wrap;
       width: 100%;

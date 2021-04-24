@@ -16,7 +16,6 @@ export const Wrapper = styled.main(({ navBarClassName }) => [
       top: 48px;
       height: 81px;
       padding: 20px 60px 0;
-      border-radius: 4px 4px 0 0;
       border-bottom: 1px solid rgba(0, 0, 0, .15);
       background-color: #fff;
       z-index: 100;

@@ -1,7 +1,7 @@
-import { Wrapper } from "../style/SectionsWrapper";
-import { RelatedForums, ArticleItem } from "../../components/common";
 import { Link, useRouteMatch } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Wrapper } from "../style/SectionsWrapper";
+import { RelatedForums, ArticleItem, FollowButton } from "../../components/common";
 
 function Sections() {
   const { url } = useRouteMatch();
@@ -76,7 +76,7 @@ function Sections() {
           <Link to="/f/sections">
             <h1>感情</h1>
           </Link>
-          <button type="button">追蹤</button>
+          <FollowButton />
         </div>
         <ul className="top-navbar-items-wrapper">
           <li className="popular">

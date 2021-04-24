@@ -39,7 +39,7 @@ function AppRouter() {
       <Route path="/forum/all" children={<SharingComponent MainCreator={Pages.ForumAll} />} />
       <Route path="/forum/popular" children={<Pages.ForumPopular />} />
       <Route path="/goods" children={<Pages.Goods />} />
-      <Route path="/def/gamezone" children={<Pages.Gamezone />} />
+      <Route path="/def/gamezone" children={<SharingComponent MainCreator={Pages.Gamezone} />} />
       <Route
         exact
         path="/f/sections"

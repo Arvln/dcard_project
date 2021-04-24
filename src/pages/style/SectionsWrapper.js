@@ -17,11 +17,6 @@ export const Wrapper = styled.main(({navBarClassName}) => [
       height: 48px;
     }
 
-    & .top-banner img {
-      border-radius: 4px 4px 0 0;
-      opacity: 1;
-    }
-
     & .top-navbar {
       position: sticky;
       top: 48px;
@@ -49,21 +44,6 @@ export const Wrapper = styled.main(({navBarClassName}) => [
     & .logo-container a h1 {
       font-size: 30px;
       font-weight: 500;
-    }
-
-    & .logo-container button {
-      width: 56px;
-      height: 31.5px;
-      padding: 7.25px 14px;
-      border-radius: 8px;
-      font-weight: 500;
-      font-size: 14px;
-      color: #fff;
-      background-color: ${theme`colors.buttonInitialBackground`};
-    }
-
-    & .logo-container button:hover {
-      background-color: ${theme`colors.buttonHoverBackground`}
     }
 
     & .top-navbar-items-wrapper {

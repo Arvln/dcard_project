@@ -55,6 +55,8 @@ export const Wrapper = styled.div(({hasFooter}) => [
       width: 100%;
       min-height: 2056px;
       border-radius: 4px 4px 0 0;
+      /* 保持圓角效果不被覆蓋 */
+      contain: paint;
     }
 
     & .forum-msg {

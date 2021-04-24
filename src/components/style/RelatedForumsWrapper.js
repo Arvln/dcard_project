@@ -8,6 +8,7 @@ export const Wrapper = styled.div(() => [
     & {
       height: 215px;
       margin: 0 60px;
+      border-bottom: 1px solid rgb(233, 233, 233);
     }
 
     h1 {

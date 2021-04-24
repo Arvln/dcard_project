@@ -16,7 +16,7 @@ function RelatedForums() {
   }
 
   function rightArrowIconHandler(): void {
-    scrollElement = document.getElementById("related-forums-scroll-element");    
+    scrollElement = document.getElementById("related-forums-scroll-element");
     if (isReachRightEnd || !scrollElement) {
       return;
     }
@@ -26,7 +26,7 @@ function RelatedForums() {
   function scrollHandler(): void {
     scrollElement = document.getElementById("related-forums-scroll-element");
     console.log(scrollElement?.scrollLeft);
-    
+
     if (scrollElement?.scrollLeft === 0) {
       setIsReachLeftEnd(true);
     } else if (scrollElement?.scrollLeft === 154) {
@@ -41,7 +41,11 @@ function RelatedForums() {
     <Wrapper>
       <h1>相關看板</h1>
       <div className="related-forums-wrapper">
-        <div className="left-arrow-icon-wrapper" style={{opacity: isReachLeftEnd ? 0 : 1}}>
+        <div
+          className="left-arrow-icon-wrapper"
+          style={{ opacity: isReachLeftEnd ? 0 : 1 }}
+          onClick={leftArrowIconHandler}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 28 28"
@@ -51,12 +55,15 @@ function RelatedForums() {
             role="img"
             aria-hidden="true"
             fill="rgba(0, 0, 0, 0.35)"
-            onClick={leftArrowIconHandler}
           >
             <path d="M17.65 8.65l-.79-.79a.5.5 0 00-.71 0l-5.79 5.79a.5.5 0 000 .71l5.79 5.79a.5.5 0 00.71 0l.79-.79a.5.5 0 000-.71L13 14l4.65-4.65a.5.5 0 000-.7z"></path>
           </svg>
         </div>
-        <div className="related-forums-container" id="related-forums-scroll-element" onScroll={scrollHandler}>
+        <div
+          className="related-forums-container"
+          id="related-forums-scroll-element"
+          onScroll={scrollHandler}
+        >
           <div className="related-forum-card">
             <div className="logo-img"></div>
             <div className="related-forum-card-content">
@@ -128,7 +135,11 @@ function RelatedForums() {
             </div>
           </div>
         </div>
-        <div className="right-arrow-icon-wrapper" style={{opacity: isReachRightEnd ? 0 : 1}}>
+        <div
+          className="right-arrow-icon-wrapper"
+          style={{ opacity: isReachRightEnd ? 0 : 1 }}
+          onClick={rightArrowIconHandler}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 28 28"
@@ -138,7 +149,6 @@ function RelatedForums() {
             role="img"
             aria-hidden="true"
             fill="rgba(0, 0, 0, 0.35)"
-            onClick={rightArrowIconHandler}
           >
             <path d="M17.65 8.65l-.79-.79a.5.5 0 00-.71 0l-5.79 5.79a.5.5 0 000 .71l5.79 5.79a.5.5 0 00.71 0l.79-.79a.5.5 0 000-.71L13 14l4.65-4.65a.5.5 0 000-.7z"></path>
           </svg>
