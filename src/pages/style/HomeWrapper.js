@@ -57,6 +57,10 @@ export const Wrapper = styled.main(({ navBarClassName }) => [
       align-items: center;
     }
 
+    & .top-navbar-items-wrapper li a:hover {
+      color: rgb(0, 0, 0);
+    }
+
     & .top-navbar-items-wrapper .${navBarClassName} a {
       color: rgb(0, 0, 0);
     }

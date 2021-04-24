@@ -3,6 +3,7 @@ import { Wrapper } from "../style/SubNavItemsWrapper";
 
 // TODO: when user in forum page, switch nav bar color
 function PopularSubNav() {
+
   return (
     <Wrapper>
       <li>

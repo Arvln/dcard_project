@@ -1,5 +1,5 @@
 import SharingComponent from "./SharingComponent";
-import ForumArticleList from "./ForumArticleList";
+import RelatedForums from "./RelatedForums";
 import ArticleItem from "./ArticleItem";
 
-export { SharingComponent, ForumArticleList, ArticleItem };
+export { SharingComponent, RelatedForums, ArticleItem };
