@@ -16,6 +16,7 @@ export const Wrapper = styled.main(({isClickArrowIcon}) => [
     & header {
       height: 48px;
       padding: 16px;
+      cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -37,7 +38,6 @@ export const Wrapper = styled.main(({isClickArrowIcon}) => [
     & .forums-arrow-icon-wrapper {
       width: 24px;
       height: 24px;
-      cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;

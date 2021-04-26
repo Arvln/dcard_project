@@ -18,11 +18,11 @@ function ForumAll() {
       </div>
       <ul>
         <li>
-          <header>
+          <header onClick={clickArrowIconHandler}>
             <h3>📢 最新看板 - 天竺鼠車車 | Clubhouse</h3>
-            <div className="forums-arrow-icon-wrapper" style={{ transform: `${isClickArrowIcon ? `rotate(180deg)` : `rotate(0)`}`}} onClick={clickArrowIconHandler}>
-              <svg viewBox="0 0 24 24" focusable="false" width="18" height="18" role="img" aria-hidden="true"><path d="M11.08 15.62l-4.69-4.69a1.31 1.31 0 01.92-2.24h9.38a1.31 1.31 0 01.92 2.24l-4.69 4.69a1.3 1.3 0 01-1.84 0z"></path><path fill="none" d="M0 0h24v24H0z"></path></svg>
-            </div>
+            <div className="forums-arrow-icon-wrapper" style={{ transform: `${isClickArrowIcon ? `rotate(180deg)` : `rotate(0)`}`}}>
+                <svg viewBox="0 0 24 24" focusable="false" width="18" height="18" role="img" aria-hidden="true"><path d="M11.08 15.62l-4.69-4.69a1.31 1.31 0 01.92-2.24h9.38a1.31 1.31 0 01.92 2.24l-4.69 4.69a1.3 1.3 0 01-1.84 0z"></path><path fill="none" d="M0 0h24v24H0z"></path></svg>
+              </div>
           </header>
           <div className="forums-list" style={{maxHeight: `${isClickArrowIcon ? `440px` : 0}`}}>
             <ol>

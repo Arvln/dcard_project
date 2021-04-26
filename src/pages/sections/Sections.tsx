@@ -4,7 +4,7 @@ import { Wrapper } from "../style/SectionsWrapper";
 import { RelatedForums, ArticleItem, FollowButton } from "../../components/common";
 
 function Sections() {
-  const { url } = useRouteMatch();
+  const { path } = useRouteMatch();
   const [navBarClassName, setNavBarClassName] = useState("");
   const [isReachLeftEnd, setIsReachLeftEnd] = useState(true);
   const [isReachRightEnd, setIsReachRightEnd] = useState(false);
@@ -16,13 +16,13 @@ function Sections() {
       "forum-title-point"
     );
 
-    url === "/f/sections" && setNavBarClassName("popular");
-    url === "/f/sections/latest" && setNavBarClassName("latest");
-    url === "/f/sections/rule" && setNavBarClassName("rule");
+    path === "/f/sections" && setNavBarClassName("popular");
+    path === "/f/sections/latest" && setNavBarClassName("latest");
+    path === "/f/sections/rule" && setNavBarClassName("rule");
     initialPosition?.scrollIntoView();
     // 跳轉頁面到版標
-    url === "/f/sections" && forumTitlePosition?.scrollIntoView();
-  }, [url]);
+    path === "/f/sections" && forumTitlePosition?.scrollIntoView();
+  }, [path]);
 
   function leftArrowIconHandler(): void {
     scrollElement = document.getElementById("scroll-element");

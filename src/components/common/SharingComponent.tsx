@@ -14,26 +14,28 @@ type Props = {
 };
 
 function SharingComponent({ MainCreator }: Props) {
-  const { url } = useRouteMatch();
+  const { path } = useRouteMatch();
   const [hasAsideTitle, setHasAsideTitle] = useState(false);
   const [hasFooter, setHasFooter] = useState(true);
 
   useEffect(() => {
     const forumPages: RegExp = /^\/f\//;
-    if (url !== "/f/latest" && url !== "/f/pessoal" && forumPages.test(url)) {
+    if (path !== "/f/latest" && path !== "/f/pessoal" && forumPages.test(path)) {
       setHasAsideTitle(true);
     }
     const searchPages: RegExp = /^\/search/;
+    const goodsPages: RegExp = /^\/goods/;
     if (
-      url === "/forum/all" ||
-      url === "/forum/popular" ||
-      url === "/goods" ||
-      url === "/def/gamezone" ||
-      searchPages.test(url)
+      path === "/forum/all" ||
+      path === "/forum/popular" ||
+      path === "/goods" ||
+      path === "/def/gamezone" ||
+      searchPages.test(path) ||
+      goodsPages.test(path)
     ) {
       setHasFooter(false);
     }
-  }, [url]);
+  }, [path]);
 
   return (
     <Wrapper hasFooter={hasFooter}>
