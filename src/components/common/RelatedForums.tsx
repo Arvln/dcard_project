@@ -25,7 +25,6 @@ function RelatedForums() {
 
   function scrollHandler(): void {
     scrollElement = document.getElementById("related-forums-scroll-element");
-    console.log(scrollElement?.scrollLeft);
 
     if (scrollElement?.scrollLeft === 0) {
       setIsReachLeftEnd(true);

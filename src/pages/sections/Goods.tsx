@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Wrapper } from "../style/GoodsWrapper";
 import goodsLogo from "../../assets/images/goods-icon.png";
@@ -10,40 +10,68 @@ import {
   SlideShowButton,
   WatchMoreTitle,
 } from "../../components/content/goods";
-
 import { direction } from "../../components/content/goods/SlideShowButton";
-import { dir } from "console";
+import { GetLimitedTime } from "../../utils";
 
 function Goods() {
-  let [firstBannerTransfromXValue, setFirstBannerTransfromXValue] = useState(0);
-  let [latestGoodsTransformXValue, setLatestGoodsTransformXValue] = useState(0);
-  let [featureGoodsTransfromXValue, setFeatureGoodsTransfromXValue] = useState(
+  const [topBannerTransfromXValue, setTopBannerTransfromXValue] = useState(0);
+  const [latestGoodsTransformXValue, setLatestGoodsTransformXValue] = useState(
     0
   );
+  const [
+    featureGoodsTransfromXValue,
+    setFeatureGoodsTransfromXValue,
+  ] = useState(0);
+  const topBannerBarCount: number = 5;
+  // 頁面頂部廣告輪播圖折返點
+  const topBannerReturnPoint: number = (topBannerBarCount - 1) * -100;
+  const [isMouseEnter, setIsMouseEnter] = useState(false);
+  const expendTime = GetLimitedTime("2021-04-29 15:00:00");
 
-  function clickRightArrowIcon(transfromXValue: number, goodsType: string) {
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    isMouseEnter ||
+      (timer = setTimeout(() => {
+        if (topBannerTransfromXValue === topBannerReturnPoint) {
+          setTopBannerTransfromXValue(0);
+        } else {
+          setTopBannerTransfromXValue(topBannerTransfromXValue - 100);
+        }
+      }, 2500));
+    // 用戶點擊按鈕後清除計時器
+    return () => clearTimeout(timer);
+  }, [topBannerTransfromXValue, isMouseEnter]);
+
+  function clickRightArrowIcon(
+    transfromXValue: number,
+    goodsType: string
+  ): void {
     if (
+      (goodsType === "TopBanner" && transfromXValue === topBannerReturnPoint) ||
       (goodsType === "LatestGoods" && transfromXValue === -200) ||
-      transfromXValue === -300
+      (goodsType === "FeatureGoods" && transfromXValue === -300)
     ) {
       return;
     }
     transfromXValue -= 100;
-    goodsType === "FirstBanner" &&
-      setFirstBannerTransfromXValue(transfromXValue);
+    goodsType === "TopBanner" && setTopBannerTransfromXValue(transfromXValue);
     goodsType === "LatestGoods" &&
       setLatestGoodsTransformXValue(transfromXValue);
     goodsType === "FeatureGoods" &&
       setFeatureGoodsTransfromXValue(transfromXValue);
   }
 
-  function clickLeftArrowIcon(transfromXValue: number, goodsType: string) {
+  function clickLeftArrowIcon(
+    transfromXValue: number,
+    goodsType: string
+  ): void {
     if (transfromXValue === 0) {
       return;
     }
     transfromXValue += 100;
-    goodsType === "FirstBanner" &&
-      setFirstBannerTransfromXValue(transfromXValue);
+    if (goodsType === "TopBanner") {
+      setTopBannerTransfromXValue(transfromXValue);
+    }
     goodsType === "LatestGoods" &&
       setLatestGoodsTransformXValue(transfromXValue);
     goodsType === "FeatureGoods" &&
@@ -52,9 +80,10 @@ function Goods() {
 
   return (
     <Wrapper
-      firstBannerTransfromXValue={firstBannerTransfromXValue}
+      topBannerTransfromXValue={topBannerTransfromXValue}
       featureGoodsTransfromXValue={featureGoodsTransfromXValue}
       latestGoodsTransformXValue={latestGoodsTransformXValue}
+      isExpired={expendTime.isExpired}
     >
       <div className="goods-title-wrapper">
         <div className="goods-title-container">
@@ -79,11 +108,22 @@ function Goods() {
         </div>
       </div>
       <div className="slideshow-wrapper">
-        <div className="slideshow-container">
+        <div
+          className="slideshow-container"
+          onMouseEnter={() => setIsMouseEnter(true)}
+          onMouseLeave={() => setIsMouseEnter(false)}
+        >
           <div className="slideshow-img">
             <Link to="#">
               <img
                 src="https://megapx-assets.dcard.tw/images/8407070a-6166-44b0-ab0c-5e261267a095/orig.png"
+                loading="lazy"
+                width="100%"
+              />
+            </Link>
+            <Link to="#">
+              <img
+                src="https://megapx-assets.dcard.tw/images/6806452e-7835-48ed-913a-86f94e5e60f9/orig.jpeg"
                 loading="lazy"
                 width="100%"
               />
@@ -97,7 +137,7 @@ function Goods() {
             </Link>
             <Link to="#">
               <img
-                src="https://megapx-assets.dcard.tw/images/7d021441-8926-4d19-bc22-16d2dee6bfff/orig.jpeg"
+                src="https://megapx-assets.dcard.tw/images/62076f82-7f10-48c8-9a62-6dc6e6e90a33/orig.jpeg"
                 loading="lazy"
                 width="100%"
               />
@@ -112,24 +152,27 @@ function Goods() {
           </div>
           <div
             onClick={() =>
-              clickLeftArrowIcon(firstBannerTransfromXValue, "FirstBanner")
+              clickLeftArrowIcon(topBannerTransfromXValue, "TopBanner")
             }
-            style={{ opacity: firstBannerTransfromXValue === 0 ? 0 : 1 }}
+            style={{ opacity: topBannerTransfromXValue === 0 ? 0 : 1 }}
           >
             <SlideShowButton direction={direction.left} top={139} />
           </div>
           <div
             onClick={() =>
-              clickRightArrowIcon(firstBannerTransfromXValue, "FirstBanner")
+              clickRightArrowIcon(topBannerTransfromXValue, "TopBanner")
             }
-            style={{ opacity: firstBannerTransfromXValue === -300 ? 0 : 1 }}
+            style={{
+              opacity:
+                topBannerTransfromXValue === topBannerReturnPoint ? 0 : 1,
+            }}
           >
             <SlideShowButton direction={direction.right} top={139} />
           </div>
-          <div className="first-banner-navbar-wrapper">
+          <div className="top-banner-navbar-wrapper">
             <SlideShowNavBar
-              bannerCount={4}
-              transformXValue={firstBannerTransfromXValue}
+              bannerCount={topBannerBarCount}
+              transformXValue={topBannerTransfromXValue}
             />
           </div>
         </div>
@@ -183,11 +226,11 @@ function Goods() {
           <div className="time-limited-title">
             <h2>限時特賣</h2>
             <div className="time-limited-count">
-              <div>03</div>
+              <div>{expendTime.hour}</div>
               <div>:</div>
-              <div>12</div>
+              <div>{expendTime.minute}</div>
               <div>:</div>
-              <div>42</div>
+              <div>{expendTime.second}</div>
             </div>
           </div>
           <div className="time-limited-goods-container">
@@ -322,7 +365,7 @@ function Goods() {
               <SlideShowButton direction={direction.right} top={122} />
             </div>
           </div>
-          <div className="latest-goods-slideshow-navbar-wrapper">
+          <div className="latest-goods-navbar-wrapper">
             <SlideShowNavBar
               bannerCount={3}
               transformXValue={latestGoodsTransformXValue}
@@ -387,7 +430,7 @@ function Goods() {
                 <div className="feature-goods-item">
                   <img
                     src="https://assets.dcard.tw/dadas-remote-entities/5e81791036b4fe8f3698d078.jpeg"
-                    className="first-img"
+                    className="Top-img"
                   />
                   <img
                     src="https://megapx-assets.dcard.tw/images/3f5159ec-0f7d-4edd-86c1-85c9f5e47e6f/orig.jpeg"
@@ -405,45 +448,7 @@ function Goods() {
                 <div className="feature-goods-item">
                   <img
                     src="https://assets.dcard.tw/dadas-remote-entities/5e81791036b4fe8f3698d078.jpeg"
-                    className="first-img"
-                  />
-                  <img
-                    src="https://megapx-assets.dcard.tw/images/3f5159ec-0f7d-4edd-86c1-85c9f5e47e6f/orig.jpeg"
-                    className="second-img"
-                  />
-                  <img
-                    src="https://megapx-assets.dcard.tw/images/3b04115a-8a7f-44d8-bd06-ca7a13f67665/orig.png"
-                    className="third-img"
-                  />
-                </div>
-                <h6>我要變水水-超值99體驗🎁</h6>
-                <span>3030人免費體驗</span>
-              </Link>
-            </div>
-            <div className="feature-goods-content">
-              <Link to="#">
-                <div className="feature-goods-item">
-                  <img
-                    src="https://assets.dcard.tw/dadas-remote-entities/5e81791036b4fe8f3698d078.jpeg"
-                    className="first-img"
-                  />
-                  <img
-                    src="https://megapx-assets.dcard.tw/images/3f5159ec-0f7d-4edd-86c1-85c9f5e47e6f/orig.jpeg"
-                    className="second-img"
-                  />
-                  <img
-                    src="https://megapx-assets.dcard.tw/images/3b04115a-8a7f-44d8-bd06-ca7a13f67665/orig.png"
-                    className="third-img"
-                  />
-                </div>
-                <h6>我要變水水-超值99體驗🎁</h6>
-                <span>3030人免費體驗</span>
-              </Link>
-              <Link to="#">
-                <div className="feature-goods-item">
-                  <img
-                    src="https://assets.dcard.tw/dadas-remote-entities/5e81791036b4fe8f3698d078.jpeg"
-                    className="first-img"
+                    className="Top-img"
                   />
                   <img
                     src="https://megapx-assets.dcard.tw/images/3f5159ec-0f7d-4edd-86c1-85c9f5e47e6f/orig.jpeg"
@@ -463,7 +468,7 @@ function Goods() {
                 <div className="feature-goods-item">
                   <img
                     src="https://assets.dcard.tw/dadas-remote-entities/5e81791036b4fe8f3698d078.jpeg"
-                    className="first-img"
+                    className="Top-img"
                   />
                   <img
                     src="https://megapx-assets.dcard.tw/images/3f5159ec-0f7d-4edd-86c1-85c9f5e47e6f/orig.jpeg"
@@ -481,7 +486,7 @@ function Goods() {
                 <div className="feature-goods-item">
                   <img
                     src="https://assets.dcard.tw/dadas-remote-entities/5e81791036b4fe8f3698d078.jpeg"
-                    className="first-img"
+                    className="Top-img"
                   />
                   <img
                     src="https://megapx-assets.dcard.tw/images/3f5159ec-0f7d-4edd-86c1-85c9f5e47e6f/orig.jpeg"
@@ -501,7 +506,7 @@ function Goods() {
                 <div className="feature-goods-item">
                   <img
                     src="https://assets.dcard.tw/dadas-remote-entities/5e81791036b4fe8f3698d078.jpeg"
-                    className="first-img"
+                    className="Top-img"
                   />
                   <img
                     src="https://megapx-assets.dcard.tw/images/3f5159ec-0f7d-4edd-86c1-85c9f5e47e6f/orig.jpeg"
@@ -519,7 +524,45 @@ function Goods() {
                 <div className="feature-goods-item">
                   <img
                     src="https://assets.dcard.tw/dadas-remote-entities/5e81791036b4fe8f3698d078.jpeg"
-                    className="first-img"
+                    className="Top-img"
+                  />
+                  <img
+                    src="https://megapx-assets.dcard.tw/images/3f5159ec-0f7d-4edd-86c1-85c9f5e47e6f/orig.jpeg"
+                    className="second-img"
+                  />
+                  <img
+                    src="https://megapx-assets.dcard.tw/images/3b04115a-8a7f-44d8-bd06-ca7a13f67665/orig.png"
+                    className="third-img"
+                  />
+                </div>
+                <h6>我要變水水-超值99體驗🎁</h6>
+                <span>3030人免費體驗</span>
+              </Link>
+            </div>
+            <div className="feature-goods-content">
+              <Link to="#">
+                <div className="feature-goods-item">
+                  <img
+                    src="https://assets.dcard.tw/dadas-remote-entities/5e81791036b4fe8f3698d078.jpeg"
+                    className="Top-img"
+                  />
+                  <img
+                    src="https://megapx-assets.dcard.tw/images/3f5159ec-0f7d-4edd-86c1-85c9f5e47e6f/orig.jpeg"
+                    className="second-img"
+                  />
+                  <img
+                    src="https://megapx-assets.dcard.tw/images/3b04115a-8a7f-44d8-bd06-ca7a13f67665/orig.png"
+                    className="third-img"
+                  />
+                </div>
+                <h6>我要變水水-超值99體驗🎁</h6>
+                <span>3030人免費體驗</span>
+              </Link>
+              <Link to="#">
+                <div className="feature-goods-item">
+                  <img
+                    src="https://assets.dcard.tw/dadas-remote-entities/5e81791036b4fe8f3698d078.jpeg"
+                    className="Top-img"
                   />
                   <img
                     src="https://megapx-assets.dcard.tw/images/3f5159ec-0f7d-4edd-86c1-85c9f5e47e6f/orig.jpeg"

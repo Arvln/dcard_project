@@ -6,18 +6,17 @@ export const Wrapper = styled.ul(() => [
     flex-col
   `,
   css`
-    h3, li {
+    & li, h3 {
       flex: 1;
       width: 208px;
       min-width: 208px;
-      height: 44px;
     }
 
-    a {
+    & a {
       display: block;
       padding: 0 10px 0 20px;
       width: 100%;
-      height: 100%;
+      height: 44px;
       font-size: 16px;
       color: rgb(169, 183, 190);
       display: flex;

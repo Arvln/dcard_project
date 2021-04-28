@@ -1,6 +1,6 @@
 import tw, { styled, css, theme } from "twin.macro";
 
-export const Wrapper = styled.main(({firstBannerTransfromXValue, featureGoodsTransfromXValue, latestGoodsTransformXValue}) => [
+export const Wrapper = styled.main(({topBannerTransfromXValue, featureGoodsTransfromXValue, latestGoodsTransformXValue, isExpired}) => [
   tw`
     pt-5
     bg-white
@@ -59,7 +59,7 @@ export const Wrapper = styled.main(({firstBannerTransfromXValue, featureGoodsTra
 
     & .slideshow-img {
       direction: ltr;
-      transform: ${`translate(` + firstBannerTransfromXValue + `%, 0%)`};
+      transform: ${`translate(` + topBannerTransfromXValue + `%, 0%)`};
       transition: transform 0.35s cubic-bezier(0.15, 0.3, 0.25, 1) 0s;
       display: flex;
     }
@@ -74,7 +74,7 @@ export const Wrapper = styled.main(({firstBannerTransfromXValue, featureGoodsTra
       border-radius: 12px;
     }
 
-    & .first-banner-navbar-wrapper {
+    & .top-banner-navbar-wrapper {
       position: absolute;
       bottom: 8px;
       left: 50%;
@@ -189,7 +189,7 @@ export const Wrapper = styled.main(({firstBannerTransfromXValue, featureGoodsTra
     }
 
     & .time-limited-goods-sold-out {
-      /* z-index: -1; */
+      z-index: ${isExpired || -1};
       background: rgba(0, 0, 0, .5);
       display: flex;
       justify-content: center;
@@ -467,12 +467,12 @@ export const Wrapper = styled.main(({firstBannerTransfromXValue, featureGoodsTra
       grid-template-rows: 98px 98px;
       gap: 2px;
       grid-template-areas:
-      "first second"
-      "first third"
+      "top second"
+      "top third"
     }
 
-    & .feature-goods-item .first-img {
-      grid-area: first;
+    & .feature-goods-item .top-img {
+      grid-area: top;
       width: 100%;
       height: 100%;
     }

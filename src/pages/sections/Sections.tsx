@@ -8,7 +8,6 @@ function Sections() {
   const [navBarClassName, setNavBarClassName] = useState("");
   const [isReachLeftEnd, setIsReachLeftEnd] = useState(true);
   const [isReachRightEnd, setIsReachRightEnd] = useState(false);
-  const initialPosition: HTMLElement | null = document.getElementById("root");
   let scrollElement: HTMLElement | null;
 
   useEffect(() => {
@@ -19,7 +18,6 @@ function Sections() {
     path === "/f/sections" && setNavBarClassName("popular");
     path === "/f/sections/latest" && setNavBarClassName("latest");
     path === "/f/sections/rule" && setNavBarClassName("rule");
-    initialPosition?.scrollIntoView();
     // 跳轉頁面到版標
     path === "/f/sections" && forumTitlePosition?.scrollIntoView();
   }, [path]);
