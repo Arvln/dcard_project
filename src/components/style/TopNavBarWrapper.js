@@ -77,6 +77,11 @@ export const Wrapper = styled.div(({ hasClickArrowIcon }) => [
     padding: 0 32px;
   }
 
+  & .search-bar input {
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+  }
+
   & .container-right {
     display: flex;
     align-items: center; 

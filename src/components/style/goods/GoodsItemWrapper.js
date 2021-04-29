@@ -67,6 +67,7 @@ export const Wrapper = styled.div(() => [
     }
 
     & .goods-discount {
+      letter-spacing: 1px;
       background-color: transparent;
       color: rgb(249, 115, 115);
     }
@@ -79,14 +80,23 @@ export const Wrapper = styled.div(() => [
       justify-content: space-between;
     }
 
+    & .goods-item-slogan {
+      margin-bottom: 2px;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 17px;
+      color: rgba(0, 0, 0, 0.35);
+    }
+
     & .goods-item-title h3 {
       margin-bottom: 6px;
+      line-height: 20px;
       font-weight: 500;
       font-size: 14px;
       color: rgb(0, 0, 0);
     }
 
-    & .goods-item-info span {
+    & .goods-item-price {
       color: rgb(249, 115, 115);
     }
   `

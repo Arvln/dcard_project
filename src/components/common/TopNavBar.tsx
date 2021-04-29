@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import tw from "twin.macro";
 import { Wrapper } from "../style/TopNavBarWrapper";
 
@@ -13,13 +14,13 @@ function TopNavBar() {
     <Wrapper hasClickArrowIcon={hasClickArrowIcon}>
       <div className="top-container">
         <div className="container-left">
-          <a href="/f">
+          <Link to="/f">
             <h1 style={{fontSize: 0}}>Dcard</h1>
             <img
               src="https://www.dcard.tw/_next/static/media/logo-2ef7b50901acaa284f36a0484329ec05.svg"
               alt="Dcard"
             />
-          </a>
+          </Link>
           <div className="search-bar">
             <input type="text" placeholder="搜尋" />
             <button>
@@ -38,9 +39,9 @@ function TopNavBar() {
           </div>
         </div>
         <div className="container-right">
-          <a href="/signup" tw="hidden lg:block">
+          <Link to="/signup" tw="hidden lg:block">
             <span>註冊 / 登入</span>
-          </a>
+          </Link>
           <svg
             className="drop-menu"
             tw="hidden lg:block"
@@ -60,28 +61,28 @@ function TopNavBar() {
         <div className="about-container">
           <ul className="about">
             <li>
-              <a href="/terms">服務條款</a>
+              <Link to="/terms">服務條款</Link>
             </li>
             <li>
-              <a href="https://about.dcard.tw/faq" target="_blank">常見問題</a>
+              <Link to="https://about.dcard.tw/faq" target="_blank">常見問題</Link>
             </li>
             <li>
-              <a href="#">回報問題</a>
+              <Link to="#">回報問題</Link>
             </li>
             <li>
-              <a href="/brand" target="_blank">品牌識別</a>
+              <Link to="/brand" target="_blank">品牌識別</Link>
             </li>
             <li>
-              <a href="https://join.dcard.today/" target="_blank">徵才</a>
+              <Link to="https://join.dcard.today/" target="_blank">徵才</Link>
             </li>
             <li>
-              <a href="https://about.dcard.tw/business" target="_blank">商業合作</a>
+              <Link to="https://about.dcard.tw/business" target="_blank">商業合作</Link>
             </li>
             <li>
-              <a href="/download">免費下載APP</a>
+              <Link to="/download">免費下載APP</Link>
             </li>
             <li>
-              <a href="/my/configs">設定</a>
+              <Link to="/my/configs">設定</Link>
             </li>
           </ul>
         </div>

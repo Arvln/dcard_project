@@ -2,6 +2,9 @@ import tw, { styled, css } from "twin.macro";
 
 export const Wrapper = styled.nav(() => [
   tw`
+    sticky
+    top-12
+    z-10
     flex
     bg-white
   `,

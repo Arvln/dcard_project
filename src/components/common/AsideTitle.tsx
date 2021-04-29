@@ -26,7 +26,7 @@ function AsideTitle() {
         <div className="forum-posts-count">每天有 336 則貼文</div>
       </header>
       <div className="forum-introduce">
-        <div className="forum-indroduce-header">
+        <div className="forum-indroduce-header" onClick={ClickArrowIconHandler}>
           <p>
             無論是遠距離戀愛、情侶間的有趣互動、分手後的藕斷絲連等...都可以在感情板分享你們的愛情故事，找到愛情路上的共感。
           </p>
@@ -37,7 +37,6 @@ function AsideTitle() {
             focusable="false"
             role="img"
             aria-hidden="true"
-            onClick={ClickArrowIconHandler}
           >
             <path d="M11.08 15.62l-4.69-4.69a1.31 1.31 0 01.92-2.24h9.38a1.31 1.31 0 01.92 2.24l-4.69 4.69a1.3 1.3 0 01-1.84 0z"></path>
             <path fill="none" d="M0 0h24v24H0z"></path>

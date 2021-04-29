@@ -11,11 +11,12 @@ function GoodsItem() {
         <div className="fair-label">免運費</div>
         <div className="goods-item-info">
           <div className="goods-item-title">
+            <span className="goods-item-slogan">1362 位風格男女</span>
             <h3>西班牙Xhekpon｜膠原蛋白頸紋霜</h3>
+            {/* <div className="buy-more-discount">多件優惠</div> */}
+            <div className="goods-discount">限時93折起</div>
           </div>
-          {/* <div className="buy-more-discount">多件優惠</div>
-          <div className="goods-discount">限時93折起</div> */}
-          <span>$429 - $1,287</span>
+          <span className="goods-item-price">$429 - $1,287</span>
         </div>
       </Link>
     </Wrapper>

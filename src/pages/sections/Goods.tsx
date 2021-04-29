@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Wrapper } from "../style/GoodsWrapper";
 import goodsLogo from "../../assets/images/goods-icon.png";
@@ -9,12 +9,13 @@ import {
   GoodsItem,
   SlideShowButton,
   WatchMoreTitle,
+  ShowSlide,
+  GoodsItemsList,
 } from "../../components/content/goods";
 import { direction } from "../../components/content/goods/SlideShowButton";
 import { GetLimitedTime } from "../../utils";
 
 function Goods() {
-  const [topBannerTransfromXValue, setTopBannerTransfromXValue] = useState(0);
   const [latestGoodsTransformXValue, setLatestGoodsTransformXValue] = useState(
     0
   );
@@ -22,39 +23,19 @@ function Goods() {
     featureGoodsTransfromXValue,
     setFeatureGoodsTransfromXValue,
   ] = useState(0);
-  const topBannerBarCount: number = 5;
-  // 頁面頂部廣告輪播圖折返點
-  const topBannerReturnPoint: number = (topBannerBarCount - 1) * -100;
-  const [isMouseEnter, setIsMouseEnter] = useState(false);
-  const expendTime = GetLimitedTime("2021-04-29 15:00:00");
-
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    isMouseEnter ||
-      (timer = setTimeout(() => {
-        if (topBannerTransfromXValue === topBannerReturnPoint) {
-          setTopBannerTransfromXValue(0);
-        } else {
-          setTopBannerTransfromXValue(topBannerTransfromXValue - 100);
-        }
-      }, 2500));
-    // 用戶點擊按鈕後清除計時器
-    return () => clearTimeout(timer);
-  }, [topBannerTransfromXValue, isMouseEnter]);
+  const expendTime = GetLimitedTime("2021-04-30 15:00:00");
 
   function clickRightArrowIcon(
     transfromXValue: number,
     goodsType: string
   ): void {
     if (
-      (goodsType === "TopBanner" && transfromXValue === topBannerReturnPoint) ||
       (goodsType === "LatestGoods" && transfromXValue === -200) ||
       (goodsType === "FeatureGoods" && transfromXValue === -300)
     ) {
       return;
     }
     transfromXValue -= 100;
-    goodsType === "TopBanner" && setTopBannerTransfromXValue(transfromXValue);
     goodsType === "LatestGoods" &&
       setLatestGoodsTransformXValue(transfromXValue);
     goodsType === "FeatureGoods" &&
@@ -69,9 +50,6 @@ function Goods() {
       return;
     }
     transfromXValue += 100;
-    if (goodsType === "TopBanner") {
-      setTopBannerTransfromXValue(transfromXValue);
-    }
     goodsType === "LatestGoods" &&
       setLatestGoodsTransformXValue(transfromXValue);
     goodsType === "FeatureGoods" &&
@@ -80,7 +58,6 @@ function Goods() {
 
   return (
     <Wrapper
-      topBannerTransfromXValue={topBannerTransfromXValue}
       featureGoodsTransfromXValue={featureGoodsTransfromXValue}
       latestGoodsTransformXValue={latestGoodsTransformXValue}
       isExpired={expendTime.isExpired}
@@ -107,76 +84,7 @@ function Goods() {
           </Link>
         </div>
       </div>
-      <div className="slideshow-wrapper">
-        <div
-          className="slideshow-container"
-          onMouseEnter={() => setIsMouseEnter(true)}
-          onMouseLeave={() => setIsMouseEnter(false)}
-        >
-          <div className="slideshow-img">
-            <Link to="#">
-              <img
-                src="https://megapx-assets.dcard.tw/images/8407070a-6166-44b0-ab0c-5e261267a095/orig.png"
-                loading="lazy"
-                width="100%"
-              />
-            </Link>
-            <Link to="#">
-              <img
-                src="https://megapx-assets.dcard.tw/images/6806452e-7835-48ed-913a-86f94e5e60f9/orig.jpeg"
-                loading="lazy"
-                width="100%"
-              />
-            </Link>
-            <Link to="#">
-              <img
-                src="https://megapx-assets.dcard.tw/images/deb9a0f3-eb50-45f6-b49b-ee8a8871e4b0/orig.png"
-                loading="lazy"
-                width="100%"
-              />
-            </Link>
-            <Link to="#">
-              <img
-                src="https://megapx-assets.dcard.tw/images/62076f82-7f10-48c8-9a62-6dc6e6e90a33/orig.jpeg"
-                loading="lazy"
-                width="100%"
-              />
-            </Link>
-            <Link to="#">
-              <img
-                src="https://megapx-assets.dcard.tw/images/f01d74b6-a0f5-486a-ab8f-bef8dcbeaaca/orig.jpeg"
-                loading="lazy"
-                width="100%"
-              />
-            </Link>
-          </div>
-          <div
-            onClick={() =>
-              clickLeftArrowIcon(topBannerTransfromXValue, "TopBanner")
-            }
-            style={{ opacity: topBannerTransfromXValue === 0 ? 0 : 1 }}
-          >
-            <SlideShowButton direction={direction.left} top={139} />
-          </div>
-          <div
-            onClick={() =>
-              clickRightArrowIcon(topBannerTransfromXValue, "TopBanner")
-            }
-            style={{
-              opacity:
-                topBannerTransfromXValue === topBannerReturnPoint ? 0 : 1,
-            }}
-          >
-            <SlideShowButton direction={direction.right} top={139} />
-          </div>
-          <div className="top-banner-navbar-wrapper">
-            <SlideShowNavBar
-              bannerCount={topBannerBarCount}
-              transformXValue={topBannerTransfromXValue}
-            />
-          </div>
-        </div>
-      </div>
+      <ShowSlide showSlideBarCount={5} />
       <div className="goods-category-nav">
         <div className="goods-category-nav-item">
           <Link to="/goods/catalog/91f75636-55a8-4776-b06a-34608adbf01c">
@@ -235,7 +143,6 @@ function Goods() {
           </div>
           <div className="time-limited-goods-container">
             <div className="time-limited-goods-img">
-              <img src="https://megapx-assets.dcard.tw/images/5c929f25-7fa7-4ebe-bc6e-16ea948b281c/orig.jpeg" />
               <div className="time-limited-goods-sold-out">
                 <div className="goods-sold-out-tips">
                   <h1 style={{ fontSize: "26px", fontWeight: 400 }}>已售完</h1>
@@ -244,6 +151,7 @@ function Goods() {
                   </h2>
                 </div>
               </div>
+              <img src="https://megapx-assets.dcard.tw/images/5c929f25-7fa7-4ebe-bc6e-16ea948b281c/orig.jpeg" />
             </div>
             <div className="time-limited-goods-title">
               <h3>葉黃素系列｜jojome 悄悄美123</h3>
@@ -354,7 +262,7 @@ function Goods() {
               }
               style={{ opacity: latestGoodsTransformXValue === 0 ? 0 : 1 }}
             >
-              <SlideShowButton direction={direction.left} top={122} />
+              <SlideShowButton direction={direction.left} />
             </div>
             <div
               onClick={() =>
@@ -362,7 +270,7 @@ function Goods() {
               }
               style={{ opacity: latestGoodsTransformXValue === -200 ? 0 : 1 }}
             >
-              <SlideShowButton direction={direction.right} top={122} />
+              <SlideShowButton direction={direction.right} />
             </div>
           </div>
           <div className="latest-goods-navbar-wrapper">
@@ -578,43 +486,29 @@ function Goods() {
               </Link>
             </div>
           </div>
-          <div
-            onClick={() =>
-              clickLeftArrowIcon(featureGoodsTransfromXValue, "FeatureGoods")
-            }
-            style={{ opacity: featureGoodsTransfromXValue === 0 ? 0 : 1 }}
-          >
-            <SlideShowButton direction={direction.left} top={98} />
-          </div>
-          <div
-            onClick={() =>
-              clickRightArrowIcon(featureGoodsTransfromXValue, "FeatureGoods")
-            }
-            style={{ opacity: featureGoodsTransfromXValue === -300 ? 0 : 1 }}
-          >
-            <SlideShowButton direction={direction.right} top={98} />
+          <div className="feature-goods-arrow-icon-wrapper">
+            <div
+              onClick={() =>
+                clickLeftArrowIcon(featureGoodsTransfromXValue, "FeatureGoods")
+              }
+              style={{ opacity: featureGoodsTransfromXValue === 0 ? 0 : 1 }}
+            >
+              <SlideShowButton direction={direction.left} />
+            </div>
+            <div
+              onClick={() =>
+                clickRightArrowIcon(featureGoodsTransfromXValue, "FeatureGoods")
+              }
+              style={{ opacity: featureGoodsTransfromXValue === -300 ? 0 : 1 }}
+            >
+              <SlideShowButton direction={direction.right} />
+            </div>
           </div>
         </div>
       </div>
       <DirectionsSplitLine />
       <GoodsRankNavBar />
-      <div className="goods-content-wrapper">
-        <div className="goods-content-container">
-          <GoodsItem />
-          <GoodsItem />
-          <GoodsItem />
-          <GoodsItem />
-          <GoodsItem />
-          <GoodsItem />
-          <GoodsItem />
-          <GoodsItem />
-          <GoodsItem />
-          <GoodsItem />
-          <GoodsItem />
-          <GoodsItem />
-          <GoodsItem />
-        </div>
-      </div>
+      <GoodsItemsList />
     </Wrapper>
   );
 }

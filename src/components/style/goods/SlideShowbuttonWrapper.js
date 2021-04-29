@@ -1,6 +1,6 @@
 import tw, { styled, css } from "twin.macro";
 
-export const Wrapper = styled.button(({direction, top}) => [
+export const Wrapper = styled.button(({direction}) => [
   tw`
     absolute
     w-6
@@ -10,7 +10,7 @@ export const Wrapper = styled.button(({direction, top}) => [
   `,
   css`
     & {
-      top: ${top}px;
+      top: 50%;
       ${direction}: 0;
       background: rgba(0, 0, 0, 0.28);
       border-radius: 4px 0px 0px 4px;

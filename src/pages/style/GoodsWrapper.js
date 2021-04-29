@@ -1,6 +1,6 @@
 import tw, { styled, css, theme } from "twin.macro";
 
-export const Wrapper = styled.main(({topBannerTransfromXValue, featureGoodsTransfromXValue, latestGoodsTransformXValue, isExpired}) => [
+export const Wrapper = styled.main(({ featureGoodsTransfromXValue, latestGoodsTransformXValue, isExpired }) => [
   tw`
     pt-5
     bg-white
@@ -46,39 +46,6 @@ export const Wrapper = styled.main(({topBannerTransfromXValue, featureGoodsTrans
       font-size: 12px;
       line-height: 17px;
       color: rgba(0, 0, 0, .5);
-    }
-
-    & .slideshow-wrapper {
-      padding: 20px 60px 0;
-    }
-
-    & .slideshow-container {
-      position: relative;
-      overflow: hidden auto;
-    }
-
-    & .slideshow-img {
-      direction: ltr;
-      transform: ${`translate(` + topBannerTransfromXValue + `%, 0%)`};
-      transition: transform 0.35s cubic-bezier(0.15, 0.3, 0.25, 1) 0s;
-      display: flex;
-    }
-
-    & .slideshow-img a {
-      width: 100%;
-      height: 100%;
-      flex-shrink: 0;
-    }
-
-    & .slideshow-img img {
-      border-radius: 12px;
-    }
-
-    & .top-banner-navbar-wrapper {
-      position: absolute;
-      bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%)
     }
 
     & .goods-category-nav {
@@ -174,14 +141,8 @@ export const Wrapper = styled.main(({topBannerTransfromXValue, featureGoodsTrans
       padding: 0 2px;
     }
 
-    & .time-limited-goods-img {
-      position: relative;
-      width: 100%;
-      padding-bottom: 100%;
-    }
-
-    & .time-limited-goods-img img,
-    .time-limited-goods-sold-out {
+    & .time-limited-goods-sold-out,
+    .time-limited-goods-img img {
       position: absolute;
       width: 100%;
       height: 100%;
@@ -189,11 +150,17 @@ export const Wrapper = styled.main(({topBannerTransfromXValue, featureGoodsTrans
     }
 
     & .time-limited-goods-sold-out {
-      z-index: ${isExpired || -1};
       background: rgba(0, 0, 0, .5);
+      z-index: ${isExpired && 2};
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+
+    & .time-limited-goods-img {
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%;
     }
 
     & .goods-sold-out-tips {
@@ -505,16 +472,11 @@ export const Wrapper = styled.main(({topBannerTransfromXValue, featureGoodsTrans
       color: rgba(0, 0, 0, .35);
     }
 
-    & .goods-content-wrapper {
-      padding: 24px 60px;
-      background-color: rgb(242, 243, 244);
-    }
-
-    & .goods-content-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      grid-template-rows: repeat(auto-fill, minmax(296px, 1fr));
-      gap: 10px;
+    & .feature-goods-arrow-icon-wrapper {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 198px;
     }
   `
 ])

@@ -19,11 +19,14 @@ function SharingComponent({ MainCreator }: Props) {
   const [hasFooter, setHasFooter] = useState(true);
   const initialPosition: HTMLElement | null = document.getElementById("root");
 
-
   useEffect(() => {
     path !== "/f/sections" && initialPosition?.scrollIntoView();
     const forumPages: RegExp = /^\/f\//;
-    if (path !== "/f/latest" && path !== "/f/pessoal" && forumPages.test(path)) {
+    if (
+      path !== "/f/latest" &&
+      path !== "/f/pessoal" &&
+      forumPages.test(path)
+    ) {
       setHasAsideTitle(true);
     }
     const searchPages: RegExp = /^\/search/;
