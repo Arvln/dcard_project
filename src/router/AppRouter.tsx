@@ -1,4 +1,8 @@
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect
+} from "react-router-dom";
 // sharing part
 import { SharingComponent } from "../components/common";
 // pages
@@ -15,11 +19,6 @@ function AppRouter() {
       <Route exact path="/">
         <Redirect to="/f" />
       </Route>
-      <Route
-        exact
-        path="/f"
-        children={<SharingComponent MainCreator={Pages.Home} />}
-      />
       <Route
         path="/f/latest"
         children={<SharingComponent MainCreator={Pages.Home} />}
@@ -38,14 +37,18 @@ function AppRouter() {
       <Route path="/my" children={<Pages.User />} />
 
       {/* aside */}
-      <Route path="/forum/all" children={<SharingComponent MainCreator={Pages.ForumAll} />} />
-      <Route path="/forum/popular" children={<SharingComponent MainCreator={Pages.ForumPopular} />} />
-      <Route path="/goods" children={<GoodsRouter />} />
-      <Route path="/def/gamezone" children={<SharingComponent MainCreator={Pages.Gamezone} />} />
       <Route
-        exact
-        path="/f/sections"
-        children={<SharingComponent MainCreator={Pages.Sections} />}
+        path="/forum/all"
+        children={<SharingComponent MainCreator={Pages.ForumAll} />}
+      />
+      <Route
+        path="/forum/popular"
+        children={<SharingComponent MainCreator={Pages.ForumPopular} />}
+      />
+      <Route path="/goods" children={<GoodsRouter />} />
+      <Route
+        path="/def/gamezone"
+        children={<SharingComponent MainCreator={Pages.Gamezone} />}
       />
       <Route
         path="/f/sections/latest"
@@ -55,6 +58,19 @@ function AppRouter() {
         path="/f/sections/rule"
         children={<SharingComponent MainCreator={Pages.Sections} />}
       />
+      <Route
+        path="/f/sections"
+        children={<SharingComponent MainCreator={Pages.Sections} />}
+      />
+
+      {/* index */}
+      <Route
+        path="/f"
+        children={<SharingComponent MainCreator={Pages.Home} />}
+      />
+      
+      {/* articles */}
+      <Route path="*/p/*" children={<Pages.SectionsArticle />} />
     </Router>
   );
 }

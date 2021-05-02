@@ -1,7 +1,6 @@
 import tw, { styled, css, theme } from "twin.macro";
 
 export const Wrapper = styled.main(({ navBarClassName }) => [
-  console.log(navBarClassName),
   tw`
     bg-white
   `,

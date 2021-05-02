@@ -1,5 +1,3 @@
 import { GetLimitedTime } from "./LimitedTimeCompute";
 
-export {
-  GetLimitedTime
-}
+export { GetLimitedTime };

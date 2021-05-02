@@ -8,10 +8,10 @@ function SearchRouter() {
   return (
     <Switch>
       <Route exact path={path} children={<SharingComponent MainCreator={Pages.SearchOptions} />} />
-      <Route path={`${path}/posts`} children={<div>123</div>} />
-      <Route path={`${path}/forums`} children={<Pages.SearchOptions />} />
-      <Route path={`${path}/topics`} children={<Pages.SearchOptions />} />
-      <Route path={`${path}/personas`} children={<Pages.SearchOptions />} />
+      <Route path={`${path}/posts`} children={<SharingComponent MainCreator={Pages.SearchOptions} />} />
+      <Route path={`${path}/forums`} children={<SharingComponent MainCreator={Pages.SearchOptions} />} />
+      <Route path={`${path}/topics`} children={<SharingComponent MainCreator={Pages.SearchOptions} />} />
+      <Route path={`${path}/personas`} children={<SharingComponent MainCreator={Pages.SearchOptions} />} />
     </Switch>
   );
 }

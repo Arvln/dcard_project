@@ -6,7 +6,6 @@ import {
   SlideShowNavBar,
   DirectionsSplitLine,
   GoodsRankNavBar,
-  GoodsItem,
   SlideShowButton,
   WatchMoreTitle,
   ShowSlide,

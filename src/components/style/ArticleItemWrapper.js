@@ -12,6 +12,10 @@ export const Wrapper = styled.li(() => [
       border-bottom: 1px solid rgb(233, 233, 233);
     }
 
+    & a {
+      display: block;
+    }
+
     & .article-conatiner {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -69,6 +73,7 @@ export const Wrapper = styled.li(() => [
     & .article-title h1 {
       font-weight: 600;
       font-size: 18px;
+      color: rgb(0, 0, 0);
     }
 
     & .article-content {

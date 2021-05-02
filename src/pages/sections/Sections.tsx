@@ -1,7 +1,11 @@
 import { Link, useRouteMatch } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Wrapper } from "../style/SectionsWrapper";
-import { RelatedForums, ArticleItem, FollowButton } from "../../components/common";
+import {
+  RelatedForums,
+  ArticleItem,
+  FollowButton,
+} from "../../components/common";
 
 function Sections() {
   const { path } = useRouteMatch();
@@ -113,7 +117,7 @@ function Sections() {
       )}
 
       {navBarClassName === "rule" || (
-        <ul className="main-container">
+        <ul>
           <ArticleItem />
           <ArticleItem />
           <ArticleItem />
@@ -594,17 +598,7 @@ function Sections() {
                 </h2>
                 <div className="rule-contents-description">
                   <p>
-                    為了創造更佳的內容體驗，除了公開的社群網站連結及遊戲 ID
-                    外（如
-                    Facebook、Instagram、YouTube、Medium、Pixnet、Discord......等），
-                  </p>
-                  <p>
-                    Dcard 全面禁止在文章與留言內留下個人聯絡方式或
-                    ID，違反者將刪文並停權。
-                  </p>
-                  <p>
-                    「個人聯絡方式」指任何可以直接聯繫到特定個人的聯絡資訊，包含但不限於電話、電子郵件、通訊軟體
-                    ID、交友軟體 ID 或配對碼等。
+                    {"為了創造更佳的內容體驗，除了公開的社群網站連結及遊戲 ID 外（如 Facebook、Instagram、YouTube、Medium、Pixnet、Discord......等），\nDcard 全面禁止在文章與留言內留下個人聯絡方式或 ID，違反者將刪文並停權。\n「個人聯絡方式」指任何可以直接聯繫到特定個人的聯絡資訊，包含但不限於電話、電子郵件、通訊軟體 ID、交友軟體 ID 或配對碼等。"}
                   </p>
                   <div>違反此站規，於此看板禁言 30 天。</div>
                 </div>
@@ -612,19 +606,7 @@ function Sections() {
               <li>
                 <h2>3. 惡意洗板、重複張貼</h2>
                 <div className="rule-contents-description">
-                  <p>若違反以下規範，將以「惡意洗板」為由刪文加停權 30 天：</p>
-                  <p> (1) 重複張貼他人已發表過且完全相同的內容</p>
-                  <p> (2) 同一人重複發表相同內容</p>
-                  <p> (3) 在文章或留言內張貼大量空白或無意義字詞，影響他人閱讀體驗</p>
-                  <p>&nbsp;</p>
-                  <p>
-                    ※
-                    引用、轉貼文章、或相同文章發表在多個看板但文章皆符合該看板板旨者，不在此限。
-                  </p>
-                  <p>
-                    ※ 時事板自 2019/8/30 起，每日每個 Dcard 帳號限發文 5
-                    篇（含引用、轉貼），違者以惡意洗板懲處。
-                  </p>
+                  <p>{ "若違反以下規範，將以「惡意洗板」為由刪文加停權 30 天：\n (1) 重複張貼他人已發表過且完全相同的內容\n (2) 同一人重複發表相同內容\n (3) 在文章或留言內張貼大量空白或無意義字詞，影響他人閱讀體驗\n\n※ 引用、轉貼文章、或相同文章發表在多個看板但文章皆符合該看板板旨者，不在此限。\n※ 時事板自 2019/8/30 起，每日每個 Dcard 帳號限發文 5 篇（含引用、轉貼），違者以惡意洗板懲處。"}</p>
                   <div>違反此站規，於此看板禁言 30 天。</div>
                 </div>
               </li>

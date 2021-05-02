@@ -10,6 +10,7 @@ import Brand from "./more/Brand";
 import Download from "./more/Download";
 import User from "./User";
 import SearchOptions from "./SearchOption";
+import SectionsArticle from "./sections/SectionsArticles";
 
 export {
   ForumAll,
@@ -24,4 +25,5 @@ export {
   Download,
   User,
   SearchOptions,
+  SectionsArticle,
 };

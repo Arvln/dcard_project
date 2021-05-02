@@ -1,6 +1,6 @@
 import tw, { styled, css, theme } from "twin.macro";
 
-export const Wrapper = styled.div(({hasFooter}) => [
+export const Wrapper = styled.div(() => [
   tw`
     grid
     max-w-screen-xl
@@ -70,11 +70,11 @@ export const Wrapper = styled.div(({hasFooter}) => [
       position: fixed;
       bottom: 0;
       left: 0;
-      z-index: 100;
+      z-index: 99;
       width: 100%;
       height: 132px;
       background-color: rgba(36, 40, 45, 0.95);
-      display: ${hasFooter ? "flex" : "none"};
+      display: flex;
       justify-content: center;
       align-items: center;
     }

@@ -260,6 +260,7 @@ export const Wrapper = styled.main(({navBarClassName}) => [
 
     & .rule-contents-description p {
       line-height: 1.56;
+      white-space: break-spaces;
     }
     
     & .rule-contents-description span {

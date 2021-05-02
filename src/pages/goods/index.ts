@@ -1,10 +1,11 @@
-import ClothStyle from "../goods/ClothStyle";
-import Foods from "../goods/Foods";
-import HomeApplianceAnd3C from "../goods/HomeApplianceAnd3C";
-import MakeUp from "../goods/MakeUp";
-import QualityLife from "../goods/QualityLife";
-import SexToys from "../goods/SexToys";
-import GoodsCategories from "../goods/GoodsCategories";
+import ClothStyle from "./ClothStyle";
+import Foods from "./Foods";
+import HomeApplianceAnd3C from "./HomeApplianceAnd3C";
+import MakeUp from "./MakeUp";
+import QualityLife from "./QualityLife";
+import SexToys from "./SexToys";
+import GoodsCategories from "./GoodsCategories";
+import GoodsArticle from "./GoodsArticle";
 
 export {
   ClothStyle,
@@ -13,5 +14,6 @@ export {
   MakeUp,
   QualityLife,
   SexToys,
-  GoodsCategories
+  GoodsCategories,
+  GoodsArticle,
 }

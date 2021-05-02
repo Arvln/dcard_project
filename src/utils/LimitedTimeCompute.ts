@@ -1,5 +1,3 @@
-
-
 export type ExpiryDateType = {
   isExpired: boolean;
   hour: string;
@@ -23,7 +21,7 @@ function GetLimitedTime(expiryDateString: string): ExpiryDateType {
   const expendSecond: number = parseInt((expendTime % 60) + "");
   const expendSecondString: string =
     expendSecond < 10 ? "0" + expendSecond.toString() : expendSecond.toString();
-  
+
   return {
     isExpired: expendTime < 0,
     hour: expendTime < 0 ? "00" : expendHourString,
@@ -31,6 +29,5 @@ function GetLimitedTime(expiryDateString: string): ExpiryDateType {
     second: expendTime < 0 ? "00" : expendSecondString,
   };
 }
-
 
 export { GetLimitedTime };
