@@ -1,4 +1,3 @@
-import axios from "axios";
 import { call, put } from "redux-saga/effects";
 import { FetchSuccess, FetchFailure } from "../../redux/FetchActions";
 

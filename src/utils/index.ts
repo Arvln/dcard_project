@@ -1,3 +1,4 @@
 import { GetLimitedTime } from "./LimitedTimeCompute";
+import { normalizedData } from "./schema";
 
-export { GetLimitedTime };
+export { GetLimitedTime, normalizedData };

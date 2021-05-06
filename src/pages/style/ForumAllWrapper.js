@@ -1,6 +1,6 @@
 import tw, { styled, css, theme } from "twin.macro";
 
-export const Wrapper = styled.main(({isClickArrowIcon}) => [
+export const Wrapper = styled.main(() => [
   tw`
     bg-white
   `,
@@ -66,12 +66,12 @@ export const Wrapper = styled.main(({isClickArrowIcon}) => [
 
     & .forums-list img {
       border-radius: 50%;
-
     }
 
     & .forums-list h4 {
       flex: 1;
       padding: 0 10px;
+      color: rgb(0, 0, 0);
     }
   `
 ])

@@ -29,12 +29,12 @@ function AppRouter() {
   }, []);
 
   const selectionForumsUrl = [];
-  for (let selectionForum of selectionForums.data) {
-    selectionForumsUrl.push({
-      id: selectionForum.id,
-      url: `/f/${selectionForum.alias}`,
-    });
-  }
+  // for (let selectionForum of selectionForums.data) {
+  //   selectionForumsUrl.push({
+  //     id: selectionForum.id,
+  //     url: `/f/${selectionForum.alias}`,
+  //   });
+  // }
 
   return (
     <Router>
@@ -74,7 +74,7 @@ function AppRouter() {
         path="/def/gamezone"
         children={<SiteLayout MainCreator={Pages.Gamezone} />}
       />
-      {selectionForumsUrl.map(({ id, url }) => {
+      {/* {selectionForumsUrl.map(({ id, url }) => {
         return (
           <React.Fragment key={id}>
             <Route
@@ -91,7 +91,7 @@ function AppRouter() {
             />
           </React.Fragment>
         );
-      })}
+      })} */}
 
       {/* index */}
       <Route path="/f" children={<SiteLayout MainCreator={Pages.Home} />} />

@@ -10,10 +10,8 @@ import RecommandSubNav from "./RecommandSubNav";
 import AsideTitle from "./AsideTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchRequest } from "../../store/redux/FetchActions";
-import { Forum } from "../../model";
-import { initialFetchState } from "../../store/redux/FetchReducer";
-
-export const SelectionForumsContext = React.createContext(initialFetchState);
+import { NormalizedState, initialFetchState, InitialState } from "../../store/redux/FetchReducer";
+export const RootStoreContext = React.createContext(initialFetchState);
 
 type Props = {
   MainCreator: () => JSX.Element;
@@ -21,10 +19,12 @@ type Props = {
 
 type RootState = {
   FetchReducer: {
-    loading: boolean;
-    data: Forum[];
-    error: string;
-  };
+    loading: boolean,
+    forums: NormalizedState,
+    categorization: NormalizedState,
+    categories: NormalizedState,
+    error: string
+  }
 };
 
 function SharingComponent({ MainCreator }: Props) {
@@ -32,9 +32,11 @@ function SharingComponent({ MainCreator }: Props) {
   const [hasAsideTitle, setHasAsideTitle] = useState(false);
   const [hasFooter, setHasFooter] = useState(true);
   const initialPosition: HTMLElement | null = document.getElementById("root");
-  const selectionForums = useSelector((state: RootState) => ({
+  const rootState = useSelector((state: RootState) => ({
     loading: state.FetchReducer.loading,
-    data: state.FetchReducer.data,
+    forums: state.FetchReducer.forums,
+    categorization: state.FetchReducer.categorization,
+    categories: state.FetchReducer.categories,
     error: state.FetchReducer.error,
   }));
 
@@ -42,6 +44,8 @@ function SharingComponent({ MainCreator }: Props) {
   useEffect(() => {
     dispatch(FetchRequest());
   }, []);
+  // console.log(rootState);
+  
 
   useEffect(() => {
     path !== "/f/sections" && initialPosition?.scrollIntoView();
@@ -68,7 +72,7 @@ function SharingComponent({ MainCreator }: Props) {
   }, [path]);
 
   return (
-    <SelectionForumsContext.Provider value={{ ...selectionForums }}>
+    <RootStoreContext.Provider value={{...rootState}}>
       <Wrapper>
         <TopNavBar />
         <nav className="forum-subnav">
@@ -77,7 +81,7 @@ function SharingComponent({ MainCreator }: Props) {
           </div>
           <div className="botton-nav">
             <PopularSubNav />
-            <RecommandSubNav />
+            {/* <RecommandSubNav /> */}
           </div>
         </nav>
         <section className="forum-content">
@@ -159,7 +163,7 @@ function SharingComponent({ MainCreator }: Props) {
           </footer>
         )}
       </Wrapper>
-    </SelectionForumsContext.Provider>
+    </RootStoreContext.Provider>
   );
 }
 

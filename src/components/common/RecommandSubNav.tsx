@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Wrapper } from "../style/SubNavItemsWrapper";
 import { useContext } from "react";
-import { SelectionForumsContext } from "../common/SiteLayout";
+import { RootStoreContext } from "../common/SiteLayout";
 
 type Props = {
   alias: string;
@@ -26,19 +26,19 @@ function RecommandForum({ alias, logo, name }: Props) {
 }
 
 function RecommandSubNav() {
-  const { loading, data } = useContext(SelectionForumsContext);
+  // const { loading, data } = useContext(SelectionForumsContext);
 
-  return (
-    <Wrapper>
-      <li>
-        <h3>Dcard 精選看板</h3>
-      </li>
-      {loading ||
-        data.map((selectionForum) => (
-          <RecommandForum {...selectionForum} key={selectionForum.id} />
-        ))}
-    </Wrapper>
-  );
+  // return (
+  //   <Wrapper>
+  //     <li>
+  //       <h3>Dcard 精選看板</h3>
+  //     </li>
+  //     {loading ||
+  //       data.map((selectionForum) => (
+  //         <RecommandForum {...selectionForum} key={selectionForum.id} />
+  //       ))}
+  //   </Wrapper>
+  // );
 }
 
 export default RecommandSubNav;

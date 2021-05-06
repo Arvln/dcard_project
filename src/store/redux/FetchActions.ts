@@ -2,23 +2,33 @@ import * as actions from "./FetchActionsType";
 
 export type FetchActions = {
   type: string,
-  payloads?: any
+  payloads?: {
+    prefix: string,
+    data?: any[]
+    error?: string
+  }
 }
 
 export function FetchRequest(): FetchActions {
   return { type: actions.FETCH_REQUEST }
 }
 
-export function FetchSuccess(data: any[]): FetchActions {
+export function FetchSuccess(prefix: string, data: any[]): FetchActions {
   return {
     type: actions.FETCH_SUCCESS,
-    payloads: data
+    payloads: {
+      prefix,
+      data
+    }
   }
 }
 
-export function FetchFailure(error: any): FetchActions {
+export function FetchFailure(prefix:string, error: any): FetchActions {
   return {
     type: actions.FETCH_FAILURE,
-    payloads: error
+    payloads: {
+      prefix,
+      error
+    }
   }
 }
