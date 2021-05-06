@@ -64,7 +64,7 @@ function TopNavBar() {
               <Link to="/terms">服務條款</Link>
             </li>
             <li>
-              <Link to="https://about.dcard.tw/faq" target="_blank">常見問題</Link>
+              <a href="https://about.dcard.tw/faq" target="_blank">常見問題</a>
             </li>
             <li>
               <Link to="#">回報問題</Link>
@@ -73,10 +73,10 @@ function TopNavBar() {
               <Link to="/brand" target="_blank">品牌識別</Link>
             </li>
             <li>
-              <Link to="https://join.dcard.today/" target="_blank">徵才</Link>
+              <a href="https://join.dcard.today/" target="_blank">徵才</a>
             </li>
             <li>
-              <Link to="https://about.dcard.tw/business" target="_blank">商業合作</Link>
+              <a href="https://about.dcard.tw/business" target="_blank">商業合作</a>
             </li>
             <li>
               <Link to="/download">免費下載APP</Link>

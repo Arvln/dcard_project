@@ -1,7 +1,7 @@
-import SharingComponent from "./SharingComponent";
+import SiteLayout from "./SiteLayout";
 import RelatedForums from "./RelatedForums";
 import ArticleItem from "./ArticleItem";
 import FollowButton from "./FollowButton";
 import ArticleCommentItem from "./ArticleCommentItem";
 
-export { SharingComponent, RelatedForums, ArticleItem, FollowButton, ArticleCommentItem };
+export { SiteLayout, RelatedForums, ArticleItem, FollowButton, ArticleCommentItem };

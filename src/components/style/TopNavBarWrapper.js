@@ -95,19 +95,21 @@ export const Wrapper = styled.div(({ hasClickArrowIcon }) => [
   & .about-container {
     display: ${hasClickArrowIcon ? "block" : "none"};
     position: fixed;
-    top: 48px;
-    right: 206px;
+    top: 0;
+    left: 0;
+    transform: translate3d(1314px, 48px, 0px);
     width: 160px;
     height: 332px;
     border-radius: 12px;
     background-color: #fff;
+    filter: drop-shadow(rgba(0, 0, 0, 0.1) 0px 3px 12px);
   }
 
   & .about-container::before {
     content: "";
-    position: fixed;
-    top: 41.45px;
-    right: 227px;
+    position: absolute;
+    top:-7px;
+    right: 21px;
     width: 0;
     height: 0;
     line-height: 0;

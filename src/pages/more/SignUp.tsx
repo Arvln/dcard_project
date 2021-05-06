@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Wrapper } from "./style/SignUpWrapper";
-import TopNavBar from "../components/common/TopNavBar";
+import { Wrapper } from "../style/SignUpWrapper";
+import TopNavBar from "../../components/common/TopNavBar";
 
 function SignUp() {
   const [isMissValidationMail, setIsMissValidationMail] = useState(false);
@@ -110,7 +110,12 @@ function SignUp() {
               <li className="pwd-wrapper">
                 <label htmlFor="pwd">密碼</label>
                 <div className="pwd-content">
-                  <input type="text" placeholder="輸入密碼" name="pwd" id="pwd" />
+                  <input
+                    type="text"
+                    placeholder="輸入密碼"
+                    name="pwd"
+                    id="pwd"
+                  />
                   <button type="button" className="pwd-visible">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -147,13 +152,7 @@ function SignUp() {
               </div>
             </div>
             {(isMissValidationMail || isForgetPassword) && (
-              <div
-                className="validation-form-Wrapper"
-                onClick={() => {
-                  setIsMissValidationMail(false);
-                  setIsForgetPassword(false);
-                }}
-              >
+              <div className="validation-form-Wrapper">
                 <div className="validation-form">
                   {isMissValidationMail && <header>收不到驗證信嗎？</header>}
                   {isForgetPassword && <header>密碼重設驗證信</header>}
@@ -195,31 +194,30 @@ function SignUp() {
             </div>
           </div>
           <div className="form-bottom-wrapper">
-
-          <div className="form-bottom">
-            <a
-              href="https://go.onelink.me/m131/85bf4a77"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://www.dcard.tw/_next/static/media/google_play-492-6088c8c95b3e39e614d54d44bf51aab1.png"
-                alt="Get it on Google Play"
-                width="100%"
-              />
-            </a>
-            <a
-              href="https://go.onelink.me/nRB7/3f4da7b0"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://www.dcard.tw/_next/static/media/app_store-492-756181fab2e5a68179afa3f3dffd0bc8.png"
-                alt="Download on the App Store"
-                width="100%"
-              />
-            </a>
-          </div>
+            <div className="form-bottom">
+              <a
+                href="https://go.onelink.me/m131/85bf4a77"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="https://www.dcard.tw/_next/static/media/google_play-492-6088c8c95b3e39e614d54d44bf51aab1.png"
+                  alt="Get it on Google Play"
+                  width="100%"
+                />
+              </a>
+              <a
+                href="https://go.onelink.me/nRB7/3f4da7b0"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="https://www.dcard.tw/_next/static/media/app_store-492-756181fab2e5a68179afa3f3dffd0bc8.png"
+                  alt="Download on the App Store"
+                  width="100%"
+                />
+              </a>
+            </div>
           </div>
         </div>
       </div>

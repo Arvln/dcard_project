@@ -1,18 +1,41 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect
-} from "react-router-dom";
-// sharing part
-import { SharingComponent } from "../components/common";
-// pages
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { SiteLayout } from "../components/common";
 import * as Pages from "../pages";
-// search router
 import SearchRouter from "./SearchRouter";
-// goods router
 import GoodsRouter from "./GoodsRouter";
+import { useDispatch, useSelector } from "react-redux";
+import { FetchRequest } from "../store/redux/FetchActions";
+import { Forum } from "../model";
+
+type RootState = {
+  FetchReducer: {
+    loading: boolean;
+    data: Forum[];
+    error: string;
+  };
+};
 
 function AppRouter() {
+  const selectionForums = useSelector((state: RootState) => ({
+    loading: state.FetchReducer.loading,
+    data: state.FetchReducer.data,
+    error: state.FetchReducer.error,
+  }));
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(FetchRequest());
+  }, []);
+
+  const selectionForumsUrl = [];
+  for (let selectionForum of selectionForums.data) {
+    selectionForumsUrl.push({
+      id: selectionForum.id,
+      url: `/f/${selectionForum.alias}`,
+    });
+  }
+
   return (
     <Router>
       {/* index */}
@@ -21,11 +44,11 @@ function AppRouter() {
       </Route>
       <Route
         path="/f/latest"
-        children={<SharingComponent MainCreator={Pages.Home} />}
+        children={<SiteLayout MainCreator={Pages.Home} />}
       />
       <Route
         path="/f/pessoal"
-        children={<SharingComponent MainCreator={Pages.Home} />}
+        children={<SiteLayout MainCreator={Pages.Home} />}
       />
 
       {/* nav */}
@@ -35,40 +58,44 @@ function AppRouter() {
       <Route path="/brand" children={<Pages.Brand />} />
       <Route path="/download" children={<Pages.Download />} />
       <Route path="/my" children={<Pages.User />} />
+      <Route path="/my/configs" children={<Pages.User />} />
 
       {/* aside */}
       <Route
         path="/forum/all"
-        children={<SharingComponent MainCreator={Pages.ForumAll} />}
+        children={<SiteLayout MainCreator={Pages.ForumAll} />}
       />
       <Route
         path="/forum/popular"
-        children={<SharingComponent MainCreator={Pages.ForumPopular} />}
+        children={<SiteLayout MainCreator={Pages.ForumPopular} />}
       />
       <Route path="/goods" children={<GoodsRouter />} />
       <Route
         path="/def/gamezone"
-        children={<SharingComponent MainCreator={Pages.Gamezone} />}
+        children={<SiteLayout MainCreator={Pages.Gamezone} />}
       />
-      <Route
-        path="/f/sections/latest"
-        children={<SharingComponent MainCreator={Pages.Sections} />}
-      />
-      <Route
-        path="/f/sections/rule"
-        children={<SharingComponent MainCreator={Pages.Sections} />}
-      />
-      <Route
-        path="/f/sections"
-        children={<SharingComponent MainCreator={Pages.Sections} />}
-      />
+      {selectionForumsUrl.map(({ id, url }) => {
+        return (
+          <React.Fragment key={id}>
+            <Route
+              path={`${url}/latest`}
+              children={<SiteLayout MainCreator={Pages.Sections} />}
+            />
+            <Route
+              path={`${url}/rule`}
+              children={<SiteLayout MainCreator={Pages.Sections} />}
+            />
+            <Route
+              path={url}
+              children={<SiteLayout MainCreator={Pages.Sections} />}
+            />
+          </React.Fragment>
+        );
+      })}
 
       {/* index */}
-      <Route
-        path="/f"
-        children={<SharingComponent MainCreator={Pages.Home} />}
-      />
-      
+      <Route path="/f" children={<SiteLayout MainCreator={Pages.Home} />} />
+
       {/* articles */}
       <Route path="*/p/*" children={<Pages.SectionsArticle />} />
     </Router>

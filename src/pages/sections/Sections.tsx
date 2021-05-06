@@ -1,5 +1,5 @@
 import { Link, useRouteMatch } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Wrapper } from "../style/SectionsWrapper";
 import {
   RelatedForums,
@@ -18,13 +18,19 @@ function Sections() {
     const forumTitlePosition: HTMLElement | null = document.getElementById(
       "forum-title-point"
     );
-
-    path === "/f/sections" && setNavBarClassName("popular");
-    path === "/f/sections/latest" && setNavBarClassName("latest");
-    path === "/f/sections/rule" && setNavBarClassName("rule");
-    // 跳轉頁面到版標
-    path === "/f/sections" && forumTitlePosition?.scrollIntoView();
+    const latestPage: RegExp = /\/latest$/;
+    const rulePage: RegExp = /\/rule$/;
+    if (latestPage.test(path)) {
+      setNavBarClassName("latest");
+    } else if (rulePage.test(path)) {
+      setNavBarClassName("rule");
+    } else {
+      setNavBarClassName("popular");
+      // 跳轉頁面到版標
+      forumTitlePosition?.scrollIntoView();
+    }
   }, [path]);
+  
 
   function leftArrowIconHandler(): void {
     scrollElement = document.getElementById("scroll-element");
