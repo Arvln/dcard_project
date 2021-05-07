@@ -64,7 +64,8 @@ export const Wrapper = styled.main(() => [
       align-items: center;
     }
 
-    & .forums-list img {
+    & .forums-list img,
+    .forums-list svg {
       border-radius: 50%;
     }
 

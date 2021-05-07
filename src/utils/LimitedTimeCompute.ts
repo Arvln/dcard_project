@@ -5,7 +5,7 @@ export type ExpiryDateType = {
   second: string;
 };
 
-function GetLimitedTime(expiryDateString: string): ExpiryDateType {
+export function GetLimitedTime(expiryDateString: string): ExpiryDateType {
   const expiryDateTimeStamp: number = +new Date(expiryDateString);
   const nowDateTimeStamp: number = +new Date();
   const expendTime: number = (expiryDateTimeStamp - nowDateTimeStamp) / 1000;
@@ -29,5 +29,3 @@ function GetLimitedTime(expiryDateString: string): ExpiryDateType {
     second: expendTime < 0 ? "00" : expendSecondString,
   };
 }
-
-export { GetLimitedTime };

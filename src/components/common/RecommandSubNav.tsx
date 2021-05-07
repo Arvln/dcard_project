@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { Wrapper } from "../style/SubNavItemsWrapper";
 import { useContext } from "react";
 import { RootStoreContext } from "../common/SiteLayout";
+import { Forum } from "../../model";
 
 type Props = {
   alias: string;
@@ -15,10 +16,22 @@ type Props = {
 };
 
 function RecommandForum({ alias, logo, name }: Props) {
+  const { path } = useRouteMatch();
   return (
-    <li>
+    <li
+      style={{
+        backgroundColor:
+          path === `/f/${alias}` ? "rgba(255, 255, 255, 0.3)" : "transparent",
+      }}
+    >
       <Link to={`/f/${alias}`}>
-        <img src={logo.url} width="30" height="30" loading="lazy" alt="Logo" />
+        <img
+          src={logo && logo.url}
+          width="30"
+          height="30"
+          loading="lazy"
+          alt="Logo"
+        />
         <span>{name}</span>
       </Link>
     </li>
@@ -26,19 +39,23 @@ function RecommandForum({ alias, logo, name }: Props) {
 }
 
 function RecommandSubNav() {
-  // const { loading, data } = useContext(SelectionForumsContext);
+  const { forums, selections } = useContext(RootStoreContext);
 
-  // return (
-  //   <Wrapper>
-  //     <li>
-  //       <h3>Dcard 精選看板</h3>
-  //     </li>
-  //     {loading ||
-  //       data.map((selectionForum) => (
-  //         <RecommandForum {...selectionForum} key={selectionForum.id} />
-  //       ))}
-  //   </Wrapper>
-  // );
+  return (
+    <Wrapper>
+      <li>
+        <h3>Dcard 精選看板</h3>
+      </li>
+      {forums &&
+        selections &&
+        selections.result.map((recommandForumId: string) => {
+          const recommandForum: Forum = forums.entities.Forums[recommandForumId];
+          return (
+            <RecommandForum {...recommandForum} key={recommandForum.id} />
+          );
+        })}
+    </Wrapper>
+  );
 }
 
 export default RecommandSubNav;

@@ -1,4 +1,4 @@
-type Image = {
+export type Image = {
   url: string,
   type: string,
   width: number,

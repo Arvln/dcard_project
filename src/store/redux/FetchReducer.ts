@@ -14,25 +14,13 @@ export type InitialState = {
   forums: NormalizedState,
   categorization: NormalizedState,
   categories: NormalizedState,
+  selections: NormalizedState,
   error: string
 }
 
-export const initialFetchState: InitialState = {
-  loading: false,
-  forums: {
-    "result": [],
-    "entities": {}
-  },
-  categorization: {
-    "result": [],
-    "entities": {}
-  },
-  categories: {
-    "result": [],
-    "entities": {}
-  },
-  error: ""
-}
+export const initialFetchState: InitialState = {} as InitialState;
+initialFetchState.loading = false;
+initialFetchState.error = "";
 
 const getNewState = (state: InitialState, action: FetchActions, ApiType: string) => ({
   ...state,

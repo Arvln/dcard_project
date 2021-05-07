@@ -10,7 +10,10 @@ import RecommandSubNav from "./RecommandSubNav";
 import AsideTitle from "./AsideTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchRequest } from "../../store/redux/FetchActions";
-import { NormalizedState, initialFetchState, InitialState } from "../../store/redux/FetchReducer";
+import {
+  initialFetchState,
+  InitialState,
+} from "../../store/redux/FetchReducer";
 export const RootStoreContext = React.createContext(initialFetchState);
 
 type Props = {
@@ -18,13 +21,7 @@ type Props = {
 };
 
 type RootState = {
-  FetchReducer: {
-    loading: boolean,
-    forums: NormalizedState,
-    categorization: NormalizedState,
-    categories: NormalizedState,
-    error: string
-  }
+  FetchReducer: InitialState;
 };
 
 function SharingComponent({ MainCreator }: Props) {
@@ -37,6 +34,7 @@ function SharingComponent({ MainCreator }: Props) {
     forums: state.FetchReducer.forums,
     categorization: state.FetchReducer.categorization,
     categories: state.FetchReducer.categories,
+    selections: state.FetchReducer.selections,
     error: state.FetchReducer.error,
   }));
 
@@ -44,8 +42,7 @@ function SharingComponent({ MainCreator }: Props) {
   useEffect(() => {
     dispatch(FetchRequest());
   }, []);
-  // console.log(rootState);
-  
+  console.log(rootState);
 
   useEffect(() => {
     path !== "/f/sections" && initialPosition?.scrollIntoView();
@@ -72,17 +69,19 @@ function SharingComponent({ MainCreator }: Props) {
   }, [path]);
 
   return (
-    <RootStoreContext.Provider value={{...rootState}}>
+    <RootStoreContext.Provider value={{ ...rootState }}>
       <Wrapper>
         <TopNavBar />
         <nav className="forum-subnav">
           <div className="top-nav">
             <TopSubNav />
           </div>
-          <div className="botton-nav">
-            <PopularSubNav />
-            {/* <RecommandSubNav /> */}
-          </div>
+          {rootState.selections && (
+            <div className="botton-nav">
+              <PopularSubNav />
+              <RecommandSubNav />
+            </div>
+          )}
         </nav>
         <section className="forum-content">
           <MainCreator />

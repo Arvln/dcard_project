@@ -7,6 +7,6 @@ export default function* RootSaga() {
     RequestsSaga(GetForums),
     RequestsSaga(GetCategorization),
     RequestsSaga(GetCategories),
-    // RequestsSaga(GetSelectionForums),
+    RequestsSaga(GetSelectionForums),
   ])
 }
