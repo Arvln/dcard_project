@@ -1,6 +1,7 @@
 import { Forum, Image } from "./forum";
 import { Categorization } from "./categorization";
 import { Categories } from "./categories";
+import { Bulletin } from "./bulletin";
 
 
 export type {
@@ -8,4 +9,5 @@ export type {
   Image,
   Categorization,
   Categories,
+  Bulletin,
 }

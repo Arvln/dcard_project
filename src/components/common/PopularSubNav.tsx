@@ -48,14 +48,12 @@ function PopularSubNav() {
             );
           }
         )}
-      {popularForumsList && (
-        <li>
-          <Link to="/forum/popular">
-            <div className="icon-wrapper"></div>
-            <span>更多</span>
-          </Link>
-        </li>
-      )}
+      {popularForumsList && <li>
+        <Link to="/forum/popular">
+          <div className="icon-wrapper"></div>
+          <span>更多</span>
+        </Link>
+      </li>}
     </Wrapper>
   );
 }

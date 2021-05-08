@@ -1,6 +1,6 @@
 import tw, { styled, css, theme } from "twin.macro";
 
-export const Wrapper = styled.section(({ hasClickArrowIcon }) => [
+export const Wrapper = styled.section(({ hasClickArrowIcon, topics }) => [
   tw`
     rounded-sm
     bg-white
@@ -45,7 +45,7 @@ export const Wrapper = styled.section(({ hasClickArrowIcon }) => [
 
     & .forum-introduce {
       position: relative;
-      height: ${hasClickArrowIcon ? "600px" : "21px"};
+      height: ${hasClickArrowIcon ? (Math.floor(topics.length / 3) * 40 || 21) + "px" : "21px"};
       transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       flex-direction: column;
@@ -55,6 +55,10 @@ export const Wrapper = styled.section(({ hasClickArrowIcon }) => [
     & .forum-indroduce-header {
       display: flex;
       align-items: flex-start;
+    }
+
+    & .forum-indroduce-header p {
+      width: 244px;
     }
 
     & .forum-title-wrapper {
@@ -74,7 +78,6 @@ export const Wrapper = styled.section(({ hasClickArrowIcon }) => [
     }
 
     & .forum-info-nav li {
-      width: 74px;
       height: 32px;
       margin-top: 8px;
       margin-right: 8px;
@@ -84,12 +87,14 @@ export const Wrapper = styled.section(({ hasClickArrowIcon }) => [
       display: block;
       width: 100%;
       height: 100%;
+      padding: 0 16px;
       border-radius: 16px;
       font-size: 14px;
       font-weight: 500;
       text-align: center;
       color: rgba(0, 0, 0, 0.75);
       background: rgb(239, 239, 239);
+
     }
 
     & .forum-info-nav li a::before {

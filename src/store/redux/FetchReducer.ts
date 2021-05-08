@@ -15,6 +15,7 @@ export type InitialState = {
   categorization: NormalizedState,
   categories: NormalizedState,
   selections: NormalizedState,
+  bulletin: NormalizedState,
   error: string
 }
 

@@ -1,39 +1,36 @@
 import { Wrapper } from "./style/HomeWrapper";
 import { ArticleItem } from "../components/common";
-import { Link, useRouteMatch } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { NavBarClassName } from "./sections/Sections";
 
-function Home() {
-  const { url } = useRouteMatch();
-  const [navBarClassName, setNavBarClassName] = useState("");
-  useEffect(() => {
-    url === "/f" && setNavBarClassName("popular");
-    url === "/f/latest" && setNavBarClassName("latest");
-    url === "/f/pessoal" && setNavBarClassName("pessoal");
-  }, [url])
+type Props = {
+  navBarClassName: NavBarClassName
+}
+
+function Home({navBarClassName}: Props) {
 
   return (
     <Wrapper navBarClassName={navBarClassName}>
       <div className="top-navbar">
         <ul className="top-navbar-items-wrapper">
-          <li className="popular">
+          <li className={NavBarClassName.Popular}>
             <Link to="/f">
               <span>熱門</span>
             </Link>
           </li>
-          <li className="latest">
+          <li className={NavBarClassName.Latest}>
             <Link to="/f/latest">
               <span>最新</span>
             </Link>
           </li>
-          <li className="pessoal">
+          <li className={NavBarClassName.Pessoal}>
             <Link to="/f/pessoal">
               <span>追蹤</span>
             </Link>
           </li>
         </ul>
       </div>
-      {navBarClassName === "popular" && (
+      {navBarClassName === NavBarClassName.Popular && (
         <a
           href="https://youtu.be/ETogpwOdkSY"
           target="_blank"
@@ -48,7 +45,7 @@ function Home() {
           />
         </a>
       )}
-      {navBarClassName === "pessoal" || (
+      {navBarClassName === NavBarClassName.Pessoal || (
         <ul>
           <ArticleItem />
           <ArticleItem />
@@ -168,7 +165,7 @@ function Home() {
           <ArticleItem />
         </ul>
       )}
-      {navBarClassName === "pessoal" && (
+      {navBarClassName === NavBarClassName.Pessoal && (
         <div className="pessoal-container">
           <div className="login-msg">
             <img

@@ -1,34 +1,44 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useRouteMatch } from "react-router-dom";
+import { Forum } from "../../model";
 import { Wrapper } from "../style/AsideTitleWrapper";
+import { RootStoreContext } from "./SiteLayout";
 
 // TODO: when user click arrow icon p svg nav switch style!
 function AsideTitle() {
+  const { forums } = useContext(RootStoreContext);
+  const { path } = useRouteMatch();
+  const [forum, setForum] = useState<Forum>({} as Forum);
   const [hasClickArrowIcon, setHasClickArrowIcon] = useState(false);
   function ClickArrowIconHandler(): void {
     hasClickArrowIcon && setHasClickArrowIcon(false);
     hasClickArrowIcon || setHasClickArrowIcon(true);
   }
 
+  useEffect(() => {
+    forums && forums.result.map(forumId => "/f/" + forums.entities.Forums[forumId].alias === path && setForum(forums.entities.Forums[forumId]))
+  }, [])
+
   return (
-    <Wrapper hasClickArrowIcon={hasClickArrowIcon}>
-      <header>
+    <Wrapper Wrapper hasClickArrowIcon = { hasClickArrowIcon } topics={forum.topics} >
+      {forum.id && <header>
         <div className="forum-title-wrapper">
           <img
-            src="https://megapx-assets.dcard.tw/images/c99966a1-03f9-4a69-86d4-df979a970496/full.jpeg"
+            src={forum.logo && forum.logo.url}
             width="20"
             height="20"
             style={{ borderRadius: "50%" }}
             loading="lazy"
             alt="Logo"
           />
-          <h1>感情</h1>
+          <h1>{ forum.name}</h1>
         </div>
-        <div className="forum-posts-count">每天有 336 則貼文</div>
-      </header>
-      <div className="forum-introduce">
+        <div className="forum-posts-count">每天有 {Math.floor(parseInt(forum.postCount.last30Days) / 30)} 則貼文</div>
+      </header>}
+      {forum.id && <div className="forum-introduce">
         <div className="forum-indroduce-header" onClick={ClickArrowIconHandler}>
           <p>
-            無論是遠距離戀愛、情侶間的有趣互動、分手後的藕斷絲連等...都可以在感情板分享你們的愛情故事，找到愛情路上的共感。
+            {forum.description}
           </p>
           <svg
             viewBox="0 0 24 24"
@@ -44,123 +54,16 @@ function AsideTitle() {
         </div>
         <nav>
           <ul className="forum-info-nav">
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
-            <li>
-              <a href="#">價值觀</a>
-            </li>
+            {forum.topics.map((topic: string, index: number) => {
+              return (
+                <li key={index}>
+                  <a href={`/topics/${topic}`}>{ topic}</a>
+                </li>
+              )
+            })}
           </ul>
         </nav>
-      </div>
+      </div>}
       <button className="post-article">發表文章</button>
     </Wrapper>
   );

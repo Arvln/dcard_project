@@ -6,31 +6,36 @@ import {
   ArticleItem,
   FollowButton,
 } from "../../components/common";
+import { Bulletin, Image } from "../../model";
+import { RootStoreContext } from "../../components/common/SiteLayout";
 
-function Sections() {
+export enum NavBarClassName {
+  Popular = "POPULAR",
+  Latest = "LATEST",
+  Pessoal = "PESSOAL",
+  Rule = "RULE"
+}
+
+type Props = {
+  id: string,
+  name: string,
+  alias: string,
+  heroImage: Image,
+  logo: Image,
+  navBarClassName: NavBarClassName
+}
+
+function Sections({ name, alias, heroImage, logo, navBarClassName }: Props) {
   const { path } = useRouteMatch();
-  const [navBarClassName, setNavBarClassName] = useState("");
+  const { bulletin } = useContext(RootStoreContext);
   const [isReachLeftEnd, setIsReachLeftEnd] = useState(true);
   const [isReachRightEnd, setIsReachRightEnd] = useState(false);
   let scrollElement: HTMLElement | null;
-
-  useEffect(() => {
-    const forumTitlePosition: HTMLElement | null = document.getElementById(
-      "forum-title-point"
-    );
-    const latestPage: RegExp = /\/latest$/;
-    const rulePage: RegExp = /\/rule$/;
-    if (latestPage.test(path)) {
-      setNavBarClassName("latest");
-    } else if (rulePage.test(path)) {
-      setNavBarClassName("rule");
-    } else {
-      setNavBarClassName("popular");
-      // 跳轉頁面到版標
-      forumTitlePosition?.scrollIntoView();
-    }
-  }, [path]);
-  
+  const forumTitlePosition: HTMLElement | null = document.getElementById(
+    "forum-title-point"
+  )
+  // 跳轉熱門頁面到版標
+  navBarClassName === NavBarClassName.Popular && forumTitlePosition?.scrollIntoView();
 
   function leftArrowIconHandler(): void {
     scrollElement = document.getElementById("scroll-element");
@@ -62,50 +67,50 @@ function Sections() {
 
   return (
     <Wrapper navBarClassName={navBarClassName}>
-      <div className="top-banner">
+      {heroImage && <div className="top-banner">
         <img
-          src="https://megapx-assets.dcard.tw/images/b7d2dc32-cccb-4afa-8291-781164fd4691/1280.jpeg"
+          src={heroImage.url}
           alt="20190926_forums_and_image/image/relationship-cover.jpg"
           width="100%"
         />
         <div id="forum-title-point"></div>
-      </div>
+      </div>}
 
-      <div className="top-navbar">
+      {logo && <div className="top-navbar">
         <div className="logo-container">
           <img
-            src="https://megapx-assets.dcard.tw/images/c99966a1-03f9-4a69-86d4-df979a970496/full.jpeg"
+            src={logo.url}
             width="40"
             height="40"
             loading="lazy"
             alt="Logo"
             style={{ borderRadius: "50%" }}
           />
-          <Link to="/f/sections">
-            <h1>感情</h1>
+          <Link to={`/f/${alias}`}>
+            <h1>{ name}</h1>
           </Link>
           <FollowButton />
         </div>
         <ul className="top-navbar-items-wrapper">
-          <li className="popular">
-            <Link to="/f/sections">
+          <li className={NavBarClassName.Popular}>
+            <Link to={`/f/${alias}`}>
               <span>熱門</span>
             </Link>
           </li>
-          <li className="latest">
-            <Link to="/f/sections/latest">
+          <li className={NavBarClassName.Latest}>
+            <Link to={`/f/${alias}/latest`}>
               <span>最新</span>
             </Link>
           </li>
-          <li className="rule">
-            <Link to="/f/sections/rule">
+          <li className={NavBarClassName.Rule}>
+            <Link to={`/f/${alias}/rule`}>
               <span>板規</span>
             </Link>
           </li>
         </ul>
-      </div>
+      </div>}
 
-      {navBarClassName === "popular" && (
+      {navBarClassName === NavBarClassName.Popular && (
         <div className="first-banner">
           <a
             href="https://youtu.be/ETogpwOdkSY"
@@ -122,13 +127,13 @@ function Sections() {
         </div>
       )}
 
-      {navBarClassName === "rule" || (
+      {navBarClassName === NavBarClassName.Rule || (
         <ul>
           <ArticleItem />
           <ArticleItem />
           <ArticleItem />
           <ArticleItem />
-          {navBarClassName === "popular" && (
+          {navBarClassName === NavBarClassName.Popular && (
             <div className="month-popular-wrapper">
               <h2 className="month-popular">本月熱門</h2>
               <div className="article-card-wrapper">
@@ -456,7 +461,7 @@ function Sections() {
           )}
           <ArticleItem />
           <ArticleItem />
-          {navBarClassName === "popular" && <RelatedForums />}
+          {navBarClassName === NavBarClassName.Popular && <RelatedForums />}
           <ArticleItem />
           <ArticleItem />
           <ArticleItem />
@@ -570,7 +575,7 @@ function Sections() {
         </ul>
       )}
 
-      {navBarClassName === "rule" && (
+      {navBarClassName === NavBarClassName.Rule && (
         <div className="rule-container">
           <div className="forum-rule-title">
             <div className="rule-title-head">
@@ -589,33 +594,20 @@ function Sections() {
           </div>
           <div className="rule-contents">
             <ul>
-              <li>
-                <h2>1. 中傷、歧視、挑釁或謾罵他人</h2>
-                <div className="rule-contents-description">
-                  <p>
-                    對特定人物、使用者、族群使用歧視、挑釁、謾罵他人、不雅字詞和人身攻擊等言論，將被刪文並停權天數懲處，累犯者、情節嚴重者視情況加重停權天數。
-                  </p>
-                  <div>違反此站規，於此看板禁言 30 天。</div>
-                </div>
-              </li>
-              <li>
-                <h2>
-                  2. 交換個人資料（電話、電子郵件、通訊軟體 ID、交友軟體 ID 等）
-                </h2>
-                <div className="rule-contents-description">
-                  <p>
-                    {"為了創造更佳的內容體驗，除了公開的社群網站連結及遊戲 ID 外（如 Facebook、Instagram、YouTube、Medium、Pixnet、Discord......等），\nDcard 全面禁止在文章與留言內留下個人聯絡方式或 ID，違反者將刪文並停權。\n「個人聯絡方式」指任何可以直接聯繫到特定個人的聯絡資訊，包含但不限於電話、電子郵件、通訊軟體 ID、交友軟體 ID 或配對碼等。"}
-                  </p>
-                  <div>違反此站規，於此看板禁言 30 天。</div>
-                </div>
-              </li>
-              <li>
-                <h2>3. 惡意洗板、重複張貼</h2>
-                <div className="rule-contents-description">
-                  <p>{ "若違反以下規範，將以「惡意洗板」為由刪文加停權 30 天：\n (1) 重複張貼他人已發表過且完全相同的內容\n (2) 同一人重複發表相同內容\n (3) 在文章或留言內張貼大量空白或無意義字詞，影響他人閱讀體驗\n\n※ 引用、轉貼文章、或相同文章發表在多個看板但文章皆符合該看板板旨者，不在此限。\n※ 時事板自 2019/8/30 起，每日每個 Dcard 帳號限發文 5 篇（含引用、轉貼），違者以惡意洗板懲處。"}</p>
-                  <div>違反此站規，於此看板禁言 30 天。</div>
-                </div>
-              </li>
+              {bulletin && bulletin.result.map((bulletinId: string, index: number) => {
+                const bulletinContent: Bulletin = bulletin.entities.Bulletin[bulletinId];
+                return (
+                  <li key={bulletinContent.id}>
+                    <h2>{index + 1}. { bulletinContent.title}</h2>
+                    <div className="rule-contents-description">
+                      <p>
+                        {bulletinContent.content}
+                      </p>
+                      <div>違反此站規，於此看板禁言 {bulletinContent.bucketDays} 天。</div>
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
           </div>
         </div>

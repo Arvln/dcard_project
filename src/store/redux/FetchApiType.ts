@@ -1,6 +1,7 @@
 export enum ApiType {
-  Forums = "Forums",
-  Categorization = "Categorization",
-  Categories = "Categories",
-  Selections = "Selections", 
+  Forums = "FORUMS",
+  Categorization = "CATEGORIZATION",
+  Categories = "CATEGORIES",
+  Selections = "SELECTIONS", 
+  Bulletin = "BULLETIN",
 }

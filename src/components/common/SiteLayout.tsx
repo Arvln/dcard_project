@@ -17,10 +17,10 @@ import {
 export const RootStoreContext = React.createContext(initialFetchState);
 
 type Props = {
-  MainCreator: () => JSX.Element;
+  MainCreator: JSX.Element | (() => JSX.Element);
 };
 
-type RootState = {
+export type RootState = {
   FetchReducer: InitialState;
 };
 
@@ -29,12 +29,13 @@ function SharingComponent({ MainCreator }: Props) {
   const [hasAsideTitle, setHasAsideTitle] = useState(false);
   const [hasFooter, setHasFooter] = useState(true);
   const initialPosition: HTMLElement | null = document.getElementById("root");
-  const rootState = useSelector((state: RootState) => ({
+  const rootState: InitialState = useSelector((state: RootState) => ({
     loading: state.FetchReducer.loading,
     forums: state.FetchReducer.forums,
     categorization: state.FetchReducer.categorization,
     categories: state.FetchReducer.categories,
     selections: state.FetchReducer.selections,
+    bulletin: state.FetchReducer.bulletin,
     error: state.FetchReducer.error,
   }));
 
@@ -45,7 +46,7 @@ function SharingComponent({ MainCreator }: Props) {
   console.log(rootState);
 
   useEffect(() => {
-    path !== "/f/sections" && initialPosition?.scrollIntoView();
+    initialPosition?.scrollIntoView();
     const forumPages: RegExp = /^\/f\//;
     if (
       path !== "/f/latest" &&
@@ -76,15 +77,13 @@ function SharingComponent({ MainCreator }: Props) {
           <div className="top-nav">
             <TopSubNav />
           </div>
-          {rootState.selections && (
-            <div className="botton-nav">
-              <PopularSubNav />
-              <RecommandSubNav />
-            </div>
-          )}
+          <div className="botton-nav">
+            <PopularSubNav />
+            <RecommandSubNav />
+          </div>
         </nav>
         <section className="forum-content">
-          <MainCreator />
+          {MainCreator}
         </section>
         <aside className="forum-msg">
           {hasAsideTitle && <AsideTitle />}

@@ -1,6 +1,6 @@
 import { all } from "redux-saga/effects";
 import RequestsSaga from "./RequestsSaga";
-import { GetSelectionForums, GetForums, GetCategorization, GetCategories } from "./generator";
+import { GetSelectionForums, GetForums, GetCategorization, GetCategories, GetBulletin } from "./generator";
 
 export default function* RootSaga() {
   yield all([
@@ -8,5 +8,6 @@ export default function* RootSaga() {
     RequestsSaga(GetCategorization),
     RequestsSaga(GetCategories),
     RequestsSaga(GetSelectionForums),
+    RequestsSaga(GetBulletin),
   ])
 }
