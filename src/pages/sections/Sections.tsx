@@ -34,8 +34,12 @@ function Sections({ name, alias, heroImage, logo, navBarClassName }: Props) {
   const forumTitlePosition: HTMLElement | null = document.getElementById(
     "forum-title-point"
   )
-  // 跳轉熱門頁面到版標
-  navBarClassName === NavBarClassName.Popular && forumTitlePosition?.scrollIntoView();
+
+  useEffect(() => {
+    // 跳轉熱門頁面到版標
+    navBarClassName === NavBarClassName.Popular && forumTitlePosition?.scrollIntoView();
+  }, [])
+
 
   function leftArrowIconHandler(): void {
     scrollElement = document.getElementById("scroll-element");
@@ -110,7 +114,7 @@ function Sections({ name, alias, heroImage, logo, navBarClassName }: Props) {
         </ul>
       </div>}
 
-      {navBarClassName === NavBarClassName.Popular && (
+      {(navBarClassName === NavBarClassName.Popular && path === "/f/relationship") && (
         <div className="first-banner">
           <a
             href="https://youtu.be/ETogpwOdkSY"

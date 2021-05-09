@@ -1,10 +1,8 @@
-import { Link, Route, useRouteMatch } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { Wrapper } from "../style/more/UserWrapper";
 import TopNavBar from "../../components/common/TopNavBar";
-
-function UserConfigs() {
-  return <div className="user-config-container"></div>;
-}
+import { ServiceBar } from "../../components/common";
+import { UserConfig } from "../more/user/";
 
 function User() {
   const { path } = useRouteMatch();
@@ -134,33 +132,11 @@ function User() {
             </div>
           </div>
           <div className="user-config-wrapper">
-            <UserConfigs />
+            <div className="user-config-container">
+              {path === "/my/configs" && <UserConfig />}
+            </div>
             <footer>
-              <ul className="botton-navbar">
-                <li>
-                  <a href="/terms">服務條款</a>
-                </li>
-                <li>
-                  <a href="https://about.dcard.tw/faq" target="_blank">
-                    常見問題
-                  </a>
-                </li>
-                <li>
-                  <a href="/brand" target="_blank">
-                    品牌識別
-                  </a>
-                </li>
-                <li>
-                  <a href="https://join.dcard.today/" target="_blank">
-                    徵才
-                  </a>
-                </li>
-                <li>
-                  <a href="https://about.dcard.tw/business" target="_blank">
-                    商業合作
-                  </a>
-                </li>
-              </ul>
+              <ServiceBar />
               <div className="copyright">
                 Copyright © Dcard Taiwan Ltd. 2021
               </div>

@@ -77,8 +77,6 @@ export const Wrapper = styled.div(() => [
 
     & .user-record a {
       width: 100%;
-      height: 44px;
-      padding: 7px 16px;
       border-radius: 10px;
       color: rgb(255, 255, 255);
       font-weight: 400;
@@ -86,14 +84,17 @@ export const Wrapper = styled.div(() => [
       line-height: 22px;
       display: flex;
       align-items: center;
+      padding: 7px 16px;
       text-align: left;
     }
 
     & .user-record a svg {
+      height: 30px;
       margin-right: 12px;
     }
 
     & .user-config-wrapper {
+      padding-left: 12px;
       display: flex;
       flex-direction: column;
     }
@@ -102,10 +103,26 @@ export const Wrapper = styled.div(() => [
       width: 760px;
       min-height: 660px;
       height: fit-content;
-      margin-left: 12px;
       padding: 20px 60px;
       background-color: rgb(242, 243, 244);
       border-radius: 12px;
+    }
+
+    & footer {
+      padding: 26px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    & .service-bar-wrapper li a {
+      color: rgb(255, 255, 255);
+    }
+
+    & .copyright {
+      margin: 3px 5px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
     }
   `
 ])

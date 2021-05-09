@@ -2,19 +2,18 @@ import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Redirect,
-  Switch,
+  Redirect
 } from "react-router-dom";
 import { SiteLayout } from "../components/common";
 import * as Pages from "../pages";
 import SearchRouter from "./SearchRouter";
 import GoodsRouter from "./GoodsRouter";
 import { useDispatch, useSelector } from "react-redux";
-import { FetchRequest } from "../store/redux/FetchActions";
 import { InitialState } from "../store/redux/FetchReducer";
 import { RootState } from "../components/common/SiteLayout";
 import { Forum } from "../model";
 import { NavBarClassName } from "../pages/sections/Sections";
+import { FetchRequest } from "../store/redux/FetchActions";
 
 function AppRouter() {
   const rootState: InitialState = useSelector((state: RootState) => ({
@@ -29,8 +28,8 @@ function AppRouter() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(FetchRequest());
-  }, []);
+    dispatch(FetchRequest())
+  }, [])
 
   return (
     <Router>
@@ -39,7 +38,6 @@ function AppRouter() {
         <Redirect to="/f" />
       </Route>
 
-      {/* index */}
       <Route
         exact
         path="/f"
@@ -51,7 +49,16 @@ function AppRouter() {
           />
         }
       />
-
+      <Route
+        path="/f/p/*"
+        children={
+          <SiteLayout
+            MainCreator={
+              <Pages.Home navBarClassName={NavBarClassName.Popular} />
+            }
+          />
+        }
+      />
       <Route
         path="/f/latest"
         children={
@@ -79,7 +86,7 @@ function AppRouter() {
       <Route path="/terms" children={<Pages.Trems />} />
       <Route path="/brand" children={<Pages.Brand />} />
       <Route path="/download" children={<Pages.Download />} />
-      <Route path="/my" children={<Pages.User />} />
+      <Route exact path="/my" children={<Pages.User />} />
       <Route path="/my/configs" children={<Pages.User />} />
 
       {/* aside */}
@@ -104,6 +111,19 @@ function AppRouter() {
               <Route
                 exact
                 path={`/f/${forum.alias}`}
+                children={
+                  <SiteLayout
+                    MainCreator={
+                      <Pages.Sections
+                        {...forum}
+                        navBarClassName={NavBarClassName.Popular}
+                      />
+                    }
+                  />
+                }
+              />
+              <Route
+                path={`/f/${forum.alias}/p`}
                 children={
                   <SiteLayout
                     MainCreator={

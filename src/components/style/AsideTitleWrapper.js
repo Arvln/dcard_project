@@ -45,7 +45,7 @@ export const Wrapper = styled.section(({ hasClickArrowIcon, topics }) => [
 
     & .forum-introduce {
       position: relative;
-      height: ${hasClickArrowIcon ? (Math.floor(topics.length / 3) * 40 || 21) + "px" : "21px"};
+      height: ${hasClickArrowIcon ? (Math.floor(topics.length / 3) * 40 || "") + "px" : "20px"};
       transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       flex-direction: column;

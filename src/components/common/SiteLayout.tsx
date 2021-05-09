@@ -8,8 +8,8 @@ import TopSubNav from "./TopSubNav";
 import PopularSubNav from "./PopularSubNav";
 import RecommandSubNav from "./RecommandSubNav";
 import AsideTitle from "./AsideTitle";
-import { useDispatch, useSelector } from "react-redux";
-import { FetchRequest } from "../../store/redux/FetchActions";
+import ServiceBar from "./ServiceBar";
+import { useSelector } from "react-redux";
 import {
   initialFetchState,
   InitialState,
@@ -17,7 +17,7 @@ import {
 export const RootStoreContext = React.createContext(initialFetchState);
 
 type Props = {
-  MainCreator: JSX.Element | (() => JSX.Element);
+  MainCreator: JSX.Element;
 };
 
 export type RootState = {
@@ -38,23 +38,22 @@ function SharingComponent({ MainCreator }: Props) {
     bulletin: state.FetchReducer.bulletin,
     error: state.FetchReducer.error,
   }));
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(FetchRequest());
-  }, []);
-  console.log(rootState);
+  // console.log(rootState);
 
   useEffect(() => {
     initialPosition?.scrollIntoView();
     const forumPages: RegExp = /^\/f\//;
+    const indexArticlePages: RegExp = /^\/f\/p\//;
+    
     if (
       path !== "/f/latest" &&
       path !== "/f/pessoal" &&
       forumPages.test(path)
     ) {
       setHasAsideTitle(true);
+      indexArticlePages.test(path) && setHasAsideTitle(false);
     }
+
     const searchPages: RegExp = /^\/search/;
     const goodsPages: RegExp = /^\/goods/;
     if (
@@ -99,31 +98,7 @@ function SharingComponent({ MainCreator }: Props) {
           ></iframe>
           <div className="short-msg"></div>
           <div className="long-msg"></div>
-          <ul className="botton-navbar">
-            <li>
-              <a href="/terms">服務條款</a>
-            </li>
-            <li>
-              <a href="https://about.dcard.tw/faq" target="_blank">
-                常見問題
-              </a>
-            </li>
-            <li>
-              <a href="/brand" target="_blank">
-                品牌識別
-              </a>
-            </li>
-            <li>
-              <a href="https://join.dcard.today/" target="_blank">
-                徵才
-              </a>
-            </li>
-            <li>
-              <a href="https://about.dcard.tw/business" target="_blank">
-                商業合作
-              </a>
-            </li>
-          </ul>
+          <ServiceBar />
         </aside>
         {hasFooter && (
           <footer className="forum-footer">

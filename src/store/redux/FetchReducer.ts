@@ -1,7 +1,5 @@
 import * as actions from "./FetchActionsType";
 import { FetchActions } from "./FetchActions";
-import { ApiType } from "./FetchApiType";
-import { Forum, Categorization } from "../../model";
 import { normalizedData } from "../../utils";
 
 export type NormalizedState = {

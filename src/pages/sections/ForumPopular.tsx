@@ -37,7 +37,7 @@ function ForumPopular() {
                 return (
                   <li className="popluar-forum" key={forumId}>
                     <Link to={`/f/${alias}`}>
-                      <div className="popular-forum-no">{index + 1}</div>
+                      <div className="popular-forum-no" style={{color: `${index + 1 < 4 && "rgb(234, 92, 92)"}`}}>{index + 1}</div>
                       <img
                         src={logo && logo.url}
                         width="48"

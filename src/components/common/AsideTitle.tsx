@@ -16,7 +16,10 @@ function AsideTitle() {
   }
 
   useEffect(() => {
-    forums && forums.result.map(forumId => "/f/" + forums.entities.Forums[forumId].alias === path && setForum(forums.entities.Forums[forumId]))
+    forums && forums.result.map(forumId => {
+      const currentForumPages: RegExp = new RegExp(`^\/f\/${forums.entities.Forums[forumId].alias}`);
+      currentForumPages.test(path) && setForum(forums.entities.Forums[forumId]);
+    })
   }, [])
 
   return (

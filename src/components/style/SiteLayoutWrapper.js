@@ -156,21 +156,5 @@ export const Wrapper = styled.div(() => [
       height: 600px;
       margin-bottom: 10px;
     }
-
-    & .botton-navbar {
-      display: flex;
-      height: 22px;
-      margin: -3px -5px;
-    }
-
-    & .botton-navbar li {
-      height: 16px;
-      font-size: 14px;
-      margin: 3px 5px;
-    }
-
-    & .botton-navbar li a {
-      color: rgb(119, 145, 160);
-    }
   `
 ])
