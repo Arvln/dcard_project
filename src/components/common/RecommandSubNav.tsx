@@ -3,6 +3,7 @@ import { Wrapper } from "../style/SubNavItemsWrapper";
 import { useContext } from "react";
 import { RootStoreContext } from "../common/SiteLayout";
 import { Forum } from "../../model";
+import { ApiType } from "../../store/redux/initial_data_for_app/FetchApiType";
 
 type Props = {
   alias: string;
@@ -39,17 +40,17 @@ function RecommandForum({ alias, logo, name }: Props) {
 }
 
 function RecommandSubNav() {
-  const { forums, selections } = useContext(RootStoreContext);
+  const { FORUMS, SELECTIONS } = useContext(RootStoreContext);
 
   return (
     <Wrapper>
       <li>
         <h3>Dcard 精選看板</h3>
       </li>
-      {forums &&
-        selections &&
-        selections.result.map((recommandForumId: string) => {
-          const recommandForum: Forum = forums.entities.Forums[recommandForumId];
+      {FORUMS &&
+        SELECTIONS &&
+        SELECTIONS.result.map((recommandForumId: string) => {
+          const recommandForum: Forum = FORUMS.entities[ApiType.Forums][recommandForumId];
           return (
             <RecommandForum {...recommandForum} key={recommandForum.id} />
           );

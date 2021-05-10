@@ -4,6 +4,7 @@ import { FollowButton } from "../../components/common";
 import { RootStoreContext } from "../../components/common/SiteLayout";
 import { Forum } from "../../model";
 import { Link } from "react-router-dom";
+import { ApiType } from "../../store/redux/initial_data_for_app/FetchApiType";
 
 function ForumAll() {
   const [isClickForumId, setIsClickForumId] = useState("");
@@ -12,13 +13,13 @@ function ForumAll() {
     const category: Forum[] = [];
     id !== isClickForumId && setIsClickForumId(id);
     id === isClickForumId && setIsClickForumId("");
-    categories.entities.Categories[id].forumIds &&
-      categories.entities.Categories[id].forumIds.map((forumId: string) => {
-        category.push(forums.entities.Forums[forumId]);
+    CATEGORIES.entities[ApiType.Categories][id].forumIds &&
+      CATEGORIES.entities[ApiType.Categories][id].forumIds.map((forumId: string) => {
+        category.push(FORUMS.entities[ApiType.Forums][forumId]);
       });
     setCategoryForum(category);
   }
-  const { forums, categorization, categories } = useContext(
+  const { FORUMS, CATEGORIZATION, CATEGORIES } = useContext(
     RootStoreContext
   );
 
@@ -28,11 +29,11 @@ function ForumAll() {
         <h1>看板分類</h1>
       </div>
       <ul>
-        { categorization && categorization.result.map((id: string) => {
+        { CATEGORIZATION && CATEGORIZATION.result.map((id: string) => {
             return (
               <li key={id}>
                 <header onClick={() => clickArrowIconHandler(id)}>
-                  <h3>{categorization.entities.Categorization[id].name}</h3>
+                  <h3>{CATEGORIZATION.entities[ApiType.Categorization][id].name}</h3>
                   <div
                     className="forums-arrow-icon-wrapper"
                     style={{
@@ -59,7 +60,7 @@ function ForumAll() {
                   style={{
                     maxHeight: `${
                       id === isClickForumId
-                        ? 44 * categorization.result.length + `px`
+                        ? 44 * CATEGORIZATION.result.length + `px`
                         : 0
                     }`,
                   }}

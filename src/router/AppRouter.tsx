@@ -9,20 +9,21 @@ import * as Pages from "../pages";
 import SearchRouter from "./SearchRouter";
 import GoodsRouter from "./GoodsRouter";
 import { useDispatch, useSelector } from "react-redux";
-import { InitialState } from "../store/redux/FetchReducer";
+import { InitialDataForAppState } from "../store/redux/initial_data_for_app/InitialDataState";
 import { RootState } from "../components/common/SiteLayout";
 import { Forum } from "../model";
 import { NavBarClassName } from "../pages/sections/Sections";
-import { FetchRequest } from "../store/redux/FetchActions";
+import { FetchRequest } from "../store/redux/initial_data_for_app/FetchActions";
+import { ApiType } from "../store/redux/initial_data_for_app/FetchApiType";
 
 function AppRouter() {
-  const rootState: InitialState = useSelector((state: RootState) => ({
+  const rootState: InitialDataForAppState = useSelector((state: RootState) => ({
     loading: state.FetchReducer.loading,
-    forums: state.FetchReducer.forums,
-    categorization: state.FetchReducer.categorization,
-    categories: state.FetchReducer.categories,
-    selections: state.FetchReducer.selections,
-    bulletin: state.FetchReducer.bulletin,
+    [ApiType.Forums]: state.FetchReducer[ApiType.Forums],
+    [ApiType.Categorization]: state.FetchReducer[ApiType.Categorization],
+    [ApiType.Categories]: state.FetchReducer[ApiType.Categories],
+    [ApiType.Selections]: state.FetchReducer[ApiType.Selections],
+    [ApiType.Bulletin]: state.FetchReducer[ApiType.Bulletin],
     error: state.FetchReducer.error,
   }));
 
@@ -103,9 +104,9 @@ function AppRouter() {
         path="/def/gamezone"
         children={<SiteLayout MainCreator={<Pages.Gamezone />} />}
       />
-      {rootState.forums &&
-        rootState.forums.result.map((forumId: string) => {
-          const forum: Forum = rootState.forums.entities.Forums[forumId];
+      {rootState[ApiType.Forums] &&
+        rootState[ApiType.Forums].result.map((forumId: string) => {
+          const forum: Forum = rootState[ApiType.Forums].entities[ApiType.Forums][forumId];
           return (
             <React.Fragment key={forum.id}>
               <Route

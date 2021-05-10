@@ -1,6 +1,7 @@
 import { SortForumsType } from "../pages/sections/ForumPopular";
-import { NormalizedState } from "../store/redux/FetchReducer";
+import { NormalizedState } from "../store/redux/initial_data_for_app/InitialDataState";
 import { QuickSort } from ".";
+import { ApiType } from "../store/redux/initial_data_for_app/FetchApiType";
 
 export function SortForumsByLast30DaysPostCount(
   allForums: NormalizedState,
@@ -9,7 +10,7 @@ export function SortForumsByLast30DaysPostCount(
   if (!allForums) {
     return;
   }
-  const forumsList = allForums.entities.Forums;
+  const forumsList = allForums.entities[ApiType.Forums];
   const beforeSortForums: SortForumsType[] = [];
   allForums.result.map((forumId: string) => {
     const forumItem = {} as SortForumsType;

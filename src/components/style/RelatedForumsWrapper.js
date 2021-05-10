@@ -50,6 +50,7 @@ export const Wrapper = styled.div(() => [
     }
 
     & .related-forum-card {
+      display: block;
       position: relative;
       width: 146px;
       height: 110px;
@@ -57,14 +58,15 @@ export const Wrapper = styled.div(() => [
       border-radius: 12px;
       box-shadow: rgb(0 0 0 / 8%) 0px 3px 12px;
       flex-shrink: 0;
+      overflow: hidden;
     }
 
     & .logo-img {
       position: absolute;
       top: 0;
       width: 100%;
-      height: 48.81px;
-      background: url("https://megapx-assets.dcard.tw/images/a366d316-3458-4123-9091-929ee1fe884b/full.jpeg") no-repeat center / cover;
+      object-position: center;
+      object-fit: cover;
       z-index: 1;
     }
 
@@ -89,6 +91,7 @@ export const Wrapper = styled.div(() => [
       margin-top: 4px;
       font-size: 14px;
       font-weight: 400;
+      color: rgb(0, 0, 0);
     }
 
     & .related-forum-card-content span {

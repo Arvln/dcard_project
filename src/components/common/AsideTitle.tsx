@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { useRouteMatch } from "react-router-dom";
 import { Forum } from "../../model";
+import { ApiType } from "../../store/redux/initial_data_for_app/FetchApiType";
 import { Wrapper } from "../style/AsideTitleWrapper";
 import { RootStoreContext } from "./SiteLayout";
 
 // TODO: when user click arrow icon p svg nav switch style!
 function AsideTitle() {
-  const { forums } = useContext(RootStoreContext);
+  const {FORUMS} = useContext(RootStoreContext);
   const { path } = useRouteMatch();
   const [forum, setForum] = useState<Forum>({} as Forum);
   const [hasClickArrowIcon, setHasClickArrowIcon] = useState(false);
@@ -16,9 +17,9 @@ function AsideTitle() {
   }
 
   useEffect(() => {
-    forums && forums.result.map(forumId => {
-      const currentForumPages: RegExp = new RegExp(`^\/f\/${forums.entities.Forums[forumId].alias}`);
-      currentForumPages.test(path) && setForum(forums.entities.Forums[forumId]);
+    FORUMS && FORUMS.result.map(forumId => {
+      const currentForumPages: RegExp = new RegExp(`^\/f\/${FORUMS.entities[ApiType.Forums][forumId].alias}`);
+      currentForumPages.test(path) && setForum(FORUMS.entities[ApiType.Forums][forumId]);
     })
   }, [])
 

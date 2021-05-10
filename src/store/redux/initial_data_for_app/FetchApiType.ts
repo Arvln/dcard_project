@@ -4,4 +4,8 @@ export enum ApiType {
   Categories = "CATEGORIES",
   Selections = "SELECTIONS", 
   Bulletin = "BULLETIN",
+  popular = "POPULAR",
+  latest = "LATEST",
+  Featured = "FEATURED",
+  Related = "RELATED",
 }

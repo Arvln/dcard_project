@@ -1,7 +1,7 @@
 import { all, call, put, select } from "redux-saga/effects";
-import { SortForumsByLast30DaysPostCount } from "../../../utils";
-import { FetchSuccess, FetchFailure } from "../../redux/FetchActions";
-import { forumsUrl, categorizationUrl, categoriesUrl, selectionsUrl, bulletinUrl } from "../FetchApi";
+import { FetchSuccess, FetchFailure } from "../../redux/initial_data_for_app/FetchActions";
+import { ApiType } from "../../redux/initial_data_for_app/FetchApiType";
+import { forumsUrl, categorizationUrl, categoriesUrl, selectionsUrl, bulletinUrl } from "../InitialDataForAppApi";
 
 export default function* GetInitialDataForApp(getApi) {
   try {
@@ -14,19 +14,19 @@ export default function* GetInitialDataForApp(getApi) {
     ])
 
     yield all([
-      put(FetchSuccess("Forums", forums)),
-      put(FetchSuccess("Categorization", categorization)),
-      put(FetchSuccess("Categories", categories)),
-      put(FetchSuccess("Selections", selections)),
-      put(FetchSuccess("Bulletin", bulletin)),
+      put(FetchSuccess(ApiType.Forums, forums)),
+      put(FetchSuccess(ApiType.Categorization, categorization)),
+      put(FetchSuccess(ApiType.Categories, categories)),
+      put(FetchSuccess(ApiType.Selections, selections)),
+      put(FetchSuccess(ApiType.Bulletin, bulletin)),
     ])
   } catch (e) {
     yield all([
-      put(FetchFailure("Forums", e.message)),
-      put(FetchFailure("Categorization", e.message)),
-      put(FetchFailure("Categories", e.message)),
-      put(FetchFailure("Selections", e.message)),
-      put(FetchFailure("Bulletin", e.message)),
+      put(FetchFailure(ApiType.Forums, e.message)),
+      put(FetchFailure(ApiType.Categorization, e.message)),
+      put(FetchFailure(ApiType.Categories, e.message)),
+      put(FetchFailure(ApiType.Selections, e.message)),
+      put(FetchFailure(ApiType.Bulletin, e.message)),
     ])
   }
 }

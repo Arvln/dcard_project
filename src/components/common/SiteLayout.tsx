@@ -11,17 +11,18 @@ import AsideTitle from "./AsideTitle";
 import ServiceBar from "./ServiceBar";
 import { useSelector } from "react-redux";
 import {
-  initialFetchState,
-  InitialState,
-} from "../../store/redux/FetchReducer";
-export const RootStoreContext = React.createContext(initialFetchState);
+  initialDataForAppState,
+  InitialDataForAppState,
+} from "../../store/redux/initial_data_for_app/InitialDataState";
+import { ApiType } from "../../store/redux/initial_data_for_app/FetchApiType";
+export const RootStoreContext = React.createContext(initialDataForAppState);
 
 type Props = {
   MainCreator: JSX.Element;
 };
 
 export type RootState = {
-  FetchReducer: InitialState;
+  FetchReducer: InitialDataForAppState
 };
 
 function SharingComponent({ MainCreator }: Props) {
@@ -29,16 +30,15 @@ function SharingComponent({ MainCreator }: Props) {
   const [hasAsideTitle, setHasAsideTitle] = useState(false);
   const [hasFooter, setHasFooter] = useState(true);
   const initialPosition: HTMLElement | null = document.getElementById("root");
-  const rootState: InitialState = useSelector((state: RootState) => ({
+  const rootState: InitialDataForAppState = useSelector((state: RootState) => ({
     loading: state.FetchReducer.loading,
-    forums: state.FetchReducer.forums,
-    categorization: state.FetchReducer.categorization,
-    categories: state.FetchReducer.categories,
-    selections: state.FetchReducer.selections,
-    bulletin: state.FetchReducer.bulletin,
+    [ApiType.Forums]: state.FetchReducer[ApiType.Forums],
+    [ApiType.Categorization]: state.FetchReducer[ApiType.Categorization],
+    [ApiType.Categories]: state.FetchReducer[ApiType.Categories],
+    [ApiType.Selections]: state.FetchReducer[ApiType.Selections],
+    [ApiType.Bulletin]: state.FetchReducer[ApiType.Bulletin],
     error: state.FetchReducer.error,
   }));
-  // console.log(rootState);
 
   useEffect(() => {
     initialPosition?.scrollIntoView();

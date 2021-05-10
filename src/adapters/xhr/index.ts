@@ -5,7 +5,7 @@ const initializers: AxiosRequestConfig = {
   headers: {
     "Content-Type": "application/json"
   },
-  timeout: 3000
+  timeout: 5000
 }
 
 function axiosInstanceCreator(): AxiosInstance {

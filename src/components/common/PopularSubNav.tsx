@@ -7,14 +7,14 @@ import { RootStoreContext } from "./SiteLayout";
 
 // TODO: when user in forum page, switch nav bar color
 function PopularSubNav() {
-  const { forums } = useContext(RootStoreContext);
+  const { FORUMS } = useContext(RootStoreContext);
   const { path } = useRouteMatch();
   const [popularForumsList, setPopularForumsList] = useState<
     SortForumsType[] | void
   >([] as SortForumsType[]);
   useEffect(() => {
-    setPopularForumsList(SortForumsByLast30DaysPostCount(forums, 8));
-  }, [forums]);
+    setPopularForumsList(SortForumsByLast30DaysPostCount(FORUMS, 8));
+  }, [FORUMS]);
 
   return (
     <Wrapper>

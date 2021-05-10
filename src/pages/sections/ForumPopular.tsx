@@ -15,13 +15,13 @@ export type SortForumsType = {
 };
 
 function ForumPopular() {
-  const { forums } = useContext(RootStoreContext);
+  const { FORUMS } = useContext(RootStoreContext);
   const [popularForumsList, setPopularForumsList] = useState<
     SortForumsType[] | void
   >([] as SortForumsType[]);
   useEffect(() => {
-    setPopularForumsList(SortForumsByLast30DaysPostCount(forums, 240));
-  }, [forums]);
+    setPopularForumsList(SortForumsByLast30DaysPostCount(FORUMS, 240));
+  }, [FORUMS]);
 
   return (
     <Wrapper>

@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Wrapper } from "../style/RelatedForumsWrapper";
+import { SectionStoreContext } from "../../pages/sections/Sections";
+import { ApiType } from "../../store/redux/initial_data_for_app/FetchApiType";
+import { Forum } from "../../model";
 
 function RelatedForums() {
+  const { RELATED } = useContext(SectionStoreContext);
   const [isReachLeftEnd, setIsReachLeftEnd] = useState(true);
   const [isReachRightEnd, setIsReachRightEnd] = useState(false);
   let scrollElement: HTMLElement | null;
@@ -63,76 +67,47 @@ function RelatedForums() {
           id="related-forums-scroll-element"
           onScroll={scrollHandler}
         >
-          <div className="related-forum-card">
-            <div className="logo-img"></div>
-            <div className="related-forum-card-content">
-              <img
-                src="https://megapx-assets.dcard.tw/images/eb5ab644-4eb2-403c-aa89-1494d06f472e/full.jpeg"
-                width="40"
-                height="40"
-                loading="lazy"
-                alt="Logo"
-              />
-              <h3>結婚</h3>
-              <span>每天有12則貼文</span>
-            </div>
-          </div>
-          <div className="related-forum-card">
-            <div className="logo-img"></div>
-            <div className="related-forum-card-content">
-              <img
-                src="https://megapx-assets.dcard.tw/images/eb5ab644-4eb2-403c-aa89-1494d06f472e/full.jpeg"
-                width="40"
-                height="40"
-                loading="lazy"
-                alt="Logo"
-              />
-              <h3>結婚</h3>
-              <span>每天有12則貼文</span>
-            </div>
-          </div>
-          <div className="related-forum-card">
-            <div className="logo-img"></div>
-            <div className="related-forum-card-content">
-              <img
-                src="https://megapx-assets.dcard.tw/images/eb5ab644-4eb2-403c-aa89-1494d06f472e/full.jpeg"
-                width="40"
-                height="40"
-                loading="lazy"
-                alt="Logo"
-              />
-              <h3>結婚</h3>
-              <span>每天有12則貼文</span>
-            </div>
-          </div>
-          <div className="related-forum-card">
-            <div className="logo-img"></div>
-            <div className="related-forum-card-content">
-              <img
-                src="https://megapx-assets.dcard.tw/images/eb5ab644-4eb2-403c-aa89-1494d06f472e/full.jpeg"
-                width="40"
-                height="40"
-                loading="lazy"
-                alt="Logo"
-              />
-              <h3>結婚</h3>
-              <span>每天有12則貼文</span>
-            </div>
-          </div>
-          <div className="related-forum-card">
-            <div className="logo-img"></div>
-            <div className="related-forum-card-content">
-              <img
-                src="https://megapx-assets.dcard.tw/images/eb5ab644-4eb2-403c-aa89-1494d06f472e/full.jpeg"
-                width="40"
-                height="40"
-                loading="lazy"
-                alt="Logo"
-              />
-              <h3>結婚</h3>
-              <span>每天有12則貼文</span>
-            </div>
-          </div>
+          {RELATED &&
+            RELATED.result.map((forumId: string, index: number) => {
+              if (index === 0 || index > 5) {
+                return;
+              }
+              const {
+                id,
+                alias,
+                name,
+                heroImage,
+                logo,
+                postCount,
+              }: Forum = RELATED.entities[ApiType.Related][forumId];
+              return (
+                <Link
+                  to={`/f/${alias}`}
+                  className="related-forum-card"
+                  key={id}
+                >
+                  <img
+                    src={heroImage && heroImage.url}
+                    className="logo-img"
+                    alt="Banner"
+                  />
+                  <div className="related-forum-card-content">
+                    <img
+                      src={logo && logo.url}
+                      width="40"
+                      height="40"
+                      loading="lazy"
+                      alt="Logo"
+                    />
+                    <h3>{name}</h3>
+                    <span>
+                      每天有{postCount ? Math.floor(parseInt(postCount.last30Days) / 30) : 10}
+                      則貼文
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
         </div>
         <div
           className="right-arrow-icon-wrapper"
@@ -153,7 +128,8 @@ function RelatedForums() {
           </svg>
         </div>
       </div>
-      <Link to="/search/forums">查看更多看板</Link>
+      <Link to="#">查看更多看板</Link>
+      {/* <Link to="/search/forums">查看更多看板</Link> */}
     </Wrapper>
   );
 }
