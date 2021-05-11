@@ -1,6 +1,6 @@
-import tw, { styled, css, theme } from "twin.macro";
+import tw, { styled, css } from "twin.macro";
 
-export const Wrapper = styled.li(() => [
+export const Wrapper = styled.li(({mediaMeta}) => [
   tw`
     m-auto
     py-5
@@ -31,6 +31,7 @@ export const Wrapper = styled.li(() => [
     }
 
     & .article-header {
+      width: 100%;
       grid-area: header;
       display: flex;
       align-items: center;
@@ -77,11 +78,11 @@ export const Wrapper = styled.li(() => [
     }
 
     & .article-content {
+      max-width: ${mediaMeta[0] ? "504px" : "608px"};
       grid-area: content;
     }
 
     & .article-content p {
-      width: 504px;
       font-weight: 400;
       font-size: 14px;
       color: rgba(0, 0, 0, 0.75);

@@ -1,4 +1,4 @@
-import { ApiType } from "./FetchApiType";
+import { ApiType } from "../../../types/FetchApiType";
 
 export type NormalizedState = {
   result: string[],

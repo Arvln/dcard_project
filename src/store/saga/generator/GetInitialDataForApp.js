@@ -1,6 +1,6 @@
 import { all, call, put, select } from "redux-saga/effects";
 import { FetchSuccess, FetchFailure } from "../../redux/initial_data_for_app/FetchActions";
-import { ApiType } from "../../redux/initial_data_for_app/FetchApiType";
+import { ApiType } from "../../../types/FetchApiType";
 import { forumsUrl, categorizationUrl, categoriesUrl, selectionsUrl, bulletinUrl } from "../InitialDataForAppApi";
 
 export default function* GetInitialDataForApp(getApi) {

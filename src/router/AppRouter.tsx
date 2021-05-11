@@ -12,9 +12,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { InitialDataForAppState } from "../store/redux/initial_data_for_app/InitialDataState";
 import { RootState } from "../components/common/SiteLayout";
 import { Forum } from "../model";
-import { NavBarClassName } from "../pages/sections/Sections";
 import { FetchRequest } from "../store/redux/initial_data_for_app/FetchActions";
-import { ApiType } from "../store/redux/initial_data_for_app/FetchApiType";
+import { ApiType } from "../types/FetchApiType";
+import { NavbarClassType } from "../types";
 
 function AppRouter() {
   const rootState: InitialDataForAppState = useSelector((state: RootState) => ({
@@ -45,7 +45,7 @@ function AppRouter() {
         children={
           <SiteLayout
             MainCreator={
-              <Pages.Home navBarClassName={NavBarClassName.Popular} />
+              <Pages.Home navbarClassName={NavbarClassType.Popular} />
             }
           />
         }
@@ -55,7 +55,7 @@ function AppRouter() {
         children={
           <SiteLayout
             MainCreator={
-              <Pages.Home navBarClassName={NavBarClassName.Popular} />
+              <Pages.Home navbarClassName={NavbarClassType.Popular} />
             }
           />
         }
@@ -65,7 +65,7 @@ function AppRouter() {
         children={
           <SiteLayout
             MainCreator={
-              <Pages.Home navBarClassName={NavBarClassName.Latest} />
+              <Pages.Home navbarClassName={NavbarClassType.Latest} />
             }
           />
         }
@@ -75,7 +75,7 @@ function AppRouter() {
         children={
           <SiteLayout
             MainCreator={
-              <Pages.Home navBarClassName={NavBarClassName.Pessoal} />
+              <Pages.Home navbarClassName={NavbarClassType.Pessoal} />
             }
           />
         }
@@ -117,7 +117,7 @@ function AppRouter() {
                     MainCreator={
                       <Pages.Sections
                         {...forum}
-                        navBarClassName={NavBarClassName.Popular}
+                        navbarClassName={NavbarClassType.Popular}
                       />
                     }
                   />
@@ -130,7 +130,7 @@ function AppRouter() {
                     MainCreator={
                       <Pages.Sections
                         {...forum}
-                        navBarClassName={NavBarClassName.Popular}
+                        navbarClassName={NavbarClassType.Popular}
                       />
                     }
                   />
@@ -143,7 +143,7 @@ function AppRouter() {
                     MainCreator={
                       <Pages.Sections
                         {...forum}
-                        navBarClassName={NavBarClassName.Latest}
+                        navbarClassName={NavbarClassType.Latest}
                       />
                     }
                   />
@@ -156,7 +156,7 @@ function AppRouter() {
                     MainCreator={
                       <Pages.Sections
                         {...forum}
-                        navBarClassName={NavBarClassName.Rule}
+                        navbarClassName={NavbarClassType.Rule}
                       />
                     }
                   />

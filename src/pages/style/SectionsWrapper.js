@@ -1,6 +1,6 @@
-import tw, { styled, css, theme } from "twin.macro";
+import tw, { styled, css } from "twin.macro";
 
-export const Wrapper = styled.main(({navBarClassName}) => [
+export const Wrapper = styled.main(({navbarClassName}) => [
   tw`
     bg-white
   `,
@@ -74,11 +74,11 @@ export const Wrapper = styled.main(({navBarClassName}) => [
       color: rgb(0, 0, 0);
     }
 
-    & .top-navbar-items-wrapper .${navBarClassName} a {
+    & .top-navbar-items-wrapper .${navbarClassName} a {
       color: rgb(0, 0, 0);
     }
 
-    & .${navBarClassName}::after {
+    & .${navbarClassName}::after {
       position: absolute;
       bottom: -1px;
       content: "";

@@ -1,7 +1,7 @@
 import { get } from "../../adapters/xhr";
 import { takeEvery } from "redux-saga/effects";
 import { FetchActionsType } from "../redux/initial_data_for_app/FetchActionsType";
-import { FetchSectionPostsActionsType } from "../redux/section_posts/FetchSectionPostsActionsType";
+import { FetchSectionPostsActionsType } from "../../types/FetchSectionPostsActionsType";
 
 const getApi = fetchUrl => {
   return (

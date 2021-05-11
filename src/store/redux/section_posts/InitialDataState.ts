@@ -1,10 +1,12 @@
-import { ApiType } from "../initial_data_for_app/FetchApiType";
+import { ApiType } from "../../../types/FetchApiType";
 import { NormalizedState } from "../initial_data_for_app/InitialDataState";
 
 export type InitialDataForEachSectionState = {
   loading: boolean,
   [ApiType.Featured]: NormalizedState,
   [ApiType.Related]: NormalizedState,
+  [ApiType.Popular]: NormalizedState,
+  [ApiType.Latest]: NormalizedState,
   error: string
 }
 

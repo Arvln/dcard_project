@@ -2,10 +2,16 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Wrapper } from "../style/RelatedForumsWrapper";
 import { SectionStoreContext } from "../../pages/sections/Sections";
-import { ApiType } from "../../store/redux/initial_data_for_app/FetchApiType";
+import { ApiType } from "../../types/FetchApiType";
 import { Forum } from "../../model";
+import { NormalizedState } from "../../store/redux/initial_data_for_app/InitialDataState";
 
-function RelatedForums() {
+type Props = {
+  gamezoneRelated?: NormalizedState
+}
+
+function RelatedForums({ gamezoneRelated }: Props) {
+  let relatedPosts: NormalizedState = {} as NormalizedState;
   const { RELATED } = useContext(SectionStoreContext);
   const [isReachLeftEnd, setIsReachLeftEnd] = useState(true);
   const [isReachRightEnd, setIsReachRightEnd] = useState(false);
@@ -40,6 +46,10 @@ function RelatedForums() {
     }
   }
 
+  if (RELATED || gamezoneRelated) {
+    relatedPosts = RELATED || gamezoneRelated;
+  }
+
   return (
     <Wrapper>
       <h1>相關看板</h1>
@@ -67,8 +77,7 @@ function RelatedForums() {
           id="related-forums-scroll-element"
           onScroll={scrollHandler}
         >
-          {RELATED &&
-            RELATED.result.map((forumId: string, index: number) => {
+          {relatedPosts.result && relatedPosts.result.map((forumId: string, index: number) => {
               if (index === 0 || index > 5) {
                 return;
               }
@@ -79,7 +88,7 @@ function RelatedForums() {
                 heroImage,
                 logo,
                 postCount,
-              }: Forum = RELATED.entities[ApiType.Related][forumId];
+              }: Forum = relatedPosts.entities[ApiType.Related][forumId];
               return (
                 <Link
                   to={`/f/${alias}`}

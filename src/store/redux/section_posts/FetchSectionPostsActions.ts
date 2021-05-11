@@ -1,5 +1,5 @@
 import { FetchActions } from "../initial_data_for_app/FetchActions";
-import { FetchSectionPostsActionsType } from "./FetchSectionPostsActionsType";
+import { FetchSectionPostsActionsType } from "../../../types/FetchSectionPostsActionsType";
 
 export type SetSectionAliasActions = {
   type: string,

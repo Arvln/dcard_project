@@ -4,7 +4,7 @@ import { FollowButton } from "../../components/common";
 import { RootStoreContext } from "../../components/common/SiteLayout";
 import { Forum } from "../../model";
 import { Link } from "react-router-dom";
-import { ApiType } from "../../store/redux/initial_data_for_app/FetchApiType";
+import { ApiType } from "../../types/FetchApiType";
 
 function ForumAll() {
   const [isClickForumId, setIsClickForumId] = useState("");

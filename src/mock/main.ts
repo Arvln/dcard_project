@@ -37,6 +37,7 @@ server.use(jsonServer.rewriter({
   '/service/api/v2/forums/vtuber/featuredPosts': '/vtuberFeaturedPosts',
   '/service/api/v2/forums/sex/featuredPosts': '/sexFeaturedPosts',
 
+  '/service/api/v2/search/forums/gamezone': '/gamezoneRelatedForums',
   '/service/api/v2/search/forums/whysoserious': '/whysoseriousRelatedForums',
   '/service/api/v2/search/forums/mood': '/moodRelatedForums',
   '/service/api/v2/search/forums/freshman': '/freshmanRelatedForums',
@@ -56,6 +57,8 @@ server.use(jsonServer.rewriter({
   '/service/api/v2/search/forums/vtuber': '/vtuberRelatedForums',
   '/service/api/v2/search/forums/sex': '/sexRelatedForums',
 
+  '/service/api/v2/popular/posts': '/popularPosts',
+  '/service/api/v2/forums/gamezone/popular/posts': '/gamezonePopularPosts',
   '/service/api/v2/forums/whysoserious/popular/posts': '/whysoseriousPopularPosts',
   '/service/api/v2/forums/mood/popular/posts': '/moodPopularPosts',
   '/service/api/v2/forums/freshman/popular/posts': '/freshmanPopularPosts',
@@ -75,6 +78,7 @@ server.use(jsonServer.rewriter({
   '/service/api/v2/forums/vtuber/popular/posts': '/vtuberPopularPosts',
   '/service/api/v2/forums/sex/popular/posts': '/sexPopularPosts',
 
+  '/service/api/v2/posts': '/posts',
   '/service/api/v2/forums/whysoserious/posts': '/whysoseriousPosts',
   '/service/api/v2/forums/mood/posts': '/moodPosts',
   '/service/api/v2/forums/freshman/posts': '/freshmanPosts',

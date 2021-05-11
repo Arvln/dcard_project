@@ -1,4 +1,4 @@
-
+import { Gender } from "../types"
 
 export type MediaMeta = {
   id: string,
@@ -15,7 +15,7 @@ export type Reactions = {
   count: number
 }
 
-export type Featured = {
+export type SectionPosts = {
   id: string,
   title: string,
   excerpt: string,
@@ -28,8 +28,9 @@ export type Featured = {
   topics: string[],
   forumName: string,
   forumAlias: string,
-  gender: string,
+  gender: Gender,
   school: string,
   mediaMeta: MediaMeta[],
-  reactions: Reactions[]
+  reactions: Reactions[],
+  categories: string[]
 }

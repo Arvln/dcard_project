@@ -1,36 +1,65 @@
 import { Wrapper } from "./style/HomeWrapper";
 import { ArticleItem } from "../components/common";
 import { Link } from "react-router-dom";
-import { NavBarClassName } from "./sections/Sections";
+import { ApiType, Gender, NavbarClassType, SectionPostsType } from "../types";
+import { NormalizedState } from "../store/redux/initial_data_for_app/InitialDataState";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { FetchSectionPostsRequest, SetSectionAlias } from "../store/redux/section_posts/FetchSectionPostsActions";
+import { SectionPosts } from "../model";
+
+type InitialState = {
+  loading: boolean,
+  [ApiType.Popular]: NormalizedState,
+  [ApiType.Latest]: NormalizedState,
+  error: string
+};
+
+type IndexState = {
+  FetchReducer: InitialState;
+};
 
 type Props = {
-  navBarClassName: NavBarClassName
+  navbarClassName: NavbarClassType
 }
 
-function Home({navBarClassName}: Props) {
+function Home({ navbarClassName }: Props) {
+  const indexState: InitialState = useSelector((state: IndexState) => ({
+    loading: state.FetchReducer.loading,
+    [ApiType.Popular]: state.FetchReducer[ApiType.Popular],
+    [ApiType.Latest]: state.FetchReducer[ApiType.Latest],
+    error: state.FetchReducer.error
+  }))
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(SetSectionAlias(SectionPostsType.Index));
+    dispatch(FetchSectionPostsRequest());
+  }, [])
+  console.log(indexState);
 
   return (
-    <Wrapper navBarClassName={navBarClassName}>
+    <Wrapper navBarClassName={navbarClassName}>
       <div className="top-navbar">
         <ul className="top-navbar-items-wrapper">
-          <li className={NavBarClassName.Popular}>
+          <li className={NavbarClassType.Popular}>
             <Link to="/f">
               <span>熱門</span>
             </Link>
           </li>
-          <li className={NavBarClassName.Latest}>
+          <li className={NavbarClassType.Latest}>
             <Link to="/f/latest">
               <span>最新</span>
             </Link>
           </li>
-          <li className={NavBarClassName.Pessoal}>
+          <li className={NavbarClassType.Pessoal}>
             <Link to="/f/pessoal">
               <span>追蹤</span>
             </Link>
           </li>
         </ul>
       </div>
-      {navBarClassName === NavBarClassName.Popular && (
+      {navbarClassName === NavbarClassType.Popular && (
         <a
           href="https://youtu.be/ETogpwOdkSY"
           target="_blank"
@@ -45,127 +74,23 @@ function Home({navBarClassName}: Props) {
           />
         </a>
       )}
-      {navBarClassName === NavBarClassName.Pessoal || (
+      {navbarClassName === NavbarClassType.Popular && (
         <ul>
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
-          <ArticleItem />
+          {indexState[ApiType.Popular] && indexState[ApiType.Popular].result.map((articleId: string) => {
+            const article: SectionPosts = indexState[ApiType.Popular].entities[ApiType.Popular][articleId];
+            return <ArticleItem {...article} gender={Gender[article.gender]} />
+          })}
         </ul>
       )}
-      {navBarClassName === NavBarClassName.Pessoal && (
+      {navbarClassName === NavbarClassType.Latest && (
+        <ul>
+          {indexState[ApiType.Latest] && indexState[ApiType.Latest].result.map((articleId: string) => {
+            const article: SectionPosts = indexState[ApiType.Latest].entities[ApiType.Latest][articleId];
+            return <ArticleItem {...article} gender={Gender[article.gender]} />
+          })}
+        </ul>
+      )}
+      {navbarClassName === NavbarClassType.Pessoal && (
         <div className="pessoal-container">
           <div className="login-msg">
             <img

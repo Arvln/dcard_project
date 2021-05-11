@@ -2,7 +2,7 @@ import { FetchActionsType } from "./FetchActionsType";
 import { FetchActions } from "./FetchActions";
 import { normalizedData } from "../../../utils";
 import { InitialDataForAppState, initialDataForAppState } from "./InitialDataState";
-import { FetchSectionPostsActionsType } from "../section_posts/FetchSectionPostsActionsType";
+import { FetchSectionPostsActionsType } from "../../../types/FetchSectionPostsActionsType";
 
 const getNewState = (state: any, action: FetchActions, ApiType: string) => ({
   ...state,

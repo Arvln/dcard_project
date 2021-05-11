@@ -3,5 +3,5 @@ import GetSectionPosts from "./GetSectionPosts";
 
 export {
   GetInitialDataForApp,
-  GetSectionPosts,
+  GetSectionPosts
 }

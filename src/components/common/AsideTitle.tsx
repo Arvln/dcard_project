@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useRouteMatch } from "react-router-dom";
 import { Forum } from "../../model";
-import { ApiType } from "../../store/redux/initial_data_for_app/FetchApiType";
+import { ApiType } from "../../types/FetchApiType";
 import { Wrapper } from "../style/AsideTitleWrapper";
 import { RootStoreContext } from "./SiteLayout";
 

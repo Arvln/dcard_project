@@ -25,6 +25,7 @@ import vtuberFeaturedPosts from "./data/featured/vtuber-featured.json";
 import sexFeaturedPosts from "./data/featured/sex-featured.json";
 
 // related forums
+import gamezoneRelatedForums from "./data/related/gamezone-related.json";
 import whysoseriousRelatedForums from "./data/related/whysoserious-related.json";
 import moodRelatedForums from "./data/related/mood-related.json";
 import freshmanRelatedForums from "./data/related/freshman-related.json";
@@ -45,6 +46,8 @@ import vtuberRelatedForums from "./data/related/vtuber-related.json";
 import sexRelatedForums from "./data/related/sex-related.json";
 
 // popular posts
+import popularPosts from "./data/popular/index-popular.json";
+import gamezonePopularPosts from "./data/popular/gamezone-popular.json";
 import whysoseriousPopularPosts from "./data/popular/whysoserious-popular.json";
 import moodPopularPosts from "./data/popular/mood-popular.json";
 import freshmanPopularPosts from "./data/popular/freshman-popular.json";
@@ -65,6 +68,7 @@ import vtuberPopularPosts from "./data/popular/vtuber-popular.json";
 import sexPopularPosts from "./data/popular/sex-popular.json";
 
 // latest posts
+import posts from "./data/latest/index-latest.json";
 import whysoseriousPosts from "./data/latest/whysoserious-latest.json";
 import moodPosts from "./data/latest/mood-latest.json";
 import freshmanPosts from "./data/latest/freshman-latest.json";
@@ -110,6 +114,7 @@ export const db = {
   vtuberFeaturedPosts,
   sexFeaturedPosts,
 
+  gamezoneRelatedForums,
   whysoseriousRelatedForums,
   moodRelatedForums,
   freshmanRelatedForums,
@@ -129,6 +134,8 @@ export const db = {
   vtuberRelatedForums,
   sexRelatedForums,
 
+  popularPosts,
+  gamezonePopularPosts,
   whysoseriousPopularPosts,
   moodPopularPosts,
   freshmanPopularPosts,
@@ -148,6 +155,7 @@ export const db = {
   vtuberPopularPosts,
   sexPopularPosts,
 
+  posts,
   whysoseriousPosts,
   moodPosts,
   freshmanPosts,

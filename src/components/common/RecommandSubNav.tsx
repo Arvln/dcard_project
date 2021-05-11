@@ -3,7 +3,7 @@ import { Wrapper } from "../style/SubNavItemsWrapper";
 import { useContext } from "react";
 import { RootStoreContext } from "../common/SiteLayout";
 import { Forum } from "../../model";
-import { ApiType } from "../../store/redux/initial_data_for_app/FetchApiType";
+import { ApiType } from "../../types/FetchApiType";
 
 type Props = {
   alias: string;

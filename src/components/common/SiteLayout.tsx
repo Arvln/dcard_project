@@ -14,7 +14,7 @@ import {
   initialDataForAppState,
   InitialDataForAppState,
 } from "../../store/redux/initial_data_for_app/InitialDataState";
-import { ApiType } from "../../store/redux/initial_data_for_app/FetchApiType";
+import { ApiType } from "../../types/FetchApiType";
 export const RootStoreContext = React.createContext(initialDataForAppState);
 
 type Props = {

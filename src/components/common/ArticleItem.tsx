@@ -1,43 +1,53 @@
 import { Link, useRouteMatch } from "react-router-dom";
+import { Gender } from "../../types";
+import { MediaMeta } from "../../model";
+import { UserPersonalIcon } from "../content/sections";
 import { Wrapper } from "../style/ArticleItemWrapper";
 
-function ArticleItem() {
+type Props = {
+  school: string;
+  title: string;
+  excerpt: string;
+  likeCount: number;
+  commentCount: number;
+  anonymousSchool: boolean;
+  gender: Gender;
+  mediaMeta: MediaMeta[];
+  categories?: string[];
+};
+
+function ArticleItem({
+  school,
+  title,
+  excerpt,
+  likeCount,
+  commentCount,
+  anonymousSchool,
+  gender,
+  mediaMeta,
+  categories,
+}: Props) {
   const { path } = useRouteMatch();
+  const vividVedioTest: RegExp = /^https:\/\/www\.dcard\.tw\/v2\/vivid\/videos/;
 
   return (
-    <Wrapper>
+    <Wrapper mediaMeta={mediaMeta}>
       <Link to={`${path}/p/235868431`}>
         <article className="article-conatiner">
           <div className="article-header">
             <div className="category-icon">
-              <svg
-                viewBox="0 0 100 100"
-                focusable="false"
-                width="16"
-                height="16"
-                fill="rgb(0, 106, 166)"
-              >
-                <title>官方</title>
-                <path d="M100 50A50 50 0 110 50a50 50 0 01100 0"></path>
-                <g fill="#FFF">
-                  <path d="M61 43.7a4.9 4.9 0 00-5 5c0 2.6 2.3 4.8 5 4.8s4.9-2.2 4.9-4.9-2.2-4.9-5-4.9"></path>
-                  <path d="M69.7 55.8l-.1 1.8a3.9 3.9 0 01-3.2.6c-1.6-.5-3.1-1.4-4.3-2.5l-4.1 4c2.5 2.5 5.7 4.2 9.4 4.7-3 5.3-8.8 9-15.3 9H34.5V49.5a44 44 0 0029.4-17.2c1.5 1 2.8 2.2 3.7 3.5 1.3 2.5 2 5.3 2 8.3v11.6zM52 20.8H28.6v58.4h23.5c13 0 23.4-10.5 23.4-23.4V44.2a23.4 23.4 0 00-23.4-23.4z"></path>
-                </g>
-                <path fill="none" d="M20.8 20.8h58.3v58.3H20.8z"></path>
-              </svg>
+              <UserPersonalIcon gender={gender} />
             </div>
-            <div className="category-title">官方公告</div>
-            <div className="category-info">小天使</div>
-            <div className="category-top">置頂</div>
+            <div className="category-info">
+              {anonymousSchool ? "匿名" : school}
+            </div>
+            {categories && <div className="category-top">置頂</div>}
           </div>
           <div className="article-title">
-            <h1>Dcard 創作者俱樂部開張🎊申請加入享有專屬個板！</h1>
+            <h1>{title}</h1>
           </div>
           <div className="article-content">
-            <p>
-              一直以來，在各個看板、各種不同領域，Dcard
-              上都有許多創作者寫下他們自己的故事，無論是美食遊記、彩妝試色、圖文創作或是心情抒發等等，這些文章都深受卡友的喜愛，慢慢地他們寫出無數作品，也漸漸累積了粉
-            </p>
+            <p>{excerpt}</p>
           </div>
           <div className="article-footer">
             <div className="moods">
@@ -46,17 +56,21 @@ function ArticleItem() {
                 title="愛心"
                 style={{ zIndex: 3 }}
               />
-              <img
-                src="https://megapx-assets.dcard.tw/images/042b27f9-b507-473b-8f36-654aedcc37df/orig.png"
-                title="森77"
-                style={{ zIndex: 2 }}
-              />
-              <img
-                src="https://megapx-assets.dcard.tw/images/9a7cc9af-9f81-43ea-8d9b-968a6441ae51/orig.png"
-                title="哈哈"
-                style={{ zIndex: 1 }}
-              />
-              <span>643</span>
+              {categories ? null : (
+                <>
+                  <img
+                    src="https://megapx-assets.dcard.tw/images/042b27f9-b507-473b-8f36-654aedcc37df/orig.png"
+                    title="森77"
+                    style={{ zIndex: 2 }}
+                  />
+                  <img
+                    src="https://megapx-assets.dcard.tw/images/9a7cc9af-9f81-43ea-8d9b-968a6441ae51/orig.png"
+                    title="哈哈"
+                    style={{ zIndex: 1 }}
+                  />
+                </>
+              )}
+              <span>{likeCount}</span>
             </div>
             <div className="comment">
               <svg
@@ -73,7 +87,7 @@ function ArticleItem() {
                   fillRule="evenodd"
                 ></path>
               </svg>
-              <span>132</span>
+              <span>{commentCount}</span>
             </div>
             <div className="save">
               <svg
@@ -90,14 +104,16 @@ function ArticleItem() {
               <span>收藏</span>
             </div>
           </div>
-          <img
-            className="article-img"
-            src="https://imgur.dcard.tw/JY9ngM4b.jpg"
-            width="84px"
-            height="84px"
-            alt=""
-            loading="lazy"
-          />
+          {(mediaMeta[0] && !vividVedioTest.test(mediaMeta[0].url)) && (
+            <img
+              className="article-img"
+              src={mediaMeta[0].url}
+              width="84px"
+              height="84px"
+              alt=""
+              loading="lazy"
+            />
+          )}
         </article>
       </Link>
     </Wrapper>

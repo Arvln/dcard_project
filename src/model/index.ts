@@ -2,7 +2,7 @@ import { Forum, Image } from "./forum";
 import { Categorization } from "./categorization";
 import { Categories } from "./categories";
 import { Bulletin } from "./bulletin";
-import { Featured } from "./featured";
+import { SectionPosts, MediaMeta, Reactions } from "./sectionPosts";
 
 export type {
   Forum,
@@ -10,5 +10,7 @@ export type {
   Categorization,
   Categories,
   Bulletin,
-  Featured,
+  SectionPosts,
+  MediaMeta,
+  Reactions,
 }

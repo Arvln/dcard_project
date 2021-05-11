@@ -1,7 +1,7 @@
 import { SortForumsType } from "../pages/sections/ForumPopular";
 import { NormalizedState } from "../store/redux/initial_data_for_app/InitialDataState";
 import { QuickSort } from ".";
-import { ApiType } from "../store/redux/initial_data_for_app/FetchApiType";
+import { ApiType } from "../types/FetchApiType";
 
 export function SortForumsByLast30DaysPostCount(
   allForums: NormalizedState,
