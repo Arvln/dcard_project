@@ -12,14 +12,16 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   FetchSectionPostsRequest,
   SetSectionAlias,
+  SetSectionPostsStart,
 } from "../../store/redux/section_posts/FetchSectionPostsActions";
 import {
   initialDataForEachSectionState,
   InitialDataForEachSectionState,
 } from "../../store/redux/section_posts/InitialDataState";
 import { RootStoreContext } from "../../components/common/SiteLayout";
-import { Gender, NavbarClassType } from "../../types";
+import { ApiParamsType, Gender, NavbarClassType } from "../../types";
 import { UserPersonalIcon } from "../../components/content/sections";
+import { CombineTwoArray } from "../../utils";
 export const SectionStoreContext = React.createContext(
   initialDataForEachSectionState
 );
@@ -53,8 +55,16 @@ function Sections({ name, alias, heroImage, logo, navbarClassName }: Props) {
       [ApiType.Related]: state.FetchReducer[ApiType.Related],
       [ApiType.Popular]: state.FetchReducer[ApiType.Popular],
       [ApiType.Latest]: state.FetchReducer[ApiType.Latest],
+      [ApiParamsType.SectionPostsStart]:
+        state.FetchReducer[ApiParamsType.SectionPostsStart],
       error: state.FetchReducer.error,
     })
+  );
+  const [popularPostsList, setPopularPostsList] = useState<SectionPosts[]>(
+    [] as SectionPosts[]
+  );
+  const [latestPostsList, setLatestPostsList] = useState<SectionPosts[]>(
+    [] as SectionPosts[]
   );
   const dispatch = useDispatch();
   const youtubeVedioTest: RegExp = /^https:\/\/youtu/;
@@ -65,9 +75,36 @@ function Sections({ name, alias, heroImage, logo, navbarClassName }: Props) {
     navbarClassName === NavbarClassType.Popular &&
       forumTitlePosition?.scrollIntoView();
     dispatch(SetSectionAlias(alias));
-    dispatch(FetchSectionPostsRequest());
+    dispatch(
+      FetchSectionPostsRequest(sectionState[ApiParamsType.SectionPostsStart])
+    );
   }, [path]);
-  console.log(sectionState);
+
+  useEffect(() => {
+    function getPostsList(postsType: ApiType.Popular | ApiType.Latest) {
+      if (!sectionState[postsType]) {
+        return;
+      }
+      let newPostsList: SectionPosts[] = [] as SectionPosts[];
+      sectionState[postsType].result.map((articleId: string) => {
+        newPostsList.push(
+          sectionState[postsType].entities[postsType][articleId]
+        );
+      });
+      if (sectionState[ApiParamsType.SectionPostsStart] !== 0) {
+        postsType === ApiType.Popular &&
+          setPopularPostsList(CombineTwoArray(popularPostsList, newPostsList));
+        postsType === ApiType.Latest &&
+          setLatestPostsList(CombineTwoArray(latestPostsList, newPostsList));
+      } else if (postsType === ApiType.Popular) {
+        setPopularPostsList(newPostsList);
+      } else {
+        setLatestPostsList(newPostsList);
+      }
+    }
+    getPostsList(ApiType.Popular);
+    getPostsList(ApiType.Latest);
+  }, [sectionState[ApiType.Popular], sectionState[ApiType.Latest]]);
 
   function leftArrowIconHandler(): void {
     scrollElement = document.getElementById("scroll-element");
@@ -167,31 +204,24 @@ function Sections({ name, alias, heroImage, logo, navbarClassName }: Props) {
 
         {navbarClassName === NavbarClassType.Popular && (
           <ul>
-            {sectionState[ApiType.Popular] &&
-              sectionState[ApiType.Popular].result.map(
-                (articleId: string, index: number) => {
-                  const article: SectionPosts =
-                    sectionState[ApiType.Popular].entities[ApiType.Popular][
-                      articleId
-                    ];
-                  article.categories && article.categories[0] === "公告" && (
-                    <ArticleItem {...article} gender={Gender[article.gender]} />
-                  );
-                  if (article.gender === Gender.D) {
-                    topShowCount++;
-                  }
-                  if (index > topShowCount) {
-                    return;
-                  }
-                  return (
-                    <ArticleItem
-                      {...article}
-                      gender={Gender[article.gender]}
-                      key={article.id}
-                    />
-                  );
-                }
-              )}
+            {popularPostsList.map((article: SectionPosts, index: number) => {
+              article.categories && article.categories[0] === "公告" && (
+                <ArticleItem {...article} gender={Gender[article.gender]} />
+              );
+              if (article.gender === Gender.D) {
+                topShowCount++;
+              }
+              if (index > topShowCount) {
+                return;
+              }
+              return (
+                <ArticleItem
+                  {...article}
+                  gender={Gender[article.gender]}
+                  key={article.id}
+                />
+              );
+            })}
             {navbarClassName === NavbarClassType.Popular && (
               <div className="month-popular-wrapper">
                 <h2 className="month-popular">本月熱門</h2>
@@ -282,64 +312,45 @@ function Sections({ name, alias, heroImage, logo, navbarClassName }: Props) {
                 </div>
               </div>
             )}
-            {sectionState[ApiType.Popular] &&
-              sectionState[ApiType.Popular].result.map(
-                (articleId: string, index: number) => {
-                  const article: SectionPosts =
-                    sectionState[ApiType.Popular].entities[ApiType.Popular][
-                      articleId
-                    ];
-                  if (index <= topShowCount || index > topShowCount + 2) {
-                    return;
-                  }
-                  return (
-                    <ArticleItem
-                      {...article}
-                      gender={Gender[article.gender]}
-                      key={article.id}
-                    />
-                  );
-                }
-              )}
+            {popularPostsList.map((article: SectionPosts, index: number) => {
+              if (index <= topShowCount || index > topShowCount + 2) {
+                return;
+              }
+              return (
+                <ArticleItem
+                  {...article}
+                  gender={Gender[article.gender]}
+                  key={article.id}
+                />
+              );
+            })}
             {navbarClassName === NavbarClassType.Popular && <RelatedForums />}
-            {sectionState[ApiType.Popular] &&
-              sectionState[ApiType.Popular].result.map(
-                (articleId: string, index: number) => {
-                  const article: SectionPosts =
-                    sectionState[ApiType.Popular].entities[ApiType.Popular][
-                      articleId
-                    ];
-                  if (index <= topShowCount + 2) {
-                    return;
-                  }
-                  return (
-                    <ArticleItem
-                      {...article}
-                      gender={Gender[article.gender]}
-                      key={article.id}
-                    />
-                  );
-                }
-              )}
+            {popularPostsList.map((article: SectionPosts, index: number) => {
+              if (index <= topShowCount + 2) {
+                return;
+              }
+              return (
+                <ArticleItem
+                  {...article}
+                  gender={Gender[article.gender]}
+                  key={article.id}
+                />
+              );
+            })}
           </ul>
         )}
 
         {navbarClassName === NavbarClassType.Latest && (
           <ul>
-            {sectionState[ApiType.Latest] &&
-              sectionState[ApiType.Latest].result.map((articleId: string) => {
-                const article: SectionPosts =
-                  sectionState[ApiType.Latest].entities[ApiType.Latest][
-                    articleId
-                  ];
-                return (
-                  <ArticleItem
-                    {...article}
-                    gender={Gender[article.gender]}
-                    key={article.id}
-                  />
-                );
-              })}
+            {latestPostsList.map((article: SectionPosts) => {
+              return (
+                <ArticleItem
+                  {...article}
+                  gender={Gender[article.gender]}
+                  key={article.id}
+                />
+              );
+            })}
           </ul>
         )}
 

@@ -1,5 +1,5 @@
 import { FetchActions } from "../initial_data_for_app/FetchActions";
-import { FetchSectionPostsActionsType } from "../../../types/FetchSectionPostsActionsType";
+import { FetchSectionPostsActionsType, GetFetchSectionPostsRequests } from "../../../types/FetchSectionPostsActionsType";
 
 export type SetSectionAliasActions = {
   type: string,
@@ -17,6 +17,20 @@ export function SetSectionAlias(alias: string): SetSectionAliasActions {
   }
 }
 
-export function FetchSectionPostsRequest(): FetchActions {
-  return { type: FetchSectionPostsActionsType.FETCH_SECTION_POSTS_REQUEST }
+export function FetchSectionPostsRequest(start: number): FetchActions {
+  return {
+    type: GetFetchSectionPostsRequests(start),
+    payloads: {
+      prefix: start.toString()
+    }
+  }
+}
+
+export function SetSectionPostsStart(start: number) {
+  return {
+    type: FetchSectionPostsActionsType.SET_SECTION_POSTS_START,
+    payloads: {
+      start
+    }
+  }
 }

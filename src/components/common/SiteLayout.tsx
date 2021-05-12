@@ -22,10 +22,10 @@ type Props = {
 };
 
 export type RootState = {
-  FetchReducer: InitialDataForAppState
+  FetchReducer: InitialDataForAppState;
 };
 
-function SharingComponent({ MainCreator }: Props) {
+function SiteLayout({ MainCreator }: Props) {
   const { path } = useRouteMatch();
   const [hasAsideTitle, setHasAsideTitle] = useState(false);
   const [hasFooter, setHasFooter] = useState(true);
@@ -44,7 +44,7 @@ function SharingComponent({ MainCreator }: Props) {
     initialPosition?.scrollIntoView();
     const forumPages: RegExp = /^\/f\//;
     const indexArticlePages: RegExp = /^\/f\/p\//;
-    
+
     if (
       path !== "/f/latest" &&
       path !== "/f/pessoal" &&
@@ -81,9 +81,7 @@ function SharingComponent({ MainCreator }: Props) {
             <RecommandSubNav />
           </div>
         </nav>
-        <section className="forum-content">
-          {MainCreator}
-        </section>
+        <section className="forum-content">{MainCreator}</section>
         <aside className="forum-msg">
           {hasAsideTitle && <AsideTitle />}
           <div className="short-msg"></div>
@@ -140,4 +138,4 @@ function SharingComponent({ MainCreator }: Props) {
   );
 }
 
-export default SharingComponent;
+export default SiteLayout;

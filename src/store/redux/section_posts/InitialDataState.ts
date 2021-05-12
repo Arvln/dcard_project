@@ -1,3 +1,4 @@
+import { ApiParamsType } from "../../../types";
 import { ApiType } from "../../../types/FetchApiType";
 import { NormalizedState } from "../initial_data_for_app/InitialDataState";
 
@@ -7,6 +8,7 @@ export type InitialDataForEachSectionState = {
   [ApiType.Related]: NormalizedState,
   [ApiType.Popular]: NormalizedState,
   [ApiType.Latest]: NormalizedState,
+  [ApiParamsType.SectionPostsStart]: number,
   error: string
 }
 

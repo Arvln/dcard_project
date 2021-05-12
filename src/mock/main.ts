@@ -1,5 +1,5 @@
-import * as jsonServer from 'json-server';
-const { db } = require("./db");
+import jsonServer from "json-server";
+import { db } from "./db";
 
 const server      = jsonServer.create();
 const middlewares = jsonServer.defaults();

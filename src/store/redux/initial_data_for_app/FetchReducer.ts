@@ -2,7 +2,8 @@ import { FetchActionsType } from "./FetchActionsType";
 import { FetchActions } from "./FetchActions";
 import { normalizedData } from "../../../utils";
 import { InitialDataForAppState, initialDataForAppState } from "./InitialDataState";
-import { FetchSectionPostsActionsType } from "../../../types/FetchSectionPostsActionsType";
+import { FetchSectionPostsActionsType, GetFetchSectionPostsRequests } from "../../../types/FetchSectionPostsActionsType";
+import { ApiParamsType } from "../../../types";
 
 const getNewState = (state: any, action: FetchActions, ApiType: string) => ({
   ...state,
@@ -12,7 +13,7 @@ const getNewState = (state: any, action: FetchActions, ApiType: string) => ({
 
 const FetchReducer = function (state: InitialDataForAppState = initialDataForAppState , action: FetchActions) {
   switch (action.type) {
-    case FetchActionsType.FETCH_INITIAL_DATA_FOR_APP_REQUEST || FetchSectionPostsActionsType.FETCH_SECTION_POSTS_REQUEST:
+    case FetchActionsType.FETCH_INITIAL_DATA_FOR_APP_REQUEST || GetFetchSectionPostsRequests(parseInt(action.payloads?.prefix || "0")):
       return {
         ...state,
         loading: true
@@ -36,6 +37,12 @@ const FetchReducer = function (state: InitialDataForAppState = initialDataForApp
       return {
         ...state,
         sectionAlias: action.payloads?.alias
+      }
+    
+    case FetchSectionPostsActionsType.SET_SECTION_POSTS_START:
+      return {
+        ...state,
+        [ApiParamsType.SectionPostsStart]: action.payloads?.start
       }
     
     default:

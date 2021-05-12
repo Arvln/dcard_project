@@ -1,7 +1,7 @@
 import { Wrapper } from "./style/HomeWrapper";
 import { ArticleItem } from "../components/common";
-import { Link } from "react-router-dom";
-import { ApiType, Gender, NavbarClassType, SectionPostsType } from "../types";
+import { Link, useRouteMatch } from "react-router-dom";
+import { ApiParamsType, ApiType, Gender, NavbarClassType, SectionPostsType } from "../types";
 import { NormalizedState } from "../store/redux/initial_data_for_app/InitialDataState";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -12,6 +12,7 @@ type InitialState = {
   loading: boolean,
   [ApiType.Popular]: NormalizedState,
   [ApiType.Latest]: NormalizedState,
+  [ApiParamsType.SectionPostsStart]: number,
   error: string
 };
 
@@ -28,15 +29,16 @@ function Home({ navbarClassName }: Props) {
     loading: state.FetchReducer.loading,
     [ApiType.Popular]: state.FetchReducer[ApiType.Popular],
     [ApiType.Latest]: state.FetchReducer[ApiType.Latest],
+    [ApiParamsType.SectionPostsStart]: state.FetchReducer[ApiParamsType.SectionPostsStart],
     error: state.FetchReducer.error
   }))
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(SetSectionAlias(SectionPostsType.Index));
-    dispatch(FetchSectionPostsRequest());
+    indexState[ApiParamsType.SectionPostsStart] && dispatch(FetchSectionPostsRequest(indexState[ApiParamsType.SectionPostsStart]));
   }, [])
-  console.log(indexState);
+  
 
   return (
     <Wrapper navBarClassName={navbarClassName}>
@@ -78,7 +80,7 @@ function Home({ navbarClassName }: Props) {
         <ul>
           {indexState[ApiType.Popular] && indexState[ApiType.Popular].result.map((articleId: string) => {
             const article: SectionPosts = indexState[ApiType.Popular].entities[ApiType.Popular][articleId];
-            return <ArticleItem {...article} gender={Gender[article.gender]} />
+            return <ArticleItem {...article} gender={Gender[article.gender]} key={article.id} />
           })}
         </ul>
       )}
@@ -86,7 +88,7 @@ function Home({ navbarClassName }: Props) {
         <ul>
           {indexState[ApiType.Latest] && indexState[ApiType.Latest].result.map((articleId: string) => {
             const article: SectionPosts = indexState[ApiType.Latest].entities[ApiType.Latest][articleId];
-            return <ArticleItem {...article} gender={Gender[article.gender]} />
+            return <ArticleItem {...article} gender={Gender[article.gender]} key={article.id} />
           })}
         </ul>
       )}

@@ -4,24 +4,25 @@ import {
   FetchFailure,
 } from "../../redux/initial_data_for_app/FetchActions";
 import { ApiType } from "../../../types/FetchApiType";
-import { SectionPostsType } from "../../../types";
+import { ApiParamsType, SectionPostsType } from "../../../types";
 
 export default function* GetSectionPosts(getApi) {
   try {
     const alias = yield select((state) => state.FetchReducer.sectionAlias);
+    const postsStart = yield select((state) => state.FetchReducer[ApiParamsType.SectionPostsStart]);
     if (!alias) {
       return;
     }
 
-    const IndexPopularPostsUrl = "/popularPosts?_limit=30";
-    const IndexLatestPostsUrl = "/posts?_limit=30";
+    const IndexPopularPostsUrl = "/popularPosts?_start=" + postsStart + "&_limit=30";
+    const IndexLatestPostsUrl = "/posts?_start=" + postsStart + "&_limit=30";
     const GamezoneRelatedPostsUrl = "/service/api/v2/search/forums/gamezone";
-    const GamezonePopularPostsUrl = "/gamezonePopularPosts?_limit=30";
+    const GamezonePopularPostsUrl = "/gamezonePopularPosts?_start=" + postsStart + "&_limit=30";
     const featuredPostsUrl =
       "/service/api/v2/forums/" + alias + "/featuredPosts";
     const relatedPostsUrl = "/service/api/v2/search/forums/" + alias;
-    const popularPostsUrl = "/" + alias + "PopularPosts?_limit=30";
-    const latestPostsUrl = "/" + alias + "Posts?_limit=30";
+    const popularPostsUrl = "/" + alias + "PopularPosts?_start=" + postsStart + "&_limit=30";
+    const latestPostsUrl = "/" + alias + "Posts?_start=" + postsStart + "&_limit=30";
 
     switch (alias) {
       case SectionPostsType.Index:

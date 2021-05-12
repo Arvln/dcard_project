@@ -6,14 +6,15 @@ import {
   FetchSectionPostsRequest,
   SetSectionAlias,
 } from "../../store/redux/section_posts/FetchSectionPostsActions";
-import { ApiType, Gender, SectionPostsType } from "../../types";
+import { ApiParamsType, ApiType, Gender, SectionPostsType } from "../../types";
 import { NormalizedState } from "../../store/redux/initial_data_for_app/InitialDataState";
 import { SectionPosts } from "../../model";
 
 type InitialState = {
-  loading: boolean;
-  [ApiType.Related]: NormalizedState;
-  [ApiType.Popular]: NormalizedState;
+  loading: boolean,
+  [ApiType.Related]: NormalizedState,
+  [ApiType.Popular]: NormalizedState,
+  [ApiParamsType.SectionPostsStart]: number,
   error: string;
 };
 
@@ -22,17 +23,18 @@ type GamezoneState = {
 };
 
 function GameZone() {
-  const gamezoneState = useSelector((state: GamezoneState) => ({
+  const gamezoneState: InitialState = useSelector((state: GamezoneState) => ({
     loading: state.FetchReducer.loading,
     [ApiType.Related]: state.FetchReducer[ApiType.Related],
     [ApiType.Popular]: state.FetchReducer[ApiType.Popular],
+    [ApiParamsType.SectionPostsStart]: state.FetchReducer[ApiParamsType.SectionPostsStart],
     error: state.FetchReducer.error,
   }));
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(SetSectionAlias(SectionPostsType.Gamazone));
-    dispatch(FetchSectionPostsRequest());
+    gamezoneState[ApiParamsType.SectionPostsStart] && dispatch(FetchSectionPostsRequest(gamezoneState[ApiParamsType.SectionPostsStart]));
   }, []);
   console.log(gamezoneState);
 
@@ -49,7 +51,7 @@ function GameZone() {
         <ul>
         {gamezoneState[ApiType.Popular] && gamezoneState[ApiType.Popular].result.map((articleId: string) => {
           const article: SectionPosts = gamezoneState[ApiType.Popular].entities[ApiType.Popular][articleId];
-          return <ArticleItem {...article} gender={Gender[article.gender]} />
+          return <ArticleItem {...article} gender={Gender[article.gender]} key={article.id} />
           })}
         </ul>
       </Wrapper>

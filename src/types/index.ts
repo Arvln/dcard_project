@@ -3,6 +3,7 @@ import { ApiType } from "./FetchApiType";
 import { FetchSectionPostsActionsType } from "./FetchSectionPostsActionsType";
 import { NavbarClassType } from "./NavbarClassType";
 import { SectionPostsType } from "./SectionPostsType";
+import { ApiParamsType } from "./ApiParamsType";
 
 export {
   Gender,
@@ -10,4 +11,5 @@ export {
   FetchSectionPostsActionsType,
   NavbarClassType,
   SectionPostsType,
+  ApiParamsType,
 }

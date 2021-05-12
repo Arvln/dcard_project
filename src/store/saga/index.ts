@@ -5,6 +5,6 @@ import { GetInitialDataForApp, GetSectionPosts } from "./generator";
 export default function* RootSaga() {
   yield all([
     RequestsSaga(GetInitialDataForApp),
-    RequestsSaga(GetSectionPosts)
+    RequestsSaga(GetSectionPosts),
   ])
 }

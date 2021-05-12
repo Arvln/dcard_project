@@ -7,5 +7,5 @@ export enum ApiType {
   Popular = "POPULAR",
   Latest = "LATEST",
   Featured = "FEATURED",
-  Related = "RELATED",
+  Related = "RELATED"
 }

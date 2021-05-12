@@ -6,7 +6,8 @@ export type FetchActions = {
     prefix: string,
     data?: any[]
     error?: string,
-    alias?: string
+    alias?: string,
+    start?: number,
   }
 }
 
