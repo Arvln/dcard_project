@@ -21,7 +21,6 @@ function AppRouter() {
     [ApiType.Categories]: state.FetchReducer[ApiType.Categories],
     [ApiType.Selections]: state.FetchReducer[ApiType.Selections],
     [ApiType.Bulletin]: state.FetchReducer[ApiType.Bulletin],
-    sectionAlias: state.FetchReducer.sectionAlias,
     error: state.FetchReducer.error,
   }));
   let sectionPostsStart: number = 0;
@@ -43,7 +42,6 @@ function AppRouter() {
       dispatch(FetchSectionPostsRequest(sectionPostsStart));
     }
   }, [])
-  // console.log(rootState);
 
   return (
     <div className="site-wrapper" style={{ overflowY: "scroll", height: "2000px" }} onScroll={ScrollHandler}>
@@ -98,7 +96,7 @@ function AppRouter() {
         {/* nav */}
         <Route path="/search" children={<SearchRouter />} />
         <Route path="/signup" children={<Pages.SignUp />} />
-        <Route path="/terms" children={<Pages.Trems />} />
+        {/* <Route path="/terms" children={<Pages.Trems />} /> */}
         <Route path="/brand" children={<Pages.Brand />} />
         <Route path="/download" children={<Pages.Download />} />
         <Route exact path="/my" children={<Pages.User />} />

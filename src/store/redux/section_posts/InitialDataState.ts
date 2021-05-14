@@ -1,4 +1,5 @@
-import { ApiParamsType } from "../../../types";
+import { SectionPosts } from "../../../model";
+import { ApiParamsType, PostType } from "../../../types";
 import { ApiType } from "../../../types/FetchApiType";
 import { NormalizedState } from "../initial_data_for_app/InitialDataState";
 
@@ -8,7 +9,17 @@ export type InitialDataForEachSectionState = {
   [ApiType.Related]: NormalizedState,
   [ApiType.Popular]: NormalizedState,
   [ApiType.Latest]: NormalizedState,
+  [ApiParamsType.SectionNavberClassName]: string,
   [ApiParamsType.SectionPostsStart]: number,
+  error: string
+}
+
+export type InitialPostData = {
+  loading: boolean,
+  [ApiType.Post]: SectionPosts,
+  [ApiType.Forums]: NormalizedState,
+  navbarClassName: PostType,
+  sectionAlias: string,
   error: string
 }
 

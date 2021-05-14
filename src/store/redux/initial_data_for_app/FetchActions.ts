@@ -8,6 +8,8 @@ export type FetchActions = {
     error?: string,
     alias?: string,
     start?: number,
+    navbarClassName?: string,
+    postId?: string,
   }
 }
 

@@ -6,13 +6,17 @@ import {
   ApiType,
   Gender,
   NavbarClassType,
+  PostType,
   SectionPostsType,
 } from "../types";
 import { NormalizedState } from "../store/redux/initial_data_for_app/InitialDataState";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
+  FetchPostRequest,
   FetchSectionPostsRequest,
+  SetNavbarClassName,
+  SetPostId,
   SetSectionAlias,
   SetSectionPostsStart,
 } from "../store/redux/section_posts/FetchSectionPostsActions";
@@ -58,6 +62,10 @@ function Home({ navbarClassName }: Props) {
       indexState[ApiParamsType.SectionPostsStart] = 0;
     }
     dispatch(SetSectionAlias(SectionPostsType.Index));
+    dispatch(SetNavbarClassName(navbarClassName === NavbarClassType.Popular ? PostType.Popular : PostType.Latest));
+    // 清空redux狀態
+    dispatch(SetPostId("reset"))
+    dispatch(FetchPostRequest());
     dispatch(SetSectionPostsStart(0));
     dispatch(
       FetchSectionPostsRequest(indexState[ApiParamsType.SectionPostsStart])

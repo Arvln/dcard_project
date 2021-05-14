@@ -1,5 +1,5 @@
 import { Link, useRouteMatch } from "react-router-dom";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Wrapper } from "../style/SectionsWrapper";
 import {
   RelatedForums,
@@ -10,7 +10,10 @@ import { Bulletin, SectionPosts, Image } from "../../model";
 import { ApiType } from "../../types/FetchApiType";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  FetchPostRequest,
   FetchSectionPostsRequest,
+  SetNavbarClassName,
+  SetPostId,
   SetSectionAlias,
   SetSectionPostsStart,
 } from "../../store/redux/section_posts/FetchSectionPostsActions";
@@ -19,7 +22,7 @@ import {
   InitialDataForEachSectionState,
 } from "../../store/redux/section_posts/InitialDataState";
 import { RootStoreContext } from "../../components/common/SiteLayout";
-import { ApiParamsType, Gender, NavbarClassType } from "../../types";
+import { ApiParamsType, Gender, NavbarClassType, PostType, SectionPostsType } from "../../types";
 import { UserPersonalIcon } from "../../components/content/sections";
 import { CombineTwoArray } from "../../utils";
 export const SectionStoreContext = React.createContext(
@@ -57,6 +60,7 @@ function Sections({ name, alias, heroImage, logo, navbarClassName }: Props) {
       [ApiType.Related]: state.FetchReducer[ApiType.Related],
       [ApiType.Popular]: state.FetchReducer[ApiType.Popular],
       [ApiType.Latest]: state.FetchReducer[ApiType.Latest],
+      [ApiParamsType.SectionNavberClassName]: state.FetchReducer[ApiParamsType.SectionNavberClassName],
       [ApiParamsType.SectionPostsStart]:
         state.FetchReducer[ApiParamsType.SectionPostsStart],
       error: state.FetchReducer.error,
@@ -76,6 +80,10 @@ function Sections({ name, alias, heroImage, logo, navbarClassName }: Props) {
     navbarClassName === NavbarClassType.Popular &&
       forumTitlePosition?.scrollIntoView();
     dispatch(SetSectionAlias(alias));
+    dispatch(SetNavbarClassName(navbarClassName === NavbarClassType.Popular ? PostType.Popular : PostType.Latest));
+    // 清空redux狀態
+    dispatch(SetPostId("reset"))
+    dispatch(FetchPostRequest());
     dispatch(SetSectionPostsStart(0)); 
     dispatch(
       FetchSectionPostsRequest(sectionState[ApiParamsType.SectionPostsStart])
@@ -135,6 +143,12 @@ function Sections({ name, alias, heroImage, logo, navbarClassName }: Props) {
       setIsReachRightEnd(false);
     }
   }
+                           
+  const ClcikHandler = useCallback((id: string) => {
+    dispatch(SetPostId(id));
+    dispatch(SetNavbarClassName(PostType.Featured))
+    dispatch(FetchPostRequest());
+  }, []);
 
   return (
     <SectionStoreContext.Provider value={{ ...sectionState }}>
@@ -246,9 +260,9 @@ function Sections({ name, alias, heroImage, logo, navbarClassName }: Props) {
                             mediaMeta,
                           }: SectionPosts = sectionState[
                             ApiType.Featured
-                          ].entities[ApiType.Featured][articleId];
+                            ].entities[ApiType.Featured][articleId];
                           return (
-                            <Link to={`${path}/p/${id}`} className="article-card" key={id}>
+                            <Link to={`${path}/p/${id}`} className="article-card" onClick={() => ClcikHandler(id)} key={id}>
                               <h2 className="article-card-title">{title}</h2>
                               <div className="article-card-content">
                                 {excerpt}

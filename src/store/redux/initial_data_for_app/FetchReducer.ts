@@ -3,7 +3,7 @@ import { FetchActions } from "./FetchActions";
 import { normalizedData } from "../../../utils";
 import { InitialDataForAppState, initialDataForAppState } from "./InitialDataState";
 import { FetchSectionPostsActionsType, GetFetchSectionPostsRequests } from "../../../types/FetchSectionPostsActionsType";
-import { ApiParamsType } from "../../../types";
+import { ApiParamsType, ApiType } from "../../../types";
 
 const getNewState = (state: any, action: FetchActions, ApiType: string) => ({
   ...state,
@@ -13,7 +13,7 @@ const getNewState = (state: any, action: FetchActions, ApiType: string) => ({
 
 const FetchReducer = function (state: InitialDataForAppState = initialDataForAppState , action: FetchActions) {
   switch (action.type) {
-    case FetchActionsType.FETCH_INITIAL_DATA_FOR_APP_REQUEST || GetFetchSectionPostsRequests(parseInt(action.payloads?.prefix || "0")):
+    case FetchActionsType.FETCH_INITIAL_DATA_FOR_APP_REQUEST || FetchActionsType.FETCH_POST_REQUEST || GetFetchSectionPostsRequests(parseInt(action.payloads?.prefix || "0")):
       return {
         ...state,
         loading: true
@@ -22,6 +22,13 @@ const FetchReducer = function (state: InitialDataForAppState = initialDataForApp
     case FetchActionsType.FETCH_SUCCESS:
       if (!action.payloads) {
         return state;
+      }
+      if (action.payloads.prefix === ApiType.Post) {
+        return {
+          ...state,
+          loading: false,
+          [ApiType.Post]: action.payloads.data
+        }
       }
       return getNewState(state, action, action.payloads.prefix)
     
@@ -44,6 +51,19 @@ const FetchReducer = function (state: InitialDataForAppState = initialDataForApp
       return {
         ...state,
         [ApiParamsType.SectionPostsStart]: action.payloads?.start
+      }
+    
+    // when user ask for article content, section posts saga need this to build url be called
+    case FetchSectionPostsActionsType.SET_NAVBAR_CLASS_NAME:
+      return {
+        ...state,
+        navbarClassName: action.payloads?.navbarClassName
+      }
+
+    case FetchSectionPostsActionsType.SET_POST_ID:
+      return {
+        ...state,
+        postId: action.payloads?.postId
       }
     
     default:

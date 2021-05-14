@@ -4,6 +4,9 @@ import { MediaMeta } from "../../model";
 import { UserPersonalIcon } from "../content/sections";
 import { Wrapper } from "../style/ArticleItemWrapper";
 import { youtubeVedioTest } from "../../pages/sections/Sections";
+import { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { FetchPostRequest, SetPostId } from "../../store/redux/section_posts/FetchSectionPostsActions";
 
 type Props = {
   id: string;
@@ -18,6 +21,8 @@ type Props = {
   categories?: string[];
 };
 
+export const vividVedioTest: RegExp = /^https:\/\/www\.dcard\.tw\/v2\/vivid\/videos/;
+
 function ArticleItem({
   id,
   school,
@@ -31,11 +36,15 @@ function ArticleItem({
   categories,
 }: Props) {
   const { path } = useRouteMatch();
-  const vividVedioTest: RegExp = /^https:\/\/www\.dcard\.tw\/v2\/vivid\/videos/;
+  const dispatch = useDispatch();
+  const ClcikHandler = useCallback(() => {
+    dispatch(SetPostId(id));
+    dispatch(FetchPostRequest());
+  }, [id]);
 
   return (
     <Wrapper mediaMeta={mediaMeta}>
-      <Link to={`${path}/p/${id}`}>
+      <Link to={`${path}/p/${id}`} onClick={ClcikHandler}>
         <article className="article-conatiner">
           <div className="article-header">
             <div className="category-icon">
@@ -107,16 +116,18 @@ function ArticleItem({
               <span>收藏</span>
             </div>
           </div>
-          {(mediaMeta[0] && !vividVedioTest.test(mediaMeta[0].url) && !youtubeVedioTest.test(mediaMeta[0].url)) && (
-            <img
-              className="article-img"
-              src={mediaMeta[0].url}
-              width="84px"
-              height="84px"
-              alt=""
-              loading="lazy"
-            />
-          )}
+          {mediaMeta[0] &&
+            !vividVedioTest.test(mediaMeta[0].url) &&
+            !youtubeVedioTest.test(mediaMeta[0].url) && (
+              <img
+                className="article-img"
+                src={mediaMeta[0].url}
+                width="84px"
+                height="84px"
+                alt=""
+                loading="lazy"
+              />
+            )}
         </article>
       </Link>
     </Wrapper>

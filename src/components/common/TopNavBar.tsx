@@ -61,7 +61,7 @@ function TopNavBar() {
         <div className="about-container">
           <ul className="about">
             <li>
-              <Link to="/terms">服務條款</Link>
+              <a href="https://www.dcard.tw/terms">服務條款</a>
             </li>
             <li>
               <a href="https://about.dcard.tw/faq" target="_blank">常見問題</a>

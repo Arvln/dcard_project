@@ -3,11 +3,14 @@ import { RelatedForums, ArticleItem } from "../../components/common";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  FetchPostRequest,
   FetchSectionPostsRequest,
+  SetNavbarClassName,
+  SetPostId,
   SetSectionAlias,
   SetSectionPostsStart,
 } from "../../store/redux/section_posts/FetchSectionPostsActions";
-import { ApiParamsType, ApiType, Gender, SectionPostsType } from "../../types";
+import { ApiParamsType, ApiType, Gender, PostType, SectionPostsType } from "../../types";
 import { NormalizedState } from "../../store/redux/initial_data_for_app/InitialDataState";
 import { SectionPosts } from "../../model";
 import { useRouteMatch } from "react-router-dom";
@@ -42,6 +45,10 @@ function GameZone() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(SetSectionAlias(SectionPostsType.Gamazone));
+    dispatch(SetNavbarClassName(PostType.Popular));
+    // 清空redux狀態
+    dispatch(SetPostId("reset"))
+    dispatch(FetchPostRequest());
     dispatch(SetSectionPostsStart(0));
     gamezoneState[ApiType.Popular] && dispatch(
       FetchSectionPostsRequest(gamezoneState[ApiParamsType.SectionPostsStart])

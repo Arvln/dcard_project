@@ -4,52 +4,77 @@ import {
   FetchFailure,
 } from "../../redux/initial_data_for_app/FetchActions";
 import { ApiType } from "../../../types/FetchApiType";
-import { ApiParamsType, SectionPostsType } from "../../../types";
+import { ApiParamsType, PostType, SectionPostsType } from "../../../types";
 
-export default function* GetSectionPosts(getApi) {
+export default function* GetSectionPosts(GetApi) {
   try {
     const alias = yield select((state) => state.FetchReducer.sectionAlias);
-    const postsStart = yield select((state) => state.FetchReducer[ApiParamsType.SectionPostsStart]);
+    const postsStart = yield select(
+      (state) => state.FetchReducer[ApiParamsType.SectionPostsStart]
+    );
+    const navbarClassName = yield select(
+      (state) => state.FetchReducer.navbarClassName
+    );
+    const postId = yield select((state) => state.FetchReducer.postId);
     if (!alias) {
       return;
     }
 
-    const IndexPopularPostsUrl = "/popularPosts?_start=" + postsStart + "&_limit=30";
-    const IndexLatestPostsUrl = "/latestPosts?_start=" + postsStart + "&_limit=30";
+    const IndexPopularPostsUrl =
+      "/popularPosts?_start=" + postsStart + "&_limit=30";
+    const IndexLatestPostsUrl =
+      "/latestPosts?_start=" + postsStart + "&_limit=30";
     const GamezoneRelatedPostsUrl = "/service/api/v2/search/forums/gamezone";
-    const GamezonePopularPostsUrl = "/gamezonePopularPosts?_start=" + postsStart + "&_limit=30";
+    const GamezonePopularPostsUrl =
+      "/gamezonePopularPosts?_start=" + postsStart + "&_limit=30";
     const featuredPostsUrl =
       "/service/api/v2/forums/" + alias + "/featuredPosts";
     const relatedPostsUrl = "/service/api/v2/search/forums/" + alias;
-    const popularPostsUrl = "/" + alias + "PopularPosts?_start=" + postsStart + "&_limit=30";
-    const latestPostsUrl = "/" + alias + "Posts?_start=" + postsStart + "&_limit=30";
+    const popularPostsUrl =
+      "/" + alias + "PopularPosts?_start=" + postsStart + "&_limit=30";
+    const latestPostsUrl =
+      "/" + alias + "Posts?_start=" + postsStart + "&_limit=30";
+    const postUrl =
+      "/" +
+      (alias === SectionPostsType.Index ? "" : alias) +
+      (alias === SectionPostsType.Index
+        ? navbarClassName.toLowerCase()
+        : navbarClassName === PostType.Latest
+        ? ""
+        : navbarClassName) +
+      "Posts/" +
+      postId;
+
+    if (postId && postId !== "reset") {
+      const post = yield call(GetApi, postUrl);
+      yield put(FetchSuccess(ApiType.Post, post));
+    } else {
+      yield put(FetchSuccess(ApiType.Post, undefined));
+    }
 
     switch (alias) {
       case SectionPostsType.Index:
-        const [
-          IndexPopularPosts,
-          IndexLatestPosts,
-        ] = yield all([
-          call(getApi, IndexPopularPostsUrl),
-          call(getApi, IndexLatestPostsUrl),
+        const [IndexPopularPosts, IndexLatestPosts] = yield all([
+          call(GetApi, IndexPopularPostsUrl),
+          call(GetApi, IndexLatestPostsUrl),
         ]);
         yield all([
           put(FetchSuccess(ApiType.Popular, IndexPopularPosts)),
           put(FetchSuccess(ApiType.Latest, IndexLatestPosts)),
         ]);
         break;
-      
+
       case SectionPostsType.Gamazone:
         const [GamezoneRelatedPosts, GamezonePopularPosts] = yield all([
-          call(getApi, GamezoneRelatedPostsUrl),
-          call(getApi, GamezonePopularPostsUrl),
+          call(GetApi, GamezoneRelatedPostsUrl),
+          call(GetApi, GamezonePopularPostsUrl),
         ]);
         yield all([
           put(FetchSuccess(ApiType.Related, GamezoneRelatedPosts)),
           put(FetchSuccess(ApiType.Popular, GamezonePopularPosts)),
         ]);
         break;
-      
+
       default:
         const [
           SectionFeaturedPosts,
@@ -57,10 +82,10 @@ export default function* GetSectionPosts(getApi) {
           SectionPopularPosts,
           SectionLatestPosts,
         ] = yield all([
-          call(getApi, featuredPostsUrl),
-          call(getApi, relatedPostsUrl),
-          call(getApi, popularPostsUrl),
-          call(getApi, latestPostsUrl),
+          call(GetApi, featuredPostsUrl),
+          call(GetApi, relatedPostsUrl),
+          call(GetApi, popularPostsUrl),
+          call(GetApi, latestPostsUrl),
         ]);
         yield all([
           put(FetchSuccess(ApiType.Featured, SectionFeaturedPosts)),

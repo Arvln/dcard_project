@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useRouteMatch } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 // style
 import { Wrapper } from "../style/SiteLayoutWrapper";
 // components
@@ -125,10 +125,10 @@ function SiteLayout({ MainCreator }: Props) {
               </div>
               <div className="footer-button">
                 <div className="sign-in">
-                  <a href="#">登入</a>
+                  <Link to="/signup">登入</Link>
                 </div>
                 <div className="sign-up">
-                  <a href="#">註冊</a>
+                  <Link to="/signup">註冊</Link>
                 </div>
               </div>
             </div>

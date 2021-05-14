@@ -1,4 +1,5 @@
 export enum SectionPostsType {
   Index = "INDEX",
-  Gamazone = "Gamezone"
+  Gamazone = "Gamezone",
+  Reset_Popular = "RESET_POPULAR"
 }

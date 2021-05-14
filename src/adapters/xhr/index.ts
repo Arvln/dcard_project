@@ -4,8 +4,7 @@ const initializers: AxiosRequestConfig = {
   baseURL: "http://localhost:3001",
   headers: {
     "Content-Type": "application/json"
-  },
-  timeout: 5000
+  }
 }
 
 function AxiosInstanceCreator(): AxiosInstance {

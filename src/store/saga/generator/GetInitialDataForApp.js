@@ -3,14 +3,14 @@ import { FetchSuccess, FetchFailure } from "../../redux/initial_data_for_app/Fet
 import { ApiType } from "../../../types/FetchApiType";
 import { forumsUrl, categorizationUrl, categoriesUrl, selectionsUrl, bulletinUrl } from "../InitialDataForAppApi";
 
-export default function* GetInitialDataForApp(getApi) {
+export default function* GetInitialDataForApp(GetApi) {
   try {
     const [forums, categorization, categories, selections, bulletin] = yield all([
-      call(getApi, forumsUrl),
-      call(getApi, categorizationUrl),
-      call(getApi, categoriesUrl),
-      call(getApi, selectionsUrl),
-      call(getApi, bulletinUrl),
+      call(GetApi, forumsUrl),
+      call(GetApi, categorizationUrl),
+      call(GetApi, categoriesUrl),
+      call(GetApi, selectionsUrl),
+      call(GetApi, bulletinUrl),
     ])
 
     yield all([

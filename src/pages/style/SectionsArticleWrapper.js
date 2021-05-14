@@ -77,7 +77,7 @@ export const Wrapper = styled.div(() => [
       font-size: 14px;
     }
 
-    & .to-relationship-link {
+    & .to-section-link {
       width: 28px;
       height: 16px;
       color: #3397cf;

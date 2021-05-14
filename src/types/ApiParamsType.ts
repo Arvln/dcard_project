@@ -1,4 +1,5 @@
 export enum ApiParamsType {
   SectionAlias = "SECTIONALIAS",
-  SectionPostsStart = "SECTIONPOSTSSTART"
+  SectionPostsStart = "SECTIONPOSTSSTART",
+  SectionNavberClassName = "SECTIONNAVBARCLASSNAME"
 }

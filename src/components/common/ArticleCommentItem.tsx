@@ -1,6 +1,11 @@
 import { Wrapper } from "../style/ArticleCommentItemWrapper";
 
-function ArticleCommentItem() {
+type Props = {
+  id: string,
+  count: number
+}
+
+function ArticleCommentItem({id, count}: Props) {
   const commentContent: string =
     "先說 老夫老妻不是這樣的模式😂\n感覺他沒有很用心在這段關係中\n似乎只有你在努力經營\n忙不是藉口 再忙也是有時間好好相處的\n如果溝通無誤的話 你就好好考慮一下吧";
   return (
