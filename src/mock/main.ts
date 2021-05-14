@@ -78,7 +78,7 @@ server.use(jsonServer.rewriter({
   '/service/api/v2/forums/vtuber/popular/posts': '/vtuberPopularPosts',
   '/service/api/v2/forums/sex/popular/posts': '/sexPopularPosts',
 
-  '/service/api/v2/posts': '/posts',
+  '/service/api/v2/latest/posts': '/latestPosts',
   '/service/api/v2/forums/whysoserious/posts': '/whysoseriousPosts',
   '/service/api/v2/forums/mood/posts': '/moodPosts',
   '/service/api/v2/forums/freshman/posts': '/freshmanPosts',

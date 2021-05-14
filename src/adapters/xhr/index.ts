@@ -8,11 +8,11 @@ const initializers: AxiosRequestConfig = {
   timeout: 5000
 }
 
-function axiosInstanceCreator(): AxiosInstance {
+function AxiosInstanceCreator(): AxiosInstance {
   return axios.create(initializers);
 }
 
-export function get(url: string): Promise<AxiosResponse<any>> {
-  const axios = axiosInstanceCreator();
+export function Get(url: string): Promise<AxiosResponse<any>> {
+  const axios = AxiosInstanceCreator();
   return axios.get(url);
 }

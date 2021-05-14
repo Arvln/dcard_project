@@ -1,19 +1,30 @@
 import { Wrapper } from "./style/HomeWrapper";
 import { ArticleItem } from "../components/common";
 import { Link, useRouteMatch } from "react-router-dom";
-import { ApiParamsType, ApiType, Gender, NavbarClassType, SectionPostsType } from "../types";
+import {
+  ApiParamsType,
+  ApiType,
+  Gender,
+  NavbarClassType,
+  SectionPostsType,
+} from "../types";
 import { NormalizedState } from "../store/redux/initial_data_for_app/InitialDataState";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { FetchSectionPostsRequest, SetSectionAlias } from "../store/redux/section_posts/FetchSectionPostsActions";
+import { useEffect, useState } from "react";
+import {
+  FetchSectionPostsRequest,
+  SetSectionAlias,
+  SetSectionPostsStart,
+} from "../store/redux/section_posts/FetchSectionPostsActions";
 import { SectionPosts } from "../model";
+import { CombineTwoArray } from "../utils";
 
 type InitialState = {
-  loading: boolean,
-  [ApiType.Popular]: NormalizedState,
-  [ApiType.Latest]: NormalizedState,
-  [ApiParamsType.SectionPostsStart]: number,
-  error: string
+  loading: boolean;
+  [ApiType.Popular]: NormalizedState;
+  [ApiType.Latest]: NormalizedState;
+  [ApiParamsType.SectionPostsStart]: number;
+  error: string;
 };
 
 type IndexState = {
@@ -21,25 +32,62 @@ type IndexState = {
 };
 
 type Props = {
-  navbarClassName: NavbarClassType
-}
+  navbarClassName: NavbarClassType;
+};
 
 function Home({ navbarClassName }: Props) {
+  const { path } = useRouteMatch();
   const indexState: InitialState = useSelector((state: IndexState) => ({
     loading: state.FetchReducer.loading,
     [ApiType.Popular]: state.FetchReducer[ApiType.Popular],
     [ApiType.Latest]: state.FetchReducer[ApiType.Latest],
-    [ApiParamsType.SectionPostsStart]: state.FetchReducer[ApiParamsType.SectionPostsStart],
-    error: state.FetchReducer.error
-  }))
+    [ApiParamsType.SectionPostsStart]:
+      state.FetchReducer[ApiParamsType.SectionPostsStart],
+    error: state.FetchReducer.error,
+  }));
+  const [popularPostsList, setPopularPostsList] = useState<SectionPosts[]>(
+    [] as SectionPosts[]
+  );
+  const [latestPostsList, setLatestPostsList] = useState<SectionPosts[]>(
+    [] as SectionPosts[]
+  );
 
   const dispatch = useDispatch();
   useEffect(() => {
+    if (!indexState[ApiParamsType.SectionPostsStart]) {
+      indexState[ApiParamsType.SectionPostsStart] = 0;
+    }
     dispatch(SetSectionAlias(SectionPostsType.Index));
-    indexState[ApiParamsType.SectionPostsStart] && dispatch(FetchSectionPostsRequest(indexState[ApiParamsType.SectionPostsStart]));
-  }, [])
-  
+    dispatch(SetSectionPostsStart(0));
+    dispatch(
+      FetchSectionPostsRequest(indexState[ApiParamsType.SectionPostsStart])
+    )
+  }, [path]);
 
+  useEffect(() => {
+    function getPostsList(postsType: ApiType.Popular | ApiType.Latest) {
+      if (!indexState[postsType]) {
+        return;
+      }
+      let newPostsList: SectionPosts[] = [] as SectionPosts[];
+      indexState[postsType].result.map((articleId: string) => {
+        newPostsList.push(indexState[postsType].entities[postsType][articleId]);
+      });
+      if (indexState[ApiParamsType.SectionPostsStart] !== 0) {
+        postsType === ApiType.Popular &&
+          setPopularPostsList(CombineTwoArray(popularPostsList, newPostsList));
+        postsType === ApiType.Latest &&
+          setLatestPostsList(CombineTwoArray(latestPostsList, newPostsList));
+      } else if (postsType === ApiType.Popular) {
+        setPopularPostsList(newPostsList);
+      } else {
+        setLatestPostsList(newPostsList);
+      }
+    }
+    getPostsList(ApiType.Popular);
+    getPostsList(ApiType.Latest);
+  }, [indexState[ApiType.Popular], indexState[ApiType.Latest]]);
+  
   return (
     <Wrapper navBarClassName={navbarClassName}>
       <div className="top-navbar">
@@ -78,18 +126,24 @@ function Home({ navbarClassName }: Props) {
       )}
       {navbarClassName === NavbarClassType.Popular && (
         <ul>
-          {indexState[ApiType.Popular] && indexState[ApiType.Popular].result.map((articleId: string) => {
-            const article: SectionPosts = indexState[ApiType.Popular].entities[ApiType.Popular][articleId];
-            return <ArticleItem {...article} gender={Gender[article.gender]} key={article.id} />
-          })}
+          {popularPostsList.map((article: SectionPosts) => (
+            <ArticleItem
+              {...article}
+              gender={Gender[article.gender]}
+              key={article.id}
+            />
+          ))}
         </ul>
       )}
       {navbarClassName === NavbarClassType.Latest && (
         <ul>
-          {indexState[ApiType.Latest] && indexState[ApiType.Latest].result.map((articleId: string) => {
-            const article: SectionPosts = indexState[ApiType.Latest].entities[ApiType.Latest][articleId];
-            return <ArticleItem {...article} gender={Gender[article.gender]} key={article.id} />
-          })}
+          {latestPostsList.map((article: SectionPosts) => (
+            <ArticleItem
+              {...article}
+              gender={Gender[article.gender]}
+              key={article.id}
+            />
+          ))}
         </ul>
       )}
       {navbarClassName === NavbarClassType.Pessoal && (

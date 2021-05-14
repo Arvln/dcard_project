@@ -71,6 +71,14 @@ export const Wrapper = styled.li(({mediaMeta}) => [
       grid-area: title;
     }
 
+    & .article-title h1,
+    .article-content p {
+      max-width: ${mediaMeta[0] ? "504px" : "608px"};
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+    }
+
     & .article-title h1 {
       font-weight: 600;
       font-size: 18px;
@@ -86,9 +94,6 @@ export const Wrapper = styled.li(({mediaMeta}) => [
       font-weight: 400;
       font-size: 14px;
       color: rgba(0, 0, 0, 0.75);
-      overflow: hidden;
-      text-overflow:ellipsis;
-      white-space: nowrap;
     }
 
     & .article-footer {

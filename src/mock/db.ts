@@ -68,7 +68,7 @@ import vtuberPopularPosts from "./data/popular/vtuber-popular.json";
 import sexPopularPosts from "./data/popular/sex-popular.json";
 
 // latest posts
-import posts from "./data/latest/index-latest.json";
+import latestPosts from "./data/latest/index-latest.json";
 import whysoseriousPosts from "./data/latest/whysoserious-latest.json";
 import moodPosts from "./data/latest/mood-latest.json";
 import freshmanPosts from "./data/latest/freshman-latest.json";
@@ -155,7 +155,7 @@ export const db = {
   vtuberPopularPosts,
   sexPopularPosts,
 
-  posts,
+  latestPosts,
   whysoseriousPosts,
   moodPosts,
   freshmanPosts,

@@ -12,6 +12,7 @@ export type InitialDataForAppState = {
   [ApiType.Categories]: NormalizedState,
   [ApiType.Selections]: NormalizedState,
   [ApiType.Bulletin]: NormalizedState,
+  sectionAlias: string,
   error: string
 }
 

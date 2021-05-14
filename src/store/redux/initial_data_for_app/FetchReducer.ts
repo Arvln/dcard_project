@@ -32,13 +32,14 @@ const FetchReducer = function (state: InitialDataForAppState = initialDataForApp
         error: action.payloads?.prefix + "error message: " + action.payloads?.error
       }
     
-    // section posts saga need this to build api be called
+    // section posts saga need this to build url be called
     case FetchSectionPostsActionsType.SET_SECTION_ALIAS:
       return {
         ...state,
         sectionAlias: action.payloads?.alias
       }
     
+    // when user scroll the page, section posts saga need this to build the next url be called
     case FetchSectionPostsActionsType.SET_SECTION_POSTS_START:
       return {
         ...state,

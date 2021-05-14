@@ -15,7 +15,7 @@ export default function* GetSectionPosts(getApi) {
     }
 
     const IndexPopularPostsUrl = "/popularPosts?_start=" + postsStart + "&_limit=30";
-    const IndexLatestPostsUrl = "/posts?_start=" + postsStart + "&_limit=30";
+    const IndexLatestPostsUrl = "/latestPosts?_start=" + postsStart + "&_limit=30";
     const GamezoneRelatedPostsUrl = "/service/api/v2/search/forums/gamezone";
     const GamezonePopularPostsUrl = "/gamezonePopularPosts?_start=" + postsStart + "&_limit=30";
     const featuredPostsUrl =

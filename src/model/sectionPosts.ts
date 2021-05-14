@@ -18,6 +18,7 @@ export type Reactions = {
 export type SectionPosts = {
   id: string,
   title: string,
+  content: string,
   excerpt: string,
   anonymousSchool: boolean,
   forumId: string,

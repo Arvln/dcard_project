@@ -37,6 +37,7 @@ function SiteLayout({ MainCreator }: Props) {
     [ApiType.Categories]: state.FetchReducer[ApiType.Categories],
     [ApiType.Selections]: state.FetchReducer[ApiType.Selections],
     [ApiType.Bulletin]: state.FetchReducer[ApiType.Bulletin],
+    sectionAlias: state.FetchReducer.sectionAlias,
     error: state.FetchReducer.error,
   }));
 

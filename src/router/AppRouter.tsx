@@ -21,6 +21,7 @@ function AppRouter() {
     [ApiType.Categories]: state.FetchReducer[ApiType.Categories],
     [ApiType.Selections]: state.FetchReducer[ApiType.Selections],
     [ApiType.Bulletin]: state.FetchReducer[ApiType.Bulletin],
+    sectionAlias: state.FetchReducer.sectionAlias,
     error: state.FetchReducer.error,
   }));
   let sectionPostsStart: number = 0;
@@ -42,6 +43,7 @@ function AppRouter() {
       dispatch(FetchSectionPostsRequest(sectionPostsStart));
     }
   }, [])
+  // console.log(rootState);
 
   return (
     <div className="site-wrapper" style={{ overflowY: "scroll", height: "2000px" }} onScroll={ScrollHandler}>

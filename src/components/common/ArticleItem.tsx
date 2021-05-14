@@ -3,8 +3,10 @@ import { Gender } from "../../types";
 import { MediaMeta } from "../../model";
 import { UserPersonalIcon } from "../content/sections";
 import { Wrapper } from "../style/ArticleItemWrapper";
+import { youtubeVedioTest } from "../../pages/sections/Sections";
 
 type Props = {
+  id: string;
   school: string;
   title: string;
   excerpt: string;
@@ -17,6 +19,7 @@ type Props = {
 };
 
 function ArticleItem({
+  id,
   school,
   title,
   excerpt,
@@ -32,7 +35,7 @@ function ArticleItem({
 
   return (
     <Wrapper mediaMeta={mediaMeta}>
-      <Link to={`${path}/p/235868431`}>
+      <Link to={`${path}/p/${id}`}>
         <article className="article-conatiner">
           <div className="article-header">
             <div className="category-icon">
@@ -41,7 +44,7 @@ function ArticleItem({
             <div className="category-info">
               {anonymousSchool ? "匿名" : school}
             </div>
-            {categories && <div className="category-top">置頂</div>}
+            {gender === Gender.D && <div className="category-top">置頂</div>}
           </div>
           <div className="article-title">
             <h1>{title}</h1>
@@ -104,7 +107,7 @@ function ArticleItem({
               <span>收藏</span>
             </div>
           </div>
-          {(mediaMeta[0] && !vividVedioTest.test(mediaMeta[0].url)) && (
+          {(mediaMeta[0] && !vividVedioTest.test(mediaMeta[0].url) && !youtubeVedioTest.test(mediaMeta[0].url)) && (
             <img
               className="article-img"
               src={mediaMeta[0].url}

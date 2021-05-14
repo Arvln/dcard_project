@@ -39,6 +39,8 @@ export type SectionState = {
   FetchReducer: InitialDataForEachSectionState;
 };
 
+export const youtubeVedioTest: RegExp = /^https:\/\/youtu/;
+
 function Sections({ name, alias, heroImage, logo, navbarClassName }: Props) {
   const { path } = useRouteMatch();
   const { BULLETIN } = useContext(RootStoreContext);
@@ -67,7 +69,6 @@ function Sections({ name, alias, heroImage, logo, navbarClassName }: Props) {
     [] as SectionPosts[]
   );
   const dispatch = useDispatch();
-  const youtubeVedioTest: RegExp = /^https:\/\/youtu/;
   let topShowCount: number = 2;
 
   useEffect(() => {
@@ -75,6 +76,7 @@ function Sections({ name, alias, heroImage, logo, navbarClassName }: Props) {
     navbarClassName === NavbarClassType.Popular &&
       forumTitlePosition?.scrollIntoView();
     dispatch(SetSectionAlias(alias));
+    dispatch(SetSectionPostsStart(0)); 
     dispatch(
       FetchSectionPostsRequest(sectionState[ApiParamsType.SectionPostsStart])
     );
@@ -246,7 +248,7 @@ function Sections({ name, alias, heroImage, logo, navbarClassName }: Props) {
                             ApiType.Featured
                           ].entities[ApiType.Featured][articleId];
                           return (
-                            <a href="#" className="article-card" key={id}>
+                            <Link to={`${path}/p/${id}`} className="article-card" key={id}>
                               <h2 className="article-card-title">{title}</h2>
                               <div className="article-card-content">
                                 {excerpt}
@@ -268,7 +270,7 @@ function Sections({ name, alias, heroImage, logo, navbarClassName }: Props) {
                                     className="article-card-picture"
                                   />
                                 )}
-                            </a>
+                            </Link>
                           );
                         }
                       )}
