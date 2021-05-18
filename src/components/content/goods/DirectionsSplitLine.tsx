@@ -1,4 +1,4 @@
-import { Wrapper } from "../../style/goods/DirectionsSplitLine";
+import { Wrapper } from "../../style/goods/DirectionsSplitLineWrapper";
 
 function DirectionsSplitLine() {
   return <Wrapper></Wrapper>;

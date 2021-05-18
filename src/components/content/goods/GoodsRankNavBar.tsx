@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Wrapper } from "../../style/goods/GoodsRankNavBar";
+import { Wrapper } from "../../style/goods/GoodsRankNavBarWrapper";
 
 function GoodsRankNavBar() {
   return (

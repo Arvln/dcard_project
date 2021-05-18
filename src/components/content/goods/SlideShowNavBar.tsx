@@ -1,4 +1,4 @@
-import { Wrapper } from "../../style/goods/SlideShowNavBar";
+import { Wrapper } from "../../style/goods/SlideShowNavBarWrapper";
 
 type Props = {
   bannerCount: number;
